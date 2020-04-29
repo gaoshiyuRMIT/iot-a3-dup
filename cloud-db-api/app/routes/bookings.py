@@ -9,9 +9,7 @@ def bookings():
         "status": request.args.get('status')
         # ...
     }
-    for k in filt.keys():
-        if filt['k'] is None:
-            filt.pop(k)
+    filt = filter(lambda k: filt[k] is not None, filt)
     bookings = bkMgr.getMany(filt)
     return jsonify(bookings)
 
