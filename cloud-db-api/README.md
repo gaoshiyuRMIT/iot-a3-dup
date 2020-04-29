@@ -4,6 +4,7 @@
   * `source venv/bin/activate`
   * `pip install --upgrade pip`
   * `pip install --upgrade -r requirements.txt`
+  * create a config.py with the correct config values (refer to config.py.example)
 - `flask run`
 
 ### references
