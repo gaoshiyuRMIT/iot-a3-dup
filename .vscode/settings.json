@@ -1,8 +1,7 @@
 {
-    "python.pythonPath": "${workspaceFolder}/venv/Scripts/python.exe",
-    "python.venvPath": "${workspaceFolder}/venv/Scripts",
+    "python.pythonPath": "C:\\Users\\aspen\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
     "workbench.colorTheme": "Yarra Valley",
     "python.venvFolders": [
-        "${workspaceFolder}/venv/Lib"
+        "C:\\Users\\aspen\\Desktop\\Masters\\_IoT\\A2\\iot\\admin-app\\app\\venv\\Scripts"
     ]
 }

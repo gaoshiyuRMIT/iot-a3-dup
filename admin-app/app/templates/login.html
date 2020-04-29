@@ -1,0 +1,24 @@
+
+{% extends "navbar.html" %}
+
+{% block title %}
+Login/Signup
+
+{% endblock title %}
+
+{% block content %}
+<form action="{{ url_for('login') }}" method="POST">
+    <div class="form-group ">
+        <label for="username" class="col-md-3 control-label"><strong>Log in</strong></label>
+    </div>
+    <div class="form-group">
+        <label for="username" class="col-md-3 control-label">Username</label>
+        <input type="text" name="username" class="col-md-4 control-form" placeholder="Username">
+    </div>
+    <div class="form-group">
+        <label for="password" class="col-md-3 control-label">Password</label>
+        <input type="password" name="password" class="col-md-4 control-form" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Log in</button>
+</form>
+{% endblock %}

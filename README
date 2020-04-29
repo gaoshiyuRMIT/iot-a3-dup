@@ -1,8 +1,0 @@
-to set up virtual python environment (windows):
-
-
-
-
-to install needed addons on virtual env:
-
-pip -install -r requirements.txt
