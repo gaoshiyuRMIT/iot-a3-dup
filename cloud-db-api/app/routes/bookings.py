@@ -1,7 +1,9 @@
-from . import request, url_for, jsonify
+from . import request, url_for, jsonify, Blueprint, g
 from . import app, bkMgr
 
-@app.route("/bookings/search", methods=["GET"])
+bp = Blueprint("bookings", __name__, url_prefix="/bookings")
+
+@bp.route("/search", methods=["GET"])
 def bookings():
     # get filter from url args
     filt = {
@@ -14,7 +16,7 @@ def bookings():
     return jsonify(bookings)
 
     
-@app.route("/bookings/<bookingNo>/update", methods=["PUT"])
+@bp.route("/<int:bookingNo>/update", methods=["PUT"])
 def updateBooking(bookingNo):
     newBkVal = request.json
     success = bkMgr.updateOne(bookingNo, newBkVal)
@@ -22,7 +24,7 @@ def updateBooking(bookingNo):
     return jsonify(result)
 
 
-@app.route("/bookings/add", methods=["POST"])
+@bp.route("/add", methods=["POST"])
 def addBooking():
     newBkVal = request.json
     bookingNo = bkMgr.addOne(newBkVal)

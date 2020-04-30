@@ -10,8 +10,9 @@ class CarManager(DBManager):
     def getMany(self, filt: dict) -> list:
         # dummy values
         return [
-            {'make': "Audi", "body_type": "Sedan", "colour": "white", "seats": 4, 
-                "location": (37, 144), "cost_per_hour": 0.5}
+            {"car_id": 1, "year": 2015, 'car_model': "Audi S3", "body_type": "Sedan", 
+                "car_colour": "white", "num_seats": 4, "latitude": 37, "longitude": 144, 
+                "cost_hour": 0.5}
         ]
     
     def updateOne(self, carId, car: dict) -> bool:

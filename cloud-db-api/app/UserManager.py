@@ -11,7 +11,14 @@ class UserManager(DBManager):
         return {}
 
     def getMany(self, filt: dict) -> list:
-        return []
+        try:
+            with self.conn.cursor() as cur:
+                # dummy sql
+                cur.execute(f"select * from {self.TABLE_NAME}")
+                return cur.fetchall()
+        except Exception:
+            self.conn.rollback()
+            raise
 
     def updateOne(self, userId, newUserVal: dict) -> bool:
         raise NotImplementedError

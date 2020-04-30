@@ -1,7 +1,9 @@
-from . import request, url_for, jsonify
+from . import request, url_for, jsonify, Blueprint, g
 from . import app, usMgr
 
-@app.route("/users/register", methods=["POST"])
+bp = Blueprint("users", __name__, url_prefix="/users")
+
+@bp.route("/register", methods=["POST"])
 def register():
     newUserVal = request.json
     usMgr.addOne(newUserVal)
@@ -9,7 +11,7 @@ def register():
     return jsonify(result)
 
 
-@app.route("/users/login", methods=["POST"])
+@bp.route("/login", methods=["POST"])
 def login():
     filt = {
         "username": request.json.get("username"),

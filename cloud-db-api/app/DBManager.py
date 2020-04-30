@@ -1,13 +1,13 @@
 from abc import ABC, ABCMeta, abstractmethod
-from . import app
+from .db import getConn
 
 class DBManager(ABC):
     FIELDS = []
     TABLE_NAME = ""
 
-    def __init__(self):
-        # TODO: use third-party library to create a connection
-        self.conn = None
+    @property
+    def conn(self):
+        return getConn()
 
     @abstractmethod
     def getMany(self, filt: dict) -> list:

@@ -1,7 +1,9 @@
-from . import request, url_for, jsonify
-from . import app, carMgr
+from . import request, url_for, jsonify, Blueprint, g
+from . import carMgr
 
-@app.route('/cars/search')
+bp = Blueprint("cars", __name__, url_prefix="/cars")
+
+@bp.route('/search')
 def cars():
     # get filters
     filt = {
@@ -14,7 +16,7 @@ def cars():
     return jsonify(cars)
 
 
-@app.route("/cars/<carId>/update", methods=["PUT"])
+@bp.route("/<int:carId>/update", methods=["PUT"])
 def updateCar(carId):
     newCarVal = request.json
     success = carMgr.updateOne(carId, newCarVal)
@@ -22,7 +24,7 @@ def updateCar(carId):
     return jsonify(result)
 
 
-@app.route("/cars/add", methods=["POST"])
+@bp.route("/add", methods=["POST"])
 def addCar():
     newCarVal = request.json
     carId = carMgr.addOne(newCarVal)
