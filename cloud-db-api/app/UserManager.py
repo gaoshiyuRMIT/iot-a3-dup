@@ -14,6 +14,7 @@ class UserManager(DBManager):
         try:
             with self.conn.cursor() as cur:
                 # dummy sql
+                # formatted string literal: python3.6+
                 cur.execute(f"select * from {self.TABLE_NAME}")
                 return cur.fetchall()
         except Exception:
