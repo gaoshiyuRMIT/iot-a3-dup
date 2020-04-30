@@ -1,8 +1,8 @@
 from .DBManager import DBManager
 
 class UserManager(DBManager):
-    FIELDS = ["username", "password", "firstName", "lastName", "email"]
-    TABLE_NAME = "user"
+    FIELDS = ["username", "password", "fName", "lName", "email"]
+    TABLE_NAME = "User"
 
     def addOne(self, newUser: dict) -> bool:
         return True

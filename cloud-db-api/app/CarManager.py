@@ -2,9 +2,9 @@ from .DBManager import DBManager
 
 
 class CarManager(DBManager):
-    FIELDS = ["make", 'body_type', "colour", "seats", "location_long", "location_lat", 
-                "cost_per_hour", "status"]
-    TABLE_NAME = "car"
+    FIELDS = ["car_id", "year", "car_model", "body_type", "num_seats", 
+                "car_colour", "cost_hour", "latitude", "longitude"]
+    TABLE_NAME = "Car"
 
 
     def getMany(self, filt: dict) -> list:

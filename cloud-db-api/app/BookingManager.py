@@ -2,8 +2,9 @@ from .DBManager import DBManager
 
 
 class BookingManager(DBManager):
-    FIELDS = ["bookingNo", "userId", "carId", "status", "datetime"]
-    TABLE_NAME = "booking"
+    FIELDS = ["booking_id", "username", "car_id", "date_booking", "time_booking", 
+                "date_return", "time_return", "status"]
+    TABLE_NAME = "Booking"
 
     def getMany(self, filt: dict) -> list:
         return []
