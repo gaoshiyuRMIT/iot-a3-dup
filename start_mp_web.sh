@@ -3,6 +3,15 @@
 # prerequisite: 
 # if venv is not set up, you need to set $python -- which python to use
 
+for conf_file in admin-app/.flaskenv admin-app/config.py cloud-db-api/config.py
+do
+    if [ ! -f $conf_file ]
+    then
+        echo "config file $conf_file is required"
+        exit 1
+    fi
+done
+
 if ( [ ! -d cloud-db-api/venv ] || [ ! -d admin-app/venv ] ) && [ -z $python ]
 then
     echo "pls set environment viable $python. e.g. export python=python3.7"
