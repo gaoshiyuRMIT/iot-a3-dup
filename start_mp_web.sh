@@ -3,7 +3,7 @@
 # prerequisite: 
 # if venv is not set up, you need to set $python -- which python to use
 
-if [ -z $python ]
+if ( [ ! -d cloud-db-api/venv ] || [ ! -d admin-app/venv ] ) && [ -z $python ]
 then
     echo "pls set environment viable $python. e.g. export python=python3.7"
     exit 1
@@ -32,7 +32,7 @@ if [ ! -d venv ]; then
 else
     . venv/bin/activate
 fi
-FLASK_APP=app.main flask run > flask.log 2>&1 &
+flask run --host=0.0.0.0 > flask.log 2>&1 &
 website_pid=$!
 echo "* admin-app successfully started"
 
