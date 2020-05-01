@@ -4,3 +4,6 @@ __pycache__
 
 venv
 .vscode
+
+pip.log
+flask.log
