@@ -11,9 +11,9 @@ def cars():
         'body_type': request.args.get("body_type")
     }
     # ignore None values    
-    filt = filter(lambda k: filt[k] is not None, filt)
+    filt = {k:filt[k] for k in filt if filt[k] is not None}
     cars = carMgr.getMany(filt)
-    return jsonify(cars)
+    return jsonify({"data": cars})
 
 
 @bp.route("/<int:carId>/update", methods=["PUT"])
