@@ -22,9 +22,9 @@ def login():
         "password": request.json.get("password")
     }
     lst = usMgr.getMany(filt)
-    result = {"success": 1}
+    result = {"success": True}
     if len(lst) == 0:
-        result = {"success": 0, "error_code": "IncorrectCredentials", 
+        result = {"error_code": "IncorrectCredentials", 
                 "error_message": "the combination of username and password doesn't exist"}
     return result
 
