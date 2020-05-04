@@ -4,6 +4,7 @@ from app import app
 from app.CarManager import CarManager
 from app.BookingManager import BookingManager
 from app.UserManager import UserManager
+from app.decorators import jsonifyResponseData
 
 carMgr = CarManager()
 bkMgr = BookingManager()

@@ -1,17 +1,21 @@
-from . import request, url_for, jsonify, Blueprint, g
-from . import app, usMgr
+from . import request, url_for, Blueprint, g
+from . import usMgr
+from . import jsonifyResponseData
+
 
 bp = Blueprint("users", __name__, url_prefix="/users")
 
 @bp.route("/register", methods=["POST"])
+@jsonifyResponseData
 def register():
     newUserVal = request.json
-    usMgr.addOne(newUserVal)
-    result = {"success": 1}
-    return jsonify(result)
+    success = usMgr.addOne(newUserVal)
+    result = {"success": success}
+    return result
 
 
 @bp.route("/login", methods=["POST"])
+@jsonifyResponseData
 def login():
     filt = {
         "username": request.json.get("username"),
@@ -22,5 +26,5 @@ def login():
     if len(lst) == 0:
         result = {"success": 0, "error_code": "IncorrectCredentials", 
                 "error_message": "the combination of username and password doesn't exist"}
-    return jsonify(result)
+    return result
 

@@ -9,6 +9,10 @@ class DBManager(ABC):
     def conn(self):
         return getConn()
 
+    @classmethod
+    def keepValidFieldsOnly(cls, d: dict) -> dict:
+        return {k: d.get(k) for k in cls.FIELDS}
+
     @abstractmethod
     def getMany(self, filt: dict) -> list:
         return []

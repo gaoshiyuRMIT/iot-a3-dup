@@ -7,7 +7,7 @@ class UserManager(DBManager):
     def addOne(self, newUser: dict) -> bool:
         return True
 
-    def getOne(self, userId) -> dict:
+    def getOne(self, username) -> dict:
         return {}
 
     def getMany(self, filt: dict) -> list:
