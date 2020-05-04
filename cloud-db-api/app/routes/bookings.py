@@ -8,7 +8,7 @@ bp = Blueprint("bookings", __name__, url_prefix="/bookings")
 @jsonifyResponseData
 def bookings():
     # get filter from url args
-    filt = bkMgr.keepValidFieldsOnly(request.args)
+    filt = bkMgr.keepValidFieldsOnly(request.args, throw=True)
     filt = filter(lambda k: filt[k] is not None, filt)
     bookings = bkMgr.getMany(filt)
     return bookings

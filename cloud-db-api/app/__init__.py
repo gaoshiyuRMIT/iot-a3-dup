@@ -13,3 +13,4 @@ app.register_blueprint(users_bp)
 from .BookingManager import BookingManager
 from .CarManager import CarManager
 from .UserManager import UserManager
+from .errors import handlers

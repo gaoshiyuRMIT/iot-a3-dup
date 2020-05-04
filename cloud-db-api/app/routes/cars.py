@@ -8,7 +8,7 @@ bp = Blueprint("cars", __name__, url_prefix="/cars")
 @jsonifyResponseData
 def cars():
     # get filters
-    filt = carMgr.keepValidFieldsOnly(request.args)
+    filt = carMgr.keepValidFieldsOnly(request.args, throw=True)
     # ignore None values    
     filt = {k: filt[k] for k in filt if filt[k] is not None}
     cars = carMgr.getMany(filt)

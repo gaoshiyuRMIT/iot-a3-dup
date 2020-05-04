@@ -1,5 +1,6 @@
 from abc import ABC, ABCMeta, abstractmethod
 from .db import getConn
+from .errors.api_exceptions import InvalidArgument
 
 class DBManager(ABC):
     FIELDS = []
@@ -10,7 +11,12 @@ class DBManager(ABC):
         return getConn()
 
     @classmethod
-    def keepValidFieldsOnly(cls, d: dict) -> dict:
+    def keepValidFieldsOnly(cls, d: dict, throw=False) -> dict:
+        if throw:
+            invalidKeys = set(d.keys()) - set(cls.FIELDS)
+            if len(invalidKeys) > 0:
+                message = "invalid key(s): {}".format(", ".join(invalidKeys))
+                raise InvalidArgument(message)
         return {k: d.get(k) for k in cls.FIELDS}
 
     @abstractmethod
