@@ -1,6 +1,8 @@
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect, url_for, session
 from .main import app
 from .services.CarService import CarService
+from .services.BookingService import BookingService
+
 
 @app.route('/')
 def index():
@@ -19,6 +21,7 @@ def cars():
     service = CarService()
     cars = service.getAllAvailableCars()
     return render_template("cars.html", cars=cars)
+
 
 @app.route("/cars/search", methods=["POST"])
 def searchCars():
@@ -39,3 +42,11 @@ def searchCars():
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
     return render_template("cars.html", cars=cars)
+
+
+@app.route("/bookings")
+def bookings():
+    # TODO: modify according to Aspen's implementation of login
+    username = session.get("username") or "testuser"
+    bookings = BookingService().getBookingsForUser(username)
+    return render_template("bookings.html", bookings=bookings)
