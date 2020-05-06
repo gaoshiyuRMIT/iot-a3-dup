@@ -3,3 +3,7 @@ __pycache__
 *.pyc
 
 venv
+.vscode
+
+pip.log
+flask.log
