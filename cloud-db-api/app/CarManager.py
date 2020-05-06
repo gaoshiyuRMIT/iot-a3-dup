@@ -11,7 +11,7 @@ class CarManager(DBManager):
         # dummy values
         return [
             {"car_id": 1, "year": 2015, 'car_model': "Audi S3", "body_type": "Sedan", 
-                "car_colour": "white", "num_seats": 4, "latitude": 37, "longitude": 144, 
+                "car_colour": "white", "num_seats": 4, "latitude": -37, "longitude": 144, 
                 "cost_hour": 0.5, "status": "available"}
         ]
     

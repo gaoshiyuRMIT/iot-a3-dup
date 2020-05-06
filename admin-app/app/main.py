@@ -11,4 +11,4 @@ app.config.from_object(Config)
 
 bootstrap = Bootstrap(app)
 
-from .routes import index, login, getAvailableCars
+from . import routes

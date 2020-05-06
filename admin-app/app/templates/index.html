@@ -8,19 +8,4 @@ Home
     <div class="alert-success">
         This is the index page
     </div>
-    <!-- just to test that restful api is connected -->
-    {% if cars is defined %}
-        <table class='table'>
-            <tr>
-                <th>car id</th>
-                <th>body type</th>
-            </tr>
-            {% for car in cars %}
-            <tr>
-                <td>{{car['car_id']}}</td>
-                <td>{{car['body_type']}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
 {% endblock %}

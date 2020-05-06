@@ -1,0 +1,35 @@
+{% extends "navbar.html" %}
+{% block title %}My Bookings{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Car ID</th>
+                    <th>Booking Start Date/Time</th>
+                    <th>Booking End Date/Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bk in bookings %}
+                <tr>
+                    <td>{{ bk['booking_id'] }}</td>
+                    <td>{{ bk['car_id'] }}
+                        (<a href="#">Detail</a>)
+                    </td>
+                    <td>{{ "{} {}".format(bk["date_booking"], bk['time_booking']) }}</td>
+                    <td>{{ "{} {}".format(bk["date_return"], bk['time_return']) }}</td>
+                    <td>{{ bk["status"] }}
+                        {% if bk['status'] == "booked" %}
+                            (<a href="#">Cancel</a>)
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
