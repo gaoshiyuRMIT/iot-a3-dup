@@ -6,6 +6,10 @@ from app.BookingManager import BookingManager
 from app.UserManager import UserManager
 from app.decorators import jsonifyResponseData
 
+@app.route("/ping")
+def ping():
+    return "hello world"
+
 carMgr = CarManager()
 bkMgr = BookingManager()
 usMgr = UserManager()

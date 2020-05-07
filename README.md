@@ -9,3 +9,8 @@
 - ensure no other apps are listening on port 6543 and 5000
 - `export python=<python_command_to_use>`
 - `./start_mp_web.sh`
+### Documentation
+to generate the API documentation: 
+- make sure your virtualenv is activated and has all libraries in requirements.txt installed
+- `sphinx-build docs docs/html`
+- open docs/html/index.html
