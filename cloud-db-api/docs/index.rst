@@ -12,6 +12,7 @@ Welcome to Car Share System API's documentation!
 
    users_api_doc
    cars_api_doc
+   bookings_api_doc
 
 
 
