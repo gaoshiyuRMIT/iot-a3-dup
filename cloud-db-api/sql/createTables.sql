@@ -1,3 +1,5 @@
+USE test;
+
 CREATE TABLE IF NOT EXISTS User ( 
     username VARCHAR(32) not null, 
     password VARCHAR(255) not null, 
@@ -16,7 +18,8 @@ CREATE TABLE IF NOT EXISTS Car (
     car_colour VARCHAR(32) not null,
     cost_hour  DECIMAL(6,2) not null, 
     latitude DECIMAL(38, 20), 
-    longitude DECIMAL(38, 20),   
+    longitude DECIMAL(38, 20),
+    status VARCHAR(32) not null,   
     CONSTRAINT PK_Car PRIMARY KEY (car_id)
 );
 
