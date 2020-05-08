@@ -9,3 +9,9 @@
 
 ### references
 - [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/index.html)
+
+### Documentation
+to generate the API documentation: 
+- make sure your virtualenv is activated and has all libraries in requirements.txt installed
+- `sphinx-build docs docs/html`
+- open docs/html/index.html
