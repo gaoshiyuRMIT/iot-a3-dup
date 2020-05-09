@@ -13,7 +13,6 @@ class DBException(Exception):
     'exception_message' is the error statement supplied by the original
     exception, as is error_code, if available."""
     def __init__(self, message, exception_message=None, error_code=None):
-        super.__init__(self)
         self.message = message
         if exception_message is not None:
             self.exception_message = exception_message
