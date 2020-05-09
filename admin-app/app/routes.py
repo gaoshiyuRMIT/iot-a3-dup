@@ -1,7 +1,8 @@
-from flask import request, render_template, redirect, url_for, session
+from flask import request, render_template, redirect, url_for, session, flash
 from .main import app
 from .services.CarService import CarService
 from .services.BookingService import BookingService
+from .errors import APIException
 
 
 @app.route('/')
@@ -50,3 +51,32 @@ def bookings():
     username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
     return render_template("bookings.html", bookings=bookings)
+
+@app.route("/bookings/new", methods=["GET"])
+def addBooking():
+    car_id = request.args.get("car_id")
+    car_id = int(car_id)
+    car = None
+    try:
+        car = CarService().getCar(car_id)
+    except APIException as e:
+        if e.error_code == "MissingKey":
+            return redirect(url_for("cars"))
+        raise
+    return render_template("addBooking.html", car=car)
+
+
+@app.route("/bookings/new", methods=["POST"])
+def addBookingPost():
+    data = {}
+    # TODO: modify according to Aspen's implementation of login
+    data["username"] = session.get("username") or "janedoe1"
+    data['car_id'] = int(request.form["car_id"])
+    data['date_booking'], data['time_booking'] = request.form['datetime_booking'].split("T")
+    data['time_booking'] += ":00"
+    data['date_return'], data['time_return'] = request.form['datetime_return'].split("T")
+    data['time_return'] += ":00"
+    bk_id = BookingService().addBooking(data)
+    CarService().updateCar(data['car_id'], {"car_status": "booked"})
+    flash("Booking successful! Booking ID - {}".format(bk_id))
+    return redirect(url_for("cars"))

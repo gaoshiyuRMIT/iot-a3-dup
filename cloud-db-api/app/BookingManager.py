@@ -31,8 +31,27 @@ class BookingManager(DBManager):
         return True
 
     def addOne(self, newBookingVal: dict):
-        # returns booking No
-        return 1
+        sql = "insert into {} (".format(self.TABLE_NAME)
+        names = []
+        vals = []
+        for k,v in newBookingVal.items():
+            names.append(k)
+            vals.append(v)
+        sql += ", ".join(names) + ") values ("
+        sql += ", ".join(["%s"] * len(vals)) + ")"
+        bk_id = None
+        conn = self.conn
+        try:
+            with conn.cursor() as cur:
+                cur.execute(sql, vals)
+            conn.commit()
+            with conn.cursor() as cur:
+                cur.execute("select last_insert_id()")
+            bk_id = cur.fetchone()[0]
+        except:
+            conn.rollback()
+            raise
+        return bk_id
 
     def getOne(self, id) -> dict:
         raise NotImplementedError

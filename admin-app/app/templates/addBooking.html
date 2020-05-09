@@ -1,0 +1,31 @@
+{% extends "navbar.html" %}
+{% block title %}Make a Booking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row col-md-3">
+        <form method="post" action="{{ url_for('addBookingPost') }}">
+            <div class="form-group">
+                <label class="control-label" for="car_id">Car ID</label>
+                <input class="form-control" type="number" id="car_id" name="car_id" value="{{ car['car_id'] }}" readonly>
+                <small class="text text-info">
+                    {% for k,v in car.items() %}
+                        {% if k != 'car_id' %}
+                            {{ "{}: {}; ".format(k,v) }}
+                        {% endif %}
+                    {% endfor %}
+                </small>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="datetime_booking">Start Date</label>
+                <input class="form-control" type="datetime-local" id="datetime_booking" name="datetime_booking">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="datetime_return">End Date</label>
+                <input class="form-control" type="datetime-local" id="datetime_return" name="datetime_return">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -45,11 +45,12 @@ class CarManager(DBManager):
 
     def getOne(self, carId) -> dict:
         sql = "SELECT * FROM " + self.TABLE_NAME + " WHERE car_id = %s"
+        car = None
         conn = self.conn
         try:
             with self.getCursor(conn) as cursor:
                 cursor.execute(sql, (carId,))
-                return cursor.fetchall()
+                car = cursor.fetchone()
         except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
             # "Internal Database error"
             raise
@@ -58,6 +59,7 @@ class CarManager(DBManager):
             raise
         except:
             raise
+        return car
         
 
     def addOne(self, car: dict):

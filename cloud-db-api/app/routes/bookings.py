@@ -26,6 +26,11 @@ def updateBooking(bookingNo):
 @bp.route("/add", methods=["POST"])
 @jsonifyResponseData
 def addBooking():
-    newBkVal = request.json
+    newBkVal = bkMgr.keepValidFieldsOnly(request.json, throw=True)
+    # pop primary key
+    if "booking_id" in newBkVal:
+        newBkVal.pop("booking_id")
+    # pop 'None' values
+    newBkVal = {k: v for k,v in newBkVal.items() if v is not None and v != ""}
     bookingNo = bkMgr.addOne(newBkVal)
     return {"booking_id": bookingNo}
