@@ -11,3 +11,4 @@
 - `./start_mp_web.sh`
 
 ### [cloud-db-api README](cloud-db-api/README.md)
+### [admin-app README](admin-app/README.md)
