@@ -14,6 +14,11 @@ def register():
     return result
 
 
+@bp.route("/search", methods=["POST"])
+@jsonifyResponseData
+def users():
+    return usMgr.getMany({})
+
 @bp.route("/login", methods=["POST"])
 @jsonifyResponseData
 def login():

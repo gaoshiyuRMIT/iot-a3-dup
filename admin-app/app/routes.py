@@ -2,6 +2,7 @@ from flask import request, render_template, redirect, url_for, session
 from .main import app
 from .services.CarService import CarService
 from .services.BookingService import BookingService
+from .services.UserService import UserService
 
 
 @app.route('/')
@@ -11,10 +12,15 @@ def index():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        print (request.form.get('username'))
-    return render_template('login.html')
+    service = UserService()
+    isValidUser = service.isValidUser(request.form.get('username'), request.form.get('password'))
+    return render_template('login.html', output=isValidUser)
 
+@app.route("/users")
+def users():
+    service = UserService()
+    users = service.getAllUsers()
+    return render_template("users.html", output=users, users=users)
 
 @app.route("/cars")
 def cars():
