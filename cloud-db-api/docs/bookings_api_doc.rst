@@ -1,6 +1,54 @@
 Bookings API Endpoints
 ======================
 
+.. http:get:: /bookings/(int:booking_id)
+
+    Get the data of one booking.
+
+    **Example request**
+
+    .. sourcecode:: http
+
+        GET /bookings/7 HTTP/1.0
+
+    **Example response**
+
+    .. sourcecode:: http
+
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "data": {
+                "booking_id": 7,
+                "car_id": 1,
+                "date_booking": "2019-01-01",
+                "date_return": "2019-01-05",
+                "status": "finished",
+                "time_booking": "19:00:00",
+                "time_return": "11:00:00",
+                "username": "janedoe1"
+            }
+        }
+
+    **Example erroneous response**
+
+    .. sourcecode:: http
+
+        HTTP/1.0 400 BAD REQUEST
+        Content-Type: application/json
+
+        {
+            "error_code": "MissingKey",
+            "error_message": "The specified booking_id does not exist."
+        }
+
+    :>json data: a json object representing a booking, with the keys "booking_id", "username", "car_id", "date_booking", "time_booking", "date_return", "time_return", "status". The entries are ordered first by ``status`` ( ``booked`` and ``inProgress`` first) and then by ``booking_id``.
+    :>json string error_code: a short code name for the error
+    :>json string error_message: readable error message
+    :statuscode 200: no error
+    :statuscode 400: request data is wrong, either with wrong keys or the values do not conform to type/format constraints
+
 .. http:post:: /bookings/search
     
     Search for bookings.
