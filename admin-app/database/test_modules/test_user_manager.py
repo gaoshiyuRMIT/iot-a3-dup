@@ -5,6 +5,7 @@ import logging
 import sys
 from iot.db_manager import DBManager
 from iot.user_manager import UserManager
+from iot.db_exception import DBException
 
 class TestUserManager(unittest.TestCase):
     USER = "root"
@@ -17,8 +18,10 @@ class TestUserManager(unittest.TestCase):
                                 TestUserManager.PASSWORD, TestUserManager.DATABASE)
     
         with self.connection.cursor() as cursor:
+            cursor.execute('drop table if exists Booking')
+            cursor.execute("drop table if exists Car")
             cursor.execute("drop table if exists User")
-            cursor.execute(""" create table if not exists User (
+            cursor.execute("""create table if not exists User (
                         username VARCHAR(32) not null, 
                         password VARCHAR(255) not null, 
                         fName VARCHAR(32) not null,
@@ -59,7 +62,6 @@ class TestUserManager(unittest.TestCase):
             return cursor.fetchone()[0] == 1
     
     def test_getAll(self):
-        
         with UserManager(self.connection) as db:
             # confirm that number of records returned is same as number of 
             # records in test_database
@@ -114,6 +116,11 @@ class TestUserManager(unittest.TestCase):
             # check number of rows reflect deleted user
             self.assertTrue(self.countUsers() == count - 1)
     
+    def test_exception(self):
+        with UserManager(self.connection) as db:
+            self.assertRaises(DBException, db.exceptionTesting())
+               
+
 def suite ():
     suite = unittest.TestSuite()
     suite.addTest(TestUserManager('test_getAll'))
@@ -121,6 +128,7 @@ def suite ():
     suite.addTest(TestUserManager('test_InsertItem'))
     suite.addTest(TestUserManager('test_UpdateItem'))
     suite.addTest(TestUserManager('test_deleteItem'))
+    suite.addTest(TestUserManager('test_exception'))
     
     return suite
 
