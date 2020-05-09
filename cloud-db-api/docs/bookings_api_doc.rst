@@ -1,7 +1,7 @@
 Bookings API Endpoints
 ======================
 
-.. http:get:: /bookings/search
+.. http:post:: /bookings/search
     
     Search for bookings.
 
@@ -9,7 +9,13 @@ Bookings API Endpoints
 
     .. sourcecode:: http
 
-        GET /bookings/search?username=janedoe1&status=booked&status=inProgress HTTP/1.0
+        POST /bookings/search HTTP/1.0
+        Content-Type: application/json
+
+        {
+            "username": "janedoe1",
+            "status": "inProgress"
+        }
 
     **Example response**
 
@@ -29,15 +35,6 @@ Bookings API Endpoints
                     "time_booking": "19:58:02",
                     "time_return": "11:00:00",
                     "username": "janedoe1"
-                }, {
-                    "booking_id": 3,
-                    "car_id": 1,
-                    "date_booking": "2020-06-01",
-                    "date_return": "2020-06-05",
-                    "status": "booked",
-                    "time_booking": "19:58:02",
-                    "time_return": "11:00:00",
-                    "username": "janedoe1"
                 }
             ]
         }
@@ -54,14 +51,14 @@ Bookings API Endpoints
             "error_message": "Invalid key(s): bodyy_type"
         }
 
-    :query int booking_id:
-    :query string username:
-    :query int car_id:
-    :query string date_booking: in iso format, e.g. "2020-06-01"
-    :query string time_booking: in iso format, e.g. "19:58:02"
-    :query string date_return: in iso format, e.g. "2020-06-01"
-    :query string time_return: in iso format, e.g. "19:58:02"
-    :query string status: one of ``booked``, ``inProgress``, ``cancelled``, ``finished``
+    :<json int booking_id:
+    :<json string username:
+    :<json int car_id:
+    :<json string date_booking: in iso format, e.g. "2020-06-01"
+    :<json string time_booking: in iso format, e.g. "19:58:02"
+    :<json string date_return: in iso format, e.g. "2020-06-01"
+    :<json string time_return: in iso format, e.g. "19:58:02"
+    :<json string status: one of ``booked``, ``inProgress``, ``cancelled``, ``finished``
 
     :>json data: a list of booking datas, each booking with the keys "booking_id", "username", "car_id", "date_booking", "time_booking", "date_return", "time_return", "status". The entries are ordered first by ``status`` ( ``booked`` and ``inProgress`` first) and then by ``booking_id``.
     :>json string error_code: a short code name for the error

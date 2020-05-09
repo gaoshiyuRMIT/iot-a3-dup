@@ -7,8 +7,21 @@
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
             <li><a href="{{ url_for('cars') }}">Cars</a></li>
+            <li><a href="{{ url_for('bookings') }}">Bookings</a></li>
         </ul>
     </div>
 </nav>
 
 {% endblock navbar %}
+
+{% block error_message %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}">
+                    {{ message }}
+                </div>       
+            {% endfor %} 
+        {% endif %}
+    {% endwith %}
+{% endblock %}
