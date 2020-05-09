@@ -1,3 +1,4 @@
+import pymysql as _p
 import datetime
 from .DBManager import DBManager
 
@@ -27,8 +28,39 @@ class BookingManager(DBManager):
         return res
 
 
-    def updateOne(self, bookingNo, newBookingVal: dict) -> bool:
-        return True
+    def updateOne(self, booking_id, newBookingVal: dict) -> bool:
+        if (list(newBookingVal.keys()) != ["status"]):
+            raise NotImplementedError
+        status = newBookingVal["status"]
+        
+        if (status == "finished" or status == "cancelled"):
+            sql = "UPDATE " + self.TABLE_NAME + " SET status = %s WHERE booking_id = %s"
+            success = False
+            conn = self.conn
+            try:
+                with conn.cursor() as cursor:
+                    done = cursor.execute(sql, (status, booking_id,))
+                    self.conn.commit() 
+                success = done == 1
+            except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
+            # "Internal Database error"
+                conn.rollback()
+                raise
+            except _p.ProgrammingError:
+            #error related to sql syntax etc
+                conn.rollback()
+                raise
+            except _p.DataError:
+            # error related to the datatypes passed in not being valid/conflict
+                conn.rollback()
+                raise
+            except:
+            # unkown error
+                conn.rollback()
+                raise
+        else:
+            raise NotImplementedError
+        return success
 
     def addOne(self, newBookingVal: dict):
         sql = "insert into {} (".format(self.TABLE_NAME)
@@ -53,5 +85,21 @@ class BookingManager(DBManager):
             raise
         return bk_id
 
-    def getOne(self, id) -> dict:
-        raise NotImplementedError
+    def getOne(self, booking_id) -> dict:
+        sql = "SELECT * FROM " + self.TABLE_NAME + " WHERE booking_id = %s"
+        data = None
+        conn = self.conn
+        try:
+            with self.getCursor(conn) as cursor:
+                cursor.execute(sql, (booking_id,))
+                data = cursor.fetchone()
+        except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
+            # "Internal Database error"
+            raise
+        except _p.ProgrammingError:
+            #error rrelated to sql syntax etc
+            raise
+        except:
+            # unkown error
+            raise
+        return BookingManager.tranformDateTime(data) if data is not None else None

@@ -80,3 +80,18 @@ def addBookingPost():
     CarService().updateCar(data['car_id'], {"car_status": "booked"})
     flash("Booking successful! Booking ID - {}".format(bk_id))
     return redirect(url_for("cars"))
+
+@app.route("/bookings/<int:booking_id>/cancel")
+def cancelBooking(booking_id):
+    bkService = BookingService()
+    booking = None
+    try:
+        booking = bkService.getBooking(booking_id)
+    except APIException as e:
+        if e.error_code == "MissingKey":
+            flash("No booking with ID {} exists!".format(booking_id))
+            return redirect(url_for("bookings"))
+    success = bkService.updateBooking(booking_id, {"status": "cancelled"})
+    CarService().updateCar(booking["car_id"], {"car_status": "available"})
+    flash("Booking {} successfully cancelled!".format(booking_id))
+    return redirect(url_for("bookings"))
