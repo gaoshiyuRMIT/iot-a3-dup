@@ -3,8 +3,8 @@ from .BaseService import BaseService
 class BookingService(BaseService):
     def getBookingsForUser(self, username: str) -> list:
         url = "/bookings/search"
-        params = {"username": username}
-        bookings = self.get(url, params)
+        data = {"username": username}
+        bookings = self.post(url, data)
         bookings.sort(key=BookingService.bookingsSortKey)
         return bookings
 

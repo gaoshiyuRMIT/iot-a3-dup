@@ -4,12 +4,12 @@ from . import jsonifyResponseData
 
 bp = Blueprint("bookings", __name__, url_prefix="/bookings")
 
-@bp.route("/search", methods=["GET"])
+@bp.route("/search", methods=["POST"])
 @jsonifyResponseData
 def bookings():
     # get filter from url args
-    filt = bkMgr.keepValidFieldsOnly(request.args, throw=True)
-    filt = filter(lambda k: filt[k] is not None, filt)
+    filt = bkMgr.keepValidFieldsOnly(request.json, throw=True)
+    filt = {k: v for k,v in filt.items() if v is not None and v != ""}
     bookings = bkMgr.getMany(filt)
     return bookings
 
