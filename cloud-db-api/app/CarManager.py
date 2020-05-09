@@ -27,24 +27,40 @@ class CarManager(DBManager):
             except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
                 # "Internal Database error"
                 conn.rollback()
-                pass
+                raise
             except _p.ProgrammingError:
                 #error related to sql syntax etc
                 conn.rollback()
-                pass
+                raise
             except _p.IntegrityError:
                 #issue related to integrity of db 
                 conn.rollback()
-                pass
+                raise
             except:
                 conn.rollback()
-                pass # unkown error type
+                raise # unkown error type
         else:
             raise NotImplementedError
         return success
 
     def getOne(self, carId) -> dict:
-        return {}
+        sql = "SELECT * FROM " + self.TABLE_NAME + " WHERE car_id = %s"
+        car = None
+        conn = self.conn
+        try:
+            with self.getCursor(conn) as cursor:
+                cursor.execute(sql, (carId,))
+                car = cursor.fetchone()
+        except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
+            # "Internal Database error"
+            raise
+        except _p.ProgrammingError:
+            #error rrelated to sql syntax etc
+            raise
+        except:
+            raise
+        return car
+        
 
     def addOne(self, car: dict):
         # returns carId

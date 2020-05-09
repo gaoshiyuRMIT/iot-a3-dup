@@ -15,6 +15,15 @@ class CarService(BaseService):
             car['latitude'], car['longitude'] = latS, longS
         return cars
 
+    def getCar(self, car_id: int) -> dict:
+        url = "/cars/{}".format(car_id)
+        car = self.get(url)
+        return car
+
+    def updateCar(self, car_id: int, newCarVal):
+        url = "/cars/{}/update".format(car_id)
+        self.put(url, newCarVal)
+
     @staticmethod
     def transformLocation(lat, long_) -> tuple:
         if lat < 0:
