@@ -1,7 +1,7 @@
 Cars API Endpoints
 ==================
 
-.. http:get:: /cars/search
+.. http:post:: /cars/search
     
     Search for cars.
 
@@ -9,7 +9,13 @@ Cars API Endpoints
 
     .. sourcecode:: http
 
-        GET /cars/search?car_colour=white&num_seats=4 HTTP/1.0
+        POST /cars/search HTTP/1.0
+        Content-Type: application/json
+
+        {
+            "car_colour": "white",
+            "num_seats": [3, 5]
+        }
 
     **Example response**
 
@@ -47,13 +53,13 @@ Cars API Endpoints
             "error_message": "Invalid key(s): bodyy_type"
         }
 
-    :query int car_id: car ID
-    :query year: year of production. A list of length 2 (specifying range), or a single int (specifying exact value).
-    :query string car_model: car model 
-    :query string body_type: body type
-    :query num_seats: number of seats. A list of length 2 (specifying range), or a single int (specifying exact value).
-    :query string car_colour: car colour
-    :query cost_hour: cost in AUD per hour. A list of length 2 (specifying range), or a single decimal number (specifying exact value).
+    :<json int car_id: car ID
+    :<json year: year of production. A list of length 2 (specifying range), or a single int (specifying exact value).
+    :<json string car_model: car model 
+    :<json string body_type: body type
+    :<json num_seats: number of seats. A list of length 2 (specifying range), or a single int (specifying exact value).
+    :<json string car_colour: car colour
+    :<json cost_hour: cost in AUD per hour. A list of length 2 (specifying range), or a single decimal number (specifying exact value).
 
     :>json data: a list of car datas, each json object respresenting a car, with the keys "car_id", "year", "car_model", "body_type", "num_seats", 
                 "car_colour", "cost_hour", "latitude", "longitude", "status".

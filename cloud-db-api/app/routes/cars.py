@@ -4,13 +4,13 @@ from . import jsonifyResponseData
 
 bp = Blueprint("cars", __name__, url_prefix="/cars")
 
-@bp.route('/search')
+@bp.route('/search', methods=["POST"])
 @jsonifyResponseData
 def cars():
     # get filters
-    filt = carMgr.keepValidFieldsOnly(request.args, throw=True)
-    # ignore None values    
-    filt = {k: filt[k] for k in filt if filt[k] is not None}
+    filt = carMgr.keepValidFieldsOnly(request.json, throw=True)
+    # ignore None values
+    filt = {k: v for k,v in filt.items() if v is not None and v != ""}
     cars = carMgr.getMany(filt)
     return cars
 
@@ -20,6 +20,8 @@ def cars():
 def updateCar(carId):
     newCarVal = request.json
     newCarVal = carMgr.keepValidFieldsOnly(newCarVal)
+    # pop 'None' values
+    newCarVal = {k: v for k,v in newCarVal.items() if v is not None and len(v) > 0}
     success = carMgr.updateOne(carId, newCarVal)
     result = {"success": success}
     return result
@@ -28,6 +30,7 @@ def updateCar(carId):
 @bp.route("/add", methods=["POST"])
 @jsonifyResponseData
 def addCar():
+    # untested
     newCarVal = request.json
     newCarVal = carMgr.keepValidFieldsOnly(newCarVal)
     carId = carMgr.addOne(newCarVal)
