@@ -27,6 +27,13 @@ def updateCar(carId):
     return result
 
 
+@bp.route("/<int:carId>")
+@jsonifyResponseData
+def getCar(carId):
+    car = carMgr.getOne(carId)
+    return car
+
+
 @bp.route("/add", methods=["POST"])
 @jsonifyResponseData
 def addCar():
