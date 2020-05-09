@@ -1,5 +1,6 @@
 import socket
 import sys
+import pickle
 
 from .httpHelper import httpHelper as Helper
 
@@ -12,6 +13,7 @@ class server:
         self.s.bind(('',port))
         self.s.listen(5)  
         self.helper = Helper()  
+        self.c = None
         
     def handle_user(self,c):
         client_input = c.recv(1024).decode("utf-8") 
@@ -25,12 +27,21 @@ class server:
     def send(self,c,request):
        b = bytes(request,'utf-8')
        c.send(b) 
+       
+    def read_data(self):
+        client_input = self.c.recv(1024)
+        
+        data = pickle.loads(client_input)
+        print(data)
+           
         
     def listen(self):
         while True:
             print('server is running')
             c,addr = self.s.accept()
+            self.c=c
             self.handle_user(c)
-            print('accepted')
-            self.handle_user    
+            self.read_data()
+            
+           
             
