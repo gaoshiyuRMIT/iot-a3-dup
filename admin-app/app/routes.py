@@ -38,7 +38,7 @@ def searchCars():
         if searchD[rangeK][0] == searchD[rangeK][1]:
             searchD[rangeK] = searchD[rangeK][0]
     searchD = {k: v for k,v in searchD.items() if v}
-    searchD["status"] = "available"
+    searchD["car_status"] = "available"
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
     return render_template("cars.html", cars=cars)
@@ -47,6 +47,6 @@ def searchCars():
 @app.route("/bookings")
 def bookings():
     # TODO: modify according to Aspen's implementation of login
-    username = session.get("username") or "testuser"
+    username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
     return render_template("bookings.html", bookings=bookings)

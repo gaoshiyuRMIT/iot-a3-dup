@@ -3,13 +3,13 @@ from .BaseService import BaseService
 class CarService(BaseService):
     def getAllAvailableCars(self):
         url = "/cars/search"
-        params = {"status": "available"}
-        cars = self.get(url, params)
+        data = {"car_status": "available"}
+        cars = self.post(url, data)
         return cars
 
     def searchCars(self, filterD: dict) -> list:
         url = "/cars/search"
-        cars = self.get(url, filterD)
+        cars = self.post(url, filterD)
         for car in cars:
             latS, longS = CarService.transformLocation(car['latitude'], car['longitude'])
             car['latitude'], car['longitude'] = latS, longS
