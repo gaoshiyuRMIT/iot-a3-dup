@@ -11,7 +11,7 @@ def index():
 
 
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     return render_template('login.html')
 
@@ -24,7 +24,10 @@ def login_check():
         session['username'] = request.form.get('username')
         session['fName'] = validUser
         session['loggedIn'] = True
-    return redirect(url_for('index')) if validUser else redirect(url_for('login', error="Invalid login credentials"))
+        return redirect(url_for('index'))
+    else:
+        flash("Invalid credentials")
+        return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():

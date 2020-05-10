@@ -7,7 +7,9 @@ Login/Signup
 {% endblock title %}
 
 {% block content %}
-{{ validUser }}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
 <form action="{{ url_for('login_check') }}" method="POST">
     <div class="container">
 
