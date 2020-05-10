@@ -10,11 +10,28 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/login', methods=['POST', 'GET'])
+
+@app.route('/login')
 def login():
+    return render_template('login.html')
+
+@app.route('/login_check', methods=['POST', 'GET'])
+def login_check():
     service = UserService()
     isValidUser = service.isValidUser(request.form.get('username'), request.form.get('password'))
-    return render_template('login.html', output=isValidUser)
+    validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
+    if (validUser):
+        session['username'] = request.form.get('username')
+        session['fName'] = validUser
+        session['loggedIn'] = True
+    return redirect(url_for('index')) if validUser else redirect(url_for('login', error="Invalid login credentials"))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('loggedIn', None)
+    session.pop('fName', None)
+    return redirect(url_for('index'))
 
 @app.route("/users")
 def users():
