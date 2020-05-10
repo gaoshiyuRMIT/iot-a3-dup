@@ -6,17 +6,16 @@ import logging
 import sys
 
 
-
 def suite(self):
-    #create a test suite which has all test methods from each DB manager test class
+    # create a test suite which has all test methods from each DB manager test class
     suite = unittest.TestSuite()
     suite = suite.unittest.TestLoader().loadTestsFromTestCase(TestCarManager)
-    suit = suite.unittest.TestLoader().loadTestsFromTestCase(TestUserManager)
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestBookingManager)
-        
+    suite += suite.unittest.TestLoader().loadTestsFromTestCase(TestUserManager)
+    suite += unittest.TestLoader().loadTestsFromTestCase(TestBookingManager)
     return suite
-      
+
+
 if __name__ == '__main__':
     logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-    runner = unittest.TextTestRunner(verbosity = 2)
+    runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite())
