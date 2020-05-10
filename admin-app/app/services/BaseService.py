@@ -1,12 +1,7 @@
 from abc import ABC, abstractmethod
 from flask import current_app
 import requests as _r
-
-
-class APIException(Exception):
-    def __init__(self, error_code: str, error_message: str):
-        self.error_code = error_code
-        self.error_message = error_message
+from app.errors import APIException
 
 
 class BaseService(ABC):
@@ -25,7 +20,7 @@ class BaseService(ABC):
 
     # GET with url params (?key1=value1&key=value2&...)
     # decode json response
-    def get(self, url, params):
+    def get(self, url, params = {}):
         resp = _r.get(self.BASE_URL + url, params=params)
         body = resp.json()
         if resp.status_code == _r.codes.ok:

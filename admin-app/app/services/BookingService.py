@@ -8,6 +8,27 @@ class BookingService(BaseService):
         bookings.sort(key=BookingService.bookingsSortKey)
         return bookings
 
+    def getBooking(self, booking_id: int) -> dict:
+        url = "/bookings/{}".format(booking_id)
+        return self.get(url)
+
+    def addBooking(self, booking: dict):
+        '''
+        :param dict booking: a dictionary representing the new booking
+        :return: booking_id of the new booking
+        :rtype: int
+        '''
+        url = "/bookings/add"
+        return self.post(url, booking)["booking_id"]
+
+    def updateBooking(self, booking_id, updateDict: dict):
+        '''
+        :param dict updateDict: a dictionary containing pairs of key & value to update that key with
+        '''
+        url = "/bookings/{}/update".format(booking_id)
+        return self.put(url, updateDict)["success"]
+
+
     @staticmethod
     def bookingsSortKey(booking) -> tuple:
         '''
