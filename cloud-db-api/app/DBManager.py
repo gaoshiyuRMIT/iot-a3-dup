@@ -24,6 +24,7 @@ class DBManager(ABC):
                 raise InvalidArgument(message)
         return {k: d.get(k) for k in cls.FIELDS}
 
+
     @abstractmethod
     def getMany(self, filt: dict) -> list:
         # default implementation
@@ -65,8 +66,15 @@ class DBManager(ABC):
         return res
 
     @abstractmethod
-    def getOne(self, id) -> dict:
-        raise NotImplementedError
+    def getOne(self, filt:dict) -> list:
+        #default implementation
+        temp = self.getMany(filt)
+        if (len(temp) > 0):
+            return temp[0]
+        else:
+            return []
+
+        # raise NotImplementedError
 
     @abstractmethod
     def updateOne(self, id, newVal: dict) -> bool:

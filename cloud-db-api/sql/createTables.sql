@@ -1,3 +1,5 @@
+USE test;
+
 CREATE TABLE IF NOT EXISTS User ( 
     username VARCHAR(32) not null, 
     password VARCHAR(255) not null,

@@ -21,11 +21,11 @@ fi
 cd cloud-db-api
 if [ ! -d venv ]; then
     $python -m venv venv
-    . venv/bin/activate
+    . venv/Scripts/activate
     pip install --upgrade pip > pip.log 2>&1
     pip install --upgrade -r requirements.txt > pip.log 2>&1
 else
-    . venv/bin/activate
+    . venv/Scripts/activate
 fi
 flask run > flask.log 2>&1 & 
 api_pid=$! 
@@ -35,11 +35,11 @@ echo "* cloud-db-api successfully started"
 cd ../admin-app
 if [ ! -d venv ]; then
     $python -m venv venv
-    . venv/bin/activate
+    . venv/Scripts/activate
     pip install --upgrade pip > pip.log 2>&1
     pip install --upgrade -r requirements.txt > pip.log 2>&1
 else
-    . venv/bin/activate
+    . venv/Scripts/activate
 fi
 flask run --host=0.0.0.0 > flask.log 2>&1 &
 website_pid=$!
