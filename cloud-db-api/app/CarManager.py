@@ -1,12 +1,22 @@
 import pymysql as _p
 from .DBManager import DBManager
+from app import app
+from flask import logging
+import pymysql as p
+import json
 
+from decimal import *
+
+class DecimalEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, Decimal):
+            return float(o)
+        return super(DecimalEncoder, self).default(o)
 
 class CarManager(DBManager):
     FIELDS = ["car_id", "year", "car_model", "body_type", "num_seats", 
                 "car_colour", "cost_hour", "latitude", "longitude", "car_status"]
     TABLE_NAME = "Car"
-
 
     def getMany(self, filt: dict) -> list:
         return super().getMany(filt)
@@ -64,4 +74,4 @@ class CarManager(DBManager):
 
     def addOne(self, car: dict):
         # returns carId
-        return 0             
+        return 0            

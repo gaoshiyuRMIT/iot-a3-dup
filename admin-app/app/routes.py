@@ -2,20 +2,45 @@ from flask import request, render_template, redirect, url_for, session, flash
 from .main import app
 from .services.CarService import CarService
 from .services.BookingService import BookingService
+from .services.UserService import UserService
 from .errors import APIException
-
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        print (request.form.get('username'))
     return render_template('login.html')
 
+@app.route('/login_check', methods=['POST', 'GET'])
+def login_check():
+    service = UserService()
+    isValidUser = service.isValidUser(request.form.get('username'), request.form.get('password'))
+    validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
+    if (validUser):
+        session['username'] = request.form.get('username')
+        session['fName'] = validUser
+        session['loggedIn'] = True
+        return redirect(url_for('index'))
+    else:
+        flash("Invalid credentials")
+        return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('loggedIn', None)
+    session.pop('fName', None)
+    return redirect(url_for('index'))
+
+@app.route("/users")
+def users():
+    service = UserService()
+    users = service.getAllUsers()
+    return render_template("users.html", output=users, users=users)
 
 @app.route("/cars")
 def cars():

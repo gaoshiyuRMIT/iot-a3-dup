@@ -133,3 +133,6 @@ class UserManager(DBManager):
                               e.args[0])
         except Exception as e:   # catch any other types of errors
             raise DBException('NON-DB Error deleting user', str(e.args))
+
+    def exceptionTesting(self):
+        raise DBException('test exception')

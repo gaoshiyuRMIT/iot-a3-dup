@@ -7,3 +7,6 @@ venv
 
 pip.log
 flask.log
+cloud-db-api/dontsavetorepo.sql
+testDB.py
+playground.py

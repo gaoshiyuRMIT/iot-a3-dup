@@ -7,19 +7,11 @@ class UserManager(DBManager):
     def addOne(self, newUser: dict) -> bool:
         return True
 
-    def getOne(self, username) -> dict:
-        return {}
+    def getOne(self, filt: dict) -> list:
+        return super().getOne(filt)
 
     def getMany(self, filt: dict) -> list:
-        try:
-            with self.conn.cursor() as cur:
-                # dummy sql
-                # formatted string literal: python3.6+
-                cur.execute(f"select * from {self.TABLE_NAME}")
-                return cur.fetchall()
-        except Exception:
-            self.conn.rollback()
-            raise
+        return super().getMany(filt)
 
     def updateOne(self, userId, newUserVal: dict) -> bool:
         raise NotImplementedError

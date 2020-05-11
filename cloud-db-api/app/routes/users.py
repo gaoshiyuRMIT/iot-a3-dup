@@ -14,6 +14,11 @@ def register():
     return result
 
 
+@bp.route("/search", methods=["POST"])
+@jsonifyResponseData
+def users():
+    return usMgr.getMany({})
+
 @bp.route("/login", methods=["POST"])
 @jsonifyResponseData
 def login():
@@ -21,7 +26,8 @@ def login():
         "username": request.json.get("username"),
         "password": request.json.get("password")
     }
-    lst = usMgr.getMany(filt)
-    result = {"success": len(lst) > 0}
+    lst = usMgr.getOne(filt)
+    # get first name from result if there is one, otherwise just pass back an empty string (so json doesn't crack it)
+    name = lst['fName'] if 'fName' in lst != None else ""
+    result = {"success": len(lst) > 0, "fname": name}
     return result
-
