@@ -3,6 +3,9 @@
 
 {% block content %}
 <div class="container">
+    {% block error_message %}
+    {{super()}}
+    {% endblock %}
     <div class="row col-md-3">
         <form method="post" action="{{ url_for('addBookingPost') }}">
             <div class="form-group">
