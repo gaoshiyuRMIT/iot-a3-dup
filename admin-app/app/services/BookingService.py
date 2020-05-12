@@ -27,7 +27,6 @@ class BookingService(BaseService):
         d3 = {"car_id": car_id}
         for d1 in filter1:
             for d2 in filter2:
-                print({**d1, **d2, **d3})
                 bookings = self.getBookings({**d1, **d2, **d3})
                 if len(bookings) > 0:
                     return True
