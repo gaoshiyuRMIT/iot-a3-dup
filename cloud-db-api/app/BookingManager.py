@@ -7,6 +7,7 @@ class BookingManager(DBManager):
     FIELDS = ["booking_id", "username", "car_id", "date_booking", "time_booking", 
                 "date_return", "time_return", "status"]
     TABLE_NAME = "Booking"
+    PK = "booking_id"
 
     @staticmethod
     def tranformDateTime(row):

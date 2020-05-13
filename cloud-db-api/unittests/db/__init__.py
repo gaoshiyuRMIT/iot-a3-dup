@@ -11,3 +11,9 @@ def patch_flask_g():
     return patch("flask.g", mock_g)
 
 from .test_car_manager import TestCarManager
+from .test_user_manager import TestUserManager
+
+__all__ = [
+    "TestCarManager",
+    "TestUserManager"
+]
