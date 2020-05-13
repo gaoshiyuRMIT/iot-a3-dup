@@ -5,14 +5,6 @@ from . import patch_flask_g
 logging.basicConfig(level=logging.INFO)
 
 
-@patch_flask_g()
-def test():
-    from app.CarManager import CarManager
-    cMgr = CarManager()
-    print(cMgr.getMany({}))
-
-
-
 class TestCarManager(_ut.TestCase):
     @patch_flask_g()
     def setUp(self):
