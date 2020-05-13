@@ -81,7 +81,7 @@ class DBManager(ABC):
                 cur.execute(sql, vals)
                 one = cur.fetchone()
         except:
-            logging.exception("getting one item by id failed")
+            logger.exception("getting one item by id failed")
             raise
         return one
 
