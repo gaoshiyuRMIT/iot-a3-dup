@@ -1,11 +1,14 @@
 import pymysql as _p
 from .DBManager import DBManager
 from app import app
-from flask import logging
+import logging
 import pymysql as p
 import json
 
 from decimal import *
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
@@ -22,36 +25,28 @@ class CarManager(DBManager):
         return super().getMany(filt)
     
     def updateOne(self, car_id, car: dict) -> bool:
-        if len(car) == 0:
-            return False
-        success = False
-        if list(car.keys()) == ["car_status"]:
-            car_status = car["car_status"]
-            sql = "UPDATE " + self.TABLE_NAME + " SET car_status = %s WHERE car_id = %s"
-            conn = self.conn
-            try:
-                with conn.cursor() as cursor:
-                    done = cursor.execute(sql, (car_status, car_id,))
-                    conn.commit()
-                success = done == 1
-            except (_p.OperationalError, _p.InternalError, _p.NotSupportedError): #errors related to db functioning
-                # "Internal Database error"
-                conn.rollback()
-                raise
-            except _p.ProgrammingError:
-                #error related to sql syntax etc
-                conn.rollback()
-                raise
-            except _p.IntegrityError:
-                #issue related to integrity of db 
-                conn.rollback()
-                raise
-            except:
-                conn.rollback()
-                raise # unkown error type
-        else:
-            raise NotImplementedError
-        return success
+        sql = f"update {self.TABLE_NAME} set "
+        sqlAssg = []
+        vals = []
+        for k,v in car.items():
+            sqlAssg.append(f"{k} = %s")
+            vals.append(v)
+        sql += ", ".join(sqlAssg)
+        sql += " where car_id = %s"
+        vals.append(car_id)
+        conn = self.conn
+        row = -1
+        try:
+            with conn.cursor() as cur:
+                logger.debug("generated sql {}".format(cur.mogrify(sql, vals)))
+                row = cur.execute(sql, vals)
+            conn.commit()
+        except Exception as e:
+            conn.rollback()
+            logger.exception("updating one car failed")
+            raise
+        return row == 1
+
 
     def getOne(self, carId) -> dict:
         sql = "SELECT * FROM " + self.TABLE_NAME + " WHERE car_id = %s"
@@ -73,5 +68,26 @@ class CarManager(DBManager):
         
 
     def addOne(self, car: dict):
+        sql = "insert into car ("
+        keys = []
+        vals = []
+        for k,v in car.items():
+            keys.append(k)
+            vals.append(v)
+        sql += ", ".join(keys) + ") values ("
+        sql += ", ".join(["%s"] * len(keys)) + ")"
+        conn = self.conn
+        car_id = -1
+        try:
+            with conn.cursor() as cur:
+                logger.debug("generated sql: {}".format(cur.mogrify(sql, vals)))
+                cur.execute(sql, vals)
+                conn.commit()
+                cur.execute("select last_insert_id()")
+                car_id = cur.fetchone()[0]
+        except Exception as e:
+            conn.rollback()
+            logger.exception("inserting one car failed")
+            raise
         # returns carId
-        return 0            
+        return car_id      

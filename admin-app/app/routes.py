@@ -64,7 +64,6 @@ def searchCars():
         if searchD[rangeK][0] == searchD[rangeK][1]:
             searchD[rangeK] = searchD[rangeK][0]
     searchD = {k: v for k,v in searchD.items() if v}
-    searchD["car_status"] = "available"
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
     return render_template("cars.html", cars=cars)
@@ -72,7 +71,6 @@ def searchCars():
 
 @app.route("/bookings")
 def bookings():
-    # TODO: modify according to Aspen's implementation of login
     username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
     return render_template("bookings.html", bookings=bookings)
@@ -93,16 +91,21 @@ def addBooking():
 
 @app.route("/bookings/new", methods=["POST"])
 def addBookingPost():
+    # clean/transform form data
     data = {}
-    # TODO: modify according to Aspen's implementation of login
     data["username"] = session.get("username") or "janedoe1"
     data['car_id'] = int(request.form["car_id"])
     data['date_booking'], data['time_booking'] = request.form['datetime_booking'].split("T")
     data['time_booking'] += ":00"
     data['date_return'], data['time_return'] = request.form['datetime_return'].split("T")
     data['time_return'] += ":00"
-    bk_id = BookingService().addBooking(data)
-    CarService().updateCar(data['car_id'], {"car_status": "booked"})
+    # check for conflicts
+    service = BookingService()
+    if service.findConflicts(data["car_id"], data["date_booking"], data["date_return"]):
+        flash("Timetable conflicts - your chosen time slot conflicts with someone else's booking.")
+        return redirect(url_for("addBooking", car_id=data["car_id"]))
+    # add a booking
+    bk_id = service.addBooking(data)
     flash("Booking successful! Booking ID - {}".format(bk_id))
     return redirect(url_for("cars"))
 

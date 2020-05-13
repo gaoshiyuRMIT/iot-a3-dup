@@ -1,6 +1,58 @@
 Cars API Endpoints
 ==================
 
+.. http:get:: /cars/(int:car_id)
+
+    Get the data of one car.
+
+    **Example request**
+
+    ..  sourcecode:: http
+
+        GET /cars/2 HTTP/1.0
+
+    **Example response**
+
+    .. sourcecode:: http
+
+        HTTP/1.0 200 OK
+        Content-Type: application/json
+
+        {
+            "data": {
+                "body_type": "Sedan",
+                "car_colour": "white",
+                "car_id": 2,
+                "car_model": "Audi S3",
+                "cost_hour": 0.5,
+                "latitude": -37,
+                "longitude": 144,
+                "num_seats": 4,
+                "status": "available",
+                "year": 2015           
+            }
+        }
+
+    **Example erroneous response**
+
+    .. sourcecode:: http
+
+        HTTP/1.0 400 BAD REQUEST
+        Content-Type: application/json
+
+        {
+            "error_code": "MissingKey",
+            "error_message": "The specified car_id does not exist."
+        }
+
+    :>json data: a json object representing a car, with the keys "car_id", "year", "car_model", "body_type", "num_seats", 
+                "car_colour", "cost_hour", "latitude", "longitude", "status".
+    :>json string error_code: a short code name for the error
+    :>json string error_message: readable error message
+    :statuscode 200: no error
+    :statuscode 400: request data is wrong, either with wrong keys or the values do not conform to type/format constraints
+
+
 .. http:post:: /cars/search
     
     Search for cars.
