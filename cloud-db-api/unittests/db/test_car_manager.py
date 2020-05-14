@@ -2,7 +2,7 @@ import unittest as _ut
 import logging
 from . import patch_flask_g
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 class TestCarManager(_ut.TestCase):

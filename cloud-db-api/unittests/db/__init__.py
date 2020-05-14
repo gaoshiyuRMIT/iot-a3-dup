@@ -11,3 +11,11 @@ def patch_flask_g():
     return patch("flask.g", mock_g)
 
 from .test_car_manager import TestCarManager
+from .test_user_manager import TestUserManager
+from .test_booking_manager import TestBookingManager
+
+__all__ = [
+    "TestCarManager",
+    "TestUserManager",
+    "TestBookingManager"
+]

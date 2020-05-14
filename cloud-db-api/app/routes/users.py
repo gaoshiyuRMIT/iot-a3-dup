@@ -22,12 +22,10 @@ def users():
 @bp.route("/login", methods=["POST"])
 @jsonifyResponseData
 def login():
-    filt = {
-        "username": request.json.get("username"),
-        "password": request.json.get("password")
-    }
-    lst = usMgr.getOne(filt)
-    # get first name from result if there is one, otherwise just pass back an empty string (so json doesn't crack it)
-    name = lst['fName'] if 'fName' in lst != None else ""
-    result = {"success": len(lst) > 0, "fname": name}
+    username, password = map(request.json.get, ("username", "password"))
+    one = usMgr.getOne(username)
+    result = {"success": False, "fname": ""}
+    if one is not None and one["password"] == password:
+        result["success"] = True
+        result["fname"] = one.get("fName", "")
     return result
