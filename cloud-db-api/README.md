@@ -17,7 +17,6 @@ to generate the API documentation:
 - open docs/html/index.html
 
 ### Unit Tests
-#### Database Manager Tests
 - activate venv
 - add details of test database in unittests/test_config.py (refer to unittests/test_config.py.example)
 - to execute all the tests: `python -m unittest unittests`
