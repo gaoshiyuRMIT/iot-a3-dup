@@ -1,15 +1,20 @@
+import pickle
 from flask import request, render_template, redirect, url_for, session, flash
-from .main import app
+from google.oauth2 import id_token
+from google.oauth2.credentials import Credentials
+from google.auth.transport import requests
+from googleapiclient.discovery import build
+
+from .main import app, client_cred
 from .services.CarService import CarService
 from .services.BookingService import BookingService
 from .services.UserService import UserService
 from .errors import APIException
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -86,6 +91,8 @@ def addBooking():
         if e.error_code == "MissingKey":
             return redirect(url_for("cars"))
         raise
+    if session.get("tokenByte") is None:
+        return render_template("addBooking.html", car=car, g_client_id=client_cred["client_id"])
     return render_template("addBooking.html", car=car)
 
 
@@ -123,3 +130,18 @@ def cancelBooking(booking_id):
     CarService().updateCar(booking["car_id"], {"car_status": "available"})
     flash("Booking {} successfully cancelled!".format(booking_id))
     return redirect(url_for("bookings"))
+
+
+@app.route("/tokensignin", methods=["GET", "POST"])
+def tokenSignIn():
+    token = request.form['accessToken']
+    if token == "undefined":
+        return "failure: access token is undefined"
+    creds = Credentials(token, 
+        refresh_token=None, 
+        client_id=client_cred["client_id"], 
+        token_uri=client_cred["token_uri"],
+        client_secret=client_cred["client_secret"]
+    ) 
+    session['tokenByte'] = pickle.dumps(creds)
+    return "success"
