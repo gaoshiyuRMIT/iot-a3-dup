@@ -1,15 +1,15 @@
+from datetime import datetime
+from dateutil.tz import tzlocal
 import pickle
 from flask import request, render_template, redirect, url_for, session, flash
-from google.oauth2 import id_token
 from google.oauth2.credentials import Credentials
-from google.auth.transport import requests
-from googleapiclient.discovery import build
 
 from .main import app, client_cred
 from .services.CarService import CarService
 from .services.BookingService import BookingService
 from .services.UserService import UserService
 from .errors import APIException
+from .utils import CalendarUtil, GAuthUtil
 
 
 @app.route('/')
@@ -91,7 +91,7 @@ def addBooking():
         if e.error_code == "MissingKey":
             return redirect(url_for("cars"))
         raise
-    if session.get("tokenByte") is None:
+    if GAuthUtil().getCredential() is None:
         return render_template("addBooking.html", car=car, g_client_id=client_cred["client_id"])
     return render_template("addBooking.html", car=car)
 
@@ -114,6 +114,12 @@ def addBookingPost():
     # add a booking
     bk_id = service.addBooking(data)
     flash("Booking successful! Booking ID - {}".format(bk_id))
+    # add an event to google calendar
+    g_cred = GAuthUtil().getCredential()
+    calUtil = CalendarUtil(g_cred)
+    data["booking_id"] = bk_id
+    event = calUtil.addEvent(data)
+    flash(f"Google Calendar event successfully added, link: {event.get('htmlLink')}")
     return redirect(url_for("cars"))
 
 @app.route("/bookings/<int:booking_id>/cancel")
@@ -129,6 +135,10 @@ def cancelBooking(booking_id):
     success = bkService.updateBooking(booking_id, {"status": "cancelled"})
     CarService().updateCar(booking["car_id"], {"car_status": "available"})
     flash("Booking {} successfully cancelled!".format(booking_id))
+    # remove calendar event
+    cred = GAuthUtil().getCredential()
+    calUtil = CalendarUtil(cred)
+    calUtil.deleteEvent(booking)
     return redirect(url_for("bookings"))
 
 
@@ -137,11 +147,12 @@ def tokenSignIn():
     token = request.form['accessToken']
     if token == "undefined":
         return "failure: access token is undefined"
-    creds = Credentials(token, 
+    creds = Credentials(
+        token, 
         refresh_token=None, 
         client_id=client_cred["client_id"], 
         token_uri=client_cred["token_uri"],
         client_secret=client_cred["client_secret"]
     ) 
-    session['tokenByte'] = pickle.dumps(creds)
+    GAuthUtil().setCredential(creds)
     return "success"
