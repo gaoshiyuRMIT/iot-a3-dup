@@ -13,6 +13,9 @@ class CalendarUtil:
     def service(self):
         return build("calendar", "v3", credentials=self.creds)
 
+    def getSummary(self, booking):
+        return f"CSS Booking #{booking['booking_id']} Car #{booking['car_id']}"
+
     def _addEvent(self, summary, desc, start: datetime, end: datetime) -> dict:
         '''
         :returns: an event object as detailed here: https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/calendar_v3.events.html#insert
@@ -28,7 +31,7 @@ class CalendarUtil:
 
     def addEvent(self, booking) -> dict:
         return self._addEvent(
-            f"CSS Booking #{booking['booking_id']} Car #{booking['car_id']}",
+            self.getSummary(booking),
             f"You have a car booking at Car Share System. Booking ID: {booking['booking_id']}; Car ID: {booking['car_id']}.",
             datetime.fromisoformat(f"{booking['date_booking']}T{booking['time_booking']}"),
             datetime.fromisoformat(f"{booking['date_return']}T{booking['time_return']}")
@@ -41,7 +44,7 @@ class CalendarUtil:
         real_end_datetime = datetime(
             *([int(s) for s in booking['date_return'].split('-') + booking['time_return'].split(":")])
         ).astimezone(tzlocal())
-        term = f"CSS Booking #{booking['booking_id']} Car #{booking['car_id']}"
+        term = self.getSummary(booking)
         result = self.service.events().list(calendarId="primary", q=term).execute()
         for event in result.get("items", []):
             # if start date & end date are the same, return event id
@@ -50,12 +53,12 @@ class CalendarUtil:
                 return event
         return None
 
-    def deleteEvent(self, booking):
+    def deleteEvent(self, booking) -> bool:
         event = self._findEvent(booking)
         if event is None:
-            raise Exception()
-            return
+            return False
         self.service.events().delete(calendarId="primary", eventId=event["id"]).execute()
+        return True
 
 
 class GAuthUtil:

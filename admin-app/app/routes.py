@@ -138,7 +138,9 @@ def cancelBooking(booking_id):
     # remove calendar event
     cred = GAuthUtil().getCredential()
     calUtil = CalendarUtil(cred)
-    calUtil.deleteEvent(booking)
+    deleted = calUtil.deleteEvent(booking)
+    if deleted:
+        flash("Booking event successfully deleted from Google Calendar.")
     return redirect(url_for("bookings"))
 
 
