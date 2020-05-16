@@ -1,15 +1,20 @@
+from datetime import datetime
+from dateutil.tz import tzlocal
+import pickle
 from flask import request, render_template, redirect, url_for, session, flash
-from .main import app
+from google.oauth2.credentials import Credentials
+
+from .main import app, client_cred
 from .services.CarService import CarService
 from .services.BookingService import BookingService
 from .services.UserService import UserService
 from .errors import APIException
+from .utils import CalendarUtil, GAuthUtil
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -86,6 +91,8 @@ def addBooking():
         if e.error_code == "MissingKey":
             return redirect(url_for("cars"))
         raise
+    if GAuthUtil().getCredential() is None:
+        return render_template("addBooking.html", car=car, g_client_id=client_cred["client_id"])
     return render_template("addBooking.html", car=car)
 
 
@@ -107,6 +114,12 @@ def addBookingPost():
     # add a booking
     bk_id = service.addBooking(data)
     flash("Booking successful! Booking ID - {}".format(bk_id))
+    # add an event to google calendar
+    g_cred = GAuthUtil().getCredential()
+    calUtil = CalendarUtil(g_cred)
+    data["booking_id"] = bk_id
+    event = calUtil.addEvent(data)
+    flash(f"Google Calendar event successfully added, link: {event.get('htmlLink')}")
     return redirect(url_for("cars"))
 
 @app.route("/bookings/<int:booking_id>/cancel")
@@ -122,4 +135,26 @@ def cancelBooking(booking_id):
     success = bkService.updateBooking(booking_id, {"status": "cancelled"})
     CarService().updateCar(booking["car_id"], {"car_status": "available"})
     flash("Booking {} successfully cancelled!".format(booking_id))
+    # remove calendar event
+    cred = GAuthUtil().getCredential()
+    calUtil = CalendarUtil(cred)
+    deleted = calUtil.deleteEvent(booking)
+    if deleted:
+        flash("Booking event successfully deleted from Google Calendar.")
     return redirect(url_for("bookings"))
+
+
+@app.route("/tokensignin", methods=["GET", "POST"])
+def tokenSignIn():
+    token = request.form['accessToken']
+    if token == "undefined":
+        return "failure: access token is undefined"
+    creds = Credentials(
+        token, 
+        refresh_token=None, 
+        client_id=client_cred["client_id"], 
+        token_uri=client_cred["token_uri"],
+        client_secret=client_cred["client_secret"]
+    ) 
+    GAuthUtil().setCredential(creds)
+    return "success"
