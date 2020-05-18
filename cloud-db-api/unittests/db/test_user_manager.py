@@ -1,11 +1,9 @@
 import unittest as _ut
 import logging
-from . import patch_flask_g
 
 logging.basicConfig(level=logging.DEBUG)
 
 class TestUserManager(_ut.TestCase):
-    @patch_flask_g()
     def setUp(self):
         logger = logging.getLogger(f"{__name__}.setUp")
         from app.UserManager import UserManager
@@ -62,7 +60,7 @@ class TestUserManager(_ut.TestCase):
         # confirm true when user exists
         self.assertEqual('aspenrocks', self.uMgr.getOne('aspenrocks')["username"])
         # confirm that getItem() returns none when username not in db
-        self.assertIsNone(self.uMgr.getOne("u34"))
+        self.assertIsNone(self.uMgr.getOne("u34nonExistent"))
 
     def testAddOne(self):
         count = self._countUsers()

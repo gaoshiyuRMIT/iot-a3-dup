@@ -1,12 +1,10 @@
 import unittest as _ut
 import logging
-from . import patch_flask_g
 
 logging.basicConfig(level=logging.DEBUG)
 
 
 class TestCarManager(_ut.TestCase):
-    @patch_flask_g()
     def setUp(self):
         '''set instance variable car manager, connection and car id list,
         clear car table, and insert test car data

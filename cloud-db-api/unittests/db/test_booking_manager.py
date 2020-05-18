@@ -1,11 +1,9 @@
 import unittest as _ut
 import logging
-from . import patch_flask_g
 
 logging.basicConfig(level=logging.DEBUG)
 
 class TestBookingManager(_ut.TestCase):
-    @patch_flask_g()
     def setUp(self):
         from app.BookingManager import BookingManager
         from app.UserManager import UserManager
@@ -130,7 +128,8 @@ class TestBookingManager(_ut.TestCase):
     
     def testGetOneNonExistent(self):
         '''confirm that `getOne` returns None when booking_id not in db'''
-        self.assertIsNone(self.bkMgr.getOne(34))
+        nonExistentId = self.bk_ids[-1] + 10
+        self.assertIsNone(self.bkMgr.getOne(nonExistentId))
 
     def testAddOne(self):
         count = self._countBookings()
