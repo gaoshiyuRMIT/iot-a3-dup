@@ -18,6 +18,7 @@ def register():
 @bp.route("/search", methods=["POST"])
 @jsonifyResponseData
 def users():
+    # not implemented
     usMgr = UserManager()
     return usMgr.getMany({})
 
