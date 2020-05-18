@@ -1,5 +1,6 @@
 import unittest as _ut
 import logging
+from datetime import date, timedelta
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -148,3 +149,16 @@ class TestBookingManager(_ut.TestCase):
         # change status to 'finished'
         self.assertTrue(self.bkMgr.updateOne(self.bk_ids[0], {"status": "finished"}))
         self.assertTrue(self.bkMgr.updateOne(self.bk_ids[4], {"status": "cancelled"}))
+
+    def testTransformDateTime(self):
+        '''confirm that BookingManager.tranformDateTime transforms date & time from db format to ISO string
+        '''
+        booking = {
+            "date_booking": date(2020,1,1), 
+            "time_booking": timedelta(hours=19)
+        }
+        result = self.bkMgr.tranformDateTime(booking)
+        self.assertEqual(
+            {"date_booking": "2020-01-01", "time_booking": "19:00:00"},
+            result
+        )
