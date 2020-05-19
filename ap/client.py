@@ -4,7 +4,6 @@ class client:
     def __init__(self, address, port):
         self.s = socket.socket()
         self.s.connect((address,port))
-        print('client set up')
         
 
     
