@@ -25,6 +25,10 @@ class InvalidArgument(BaseAPIException):
     status_code = 400
     error_code = "InvalidArgument"
 
+class MissingKey(BaseAPIException):
+    status_code = 400
+    error_code = "MissingKey"
         
-        
-
+class DuplicateKey(BaseAPIException):
+    status_code = 400
+    error_code = "DuplicateKey"

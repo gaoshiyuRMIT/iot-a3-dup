@@ -7,18 +7,35 @@ Login/Signup
 {% endblock title %}
 
 {% block content %}
-<form action="{{ url_for('login') }}" method="POST">
-    <div class="form-group ">
-        <label for="username" class="col-md-3 control-label"><strong>Log in</strong></label>
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<form action="{{ url_for('login_check') }}" method="POST">
+    <div class="container">
+
+        <div class="form-group ">
+            <div class="row">
+                <label for="username" class="col-md-1 control-label"><strong>Log in</strong></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="username" class="col-md-1 control-label">Username</label>
+                <input type="text" name="username" class="col-md-4 control-form" placeholder="Username">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="password" class="col-md-1 control-label">Password</label>
+                <input type="password" name="password" class="col-md-4 control-form" placeholder="Password">
+            </div>
+        </div>
+        <div class="align-items-center">
+            <div class="col align-self-center">
+                <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="username" class="col-md-3 control-label">Username</label>
-        <input type="text" name="username" class="col-md-4 control-form" placeholder="Username">
-    </div>
-    <div class="form-group">
-        <label for="password" class="col-md-3 control-label">Password</label>
-        <input type="password" name="password" class="col-md-4 control-form" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary">Log in</button>
 </form>
+{{ output }}
 {% endblock %}

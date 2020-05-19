@@ -5,10 +5,34 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% if session['loggedIn'] %}
             <li><a href="{{ url_for('cars') }}">Cars</a></li>
+            <li><a href="{{ url_for('users') }}">Users_TEMP</a></li> 
+            <li><a href="{{ url_for('bookings') }}">Bookings</a></li>           
+            {% endif %}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if session['loggedIn'] %}
+            <li><span class="navbar-text">Welcome, {{ session['fName'] }}</span> </li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            
         </ul>
     </div>
 </nav>
 
 {% endblock navbar %}
+
+{% block error_message %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}">
+                    {{ message }}
+                </div>       
+            {% endfor %} 
+        {% endif %}
+    {% endwith %}
+{% endblock %}

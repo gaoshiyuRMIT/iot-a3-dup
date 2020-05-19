@@ -1,0 +1,97 @@
+{% extends "navbar.html" %}
+{% block title %}Make a Booking{% endblock %}
+
+{% block head %}
+    {{super()}}
+    {% if g_client_id is defined %}
+    <meta name="google-signin-client_id" 
+        content="{{ g_client_id }}">
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    {% if g_client_id is defined %}
+    <script>
+        function _sendToken(id_token) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/tokensignin');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                console.log(xhr.responseText);
+            };
+            xhr.send('accessToken=' + id_token);            
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                var xhr = new XMLHttpRequest();
+                xhr.open('PUT', "/signout");
+                xhr.send();
+            });
+        }
+
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            var access_token = googleUser.getAuthResponse().access_token;
+            console.log(access_token);
+            _sendToken(access_token);
+            document.getElementById("submit").removeAttribute("disabled");
+        }
+        function onFailure(error) {
+            console.log(error);
+        }
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile https://www.googleapis.com/auth/calendar',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block error_message %}
+    {{super()}}
+    {% endblock %}
+    {% if g_client_id is defined %}
+        <div id="my-signin2"></div>
+    {% endif %}
+    <div class="row col-md-3">
+        <form method="post" action="{{ url_for('addBookingPost') }}">
+            <div class="form-group">
+                <label class="control-label" for="car_id">Car ID</label>
+                <input class="form-control" type="number" id="car_id" name="car_id" value="{{ car['car_id'] }}" readonly>
+                <small class="text text-info">
+                    {% for k,v in car.items() %}
+                        {% if k != 'car_id' %}
+                            {{ "{}: {}; ".format(k,v) }}
+                        {% endif %}
+                    {% endfor %}
+                </small>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="datetime_booking">Start Date</label>
+                <input class="form-control" type="datetime-local" id="datetime_booking" name="datetime_booking">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="datetime_return">End Date</label>
+                <input class="form-control" type="datetime-local" id="datetime_return" name="datetime_return">
+            </div>
+            <input id="submit" type="submit" class="btn btn-primary" value="Submit"
+                {{ "disabled" if g_client_id is defined else "" }}
+            >
+        </form>
+    </div>
+</div>
+{% endblock %}

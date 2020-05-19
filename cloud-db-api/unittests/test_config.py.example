@@ -1,0 +1,6 @@
+test_config = {
+    "MYSQL_HOST": "localhost",
+    "MYSQL_USER": "root",
+    "MYSQL_PASSWORD": "abcd1234",
+    "MYSQL_DATABASE": "test"
+}

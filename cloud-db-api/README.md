@@ -9,3 +9,15 @@
 
 ### references
 - [PyMySQL documentation](https://pymysql.readthedocs.io/en/latest/index.html)
+
+### Documentation
+to generate the API documentation: 
+- make sure your virtualenv is activated and has all libraries in requirements.txt installed
+- `sphinx-build docs docs/html`
+- open docs/html/index.html
+
+### Unit Tests
+- activate venv
+- add details of test database in unittests/test_config.py (refer to unittests/test_config.py.example)
+- to execute all the tests: `python -m unittest unittests`
+- to execute a particular test case class: e.g. `python -m unittest unittests.db.test_car_manager`
