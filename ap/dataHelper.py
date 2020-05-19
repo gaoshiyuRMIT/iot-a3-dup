@@ -51,8 +51,8 @@ class dataHelper:
     def return_car(self,car_id,booking_id):
         self.time=datetime.now()
         data ={
+            "car_id": car_id,
             'type' : 'return_car',
-            "status": "available",
             "booking_id": booking_id,
             "date_return": self.time.strftime('%Y-%m-%d'),
             "time_return": self.time.strftime('%H:%M:%S'),

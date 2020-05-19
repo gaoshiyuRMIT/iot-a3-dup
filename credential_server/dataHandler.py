@@ -16,10 +16,22 @@ class dataHandler:
         elif data['type'] == 'unlock':
             return self.unlock(data['booking_id'])
         else:
-            update_car(data['id'])
-            update_booking(data['id'])
-            
+            return self.return_car(data)
         
+    def return_car(self, data):
+        booking={
+        'status' :'finished',
+        "date_return": data['date_return'],  
+        "time_return": data['time_return']
+    }
+        self.update_booking(data['booking_id'],booking)     
+        
+        car={
+            'car_status': 'available'
+        }  
+        
+        self.update_car(car,data['car_id'])
+        return "you have successfully returned the car" 
         
     def unlock(self,booking_id):
         booking={
@@ -27,6 +39,7 @@ class dataHandler:
         }  
         self.update_booking(booking_id,booking) 
         return "you have successfully unlocked the car" 
+    
     def search_booking(self,user_input,status):
         data = {
            "username" : user_input['username'],
@@ -56,8 +69,4 @@ class dataHandler:
     
     
     
-    def return_car(self,booking_id, car_id, data):
-        booking={
-            'status' :'finished',
-        }
-        self.update_booking()    
+    

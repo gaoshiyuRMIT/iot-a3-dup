@@ -9,6 +9,7 @@ class console():
     def login(self):
         username,password = self.agent.input_credential()
         self.islogin = self.agent.login(username,password)
+        
     def menu(self):
         print("1.unlock a car\n2.return a car\n3.quit")    
         user_input = input()
@@ -16,16 +17,17 @@ class console():
     
     def read_input(self,input):
         if input == '1':
-            print("choose one")
+            self.agent.find_booked_car()
         elif input == '2':
-            print("choose two")
+            self.agent.find_inprogress()
         elif input == '3':
             print("see u")
             self.quit = True
             
     def start_console(self):
         while True:
-            if self.islogin:
+            print(self.quit)
+            if self.islogin:        
                 self.menu()
             else:
                 self.login() 
