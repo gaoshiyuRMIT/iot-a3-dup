@@ -2,7 +2,7 @@ from console import console
 
 def main():
     c = console()
-    console.start()
+    c.start_console()
     
     
 if __name__ == "__main__":

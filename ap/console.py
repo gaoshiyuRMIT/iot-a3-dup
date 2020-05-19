@@ -26,13 +26,9 @@ class console():
             
     def start_console(self):
         while True:
-            print(self.quit)
             if self.islogin:        
                 self.menu()
             else:
                 self.login() 
             if self.quit:
                 break      
-if __name__ == "__main__":
-    c= console()
-    c.start_console()

@@ -1,6 +1,7 @@
 from client import client as cl
 from dataHelper import dataHelper as helper
 import json
+import hashlib
 class ap():
     
     def __init__(self):
@@ -86,6 +87,8 @@ class ap():
         username = input()
         print("input your password")
         password = input()
+        h = hashlib.md5(password.encode())
+        password=h.hexdigest()
         return username,password
         
 if __name__ == "__main__":
