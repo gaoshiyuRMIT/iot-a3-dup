@@ -25,17 +25,6 @@ def users():
 @bp.route("/login", methods=["POST"])
 @jsonifyResponseData
 def login():
-<<<<<<< HEAD
-  
-    filt = {
-        "username": request.json.get("username"),
-        "password": request.json.get("password")
-    }
-    #lst = usMgr.getMany(filt)
-    result = {"success": True}
-    return result
-
-=======
     usMgr = UserManager()
     username, password = map(request.json.get, ("username", "password"))
     one = usMgr.getOne(username)
@@ -44,4 +33,3 @@ def login():
         result["success"] = True
         result["fname"] = one.get("fName", "")
     return result
->>>>>>> master
