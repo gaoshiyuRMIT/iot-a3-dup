@@ -1,10 +1,8 @@
 import socket
 import sys
-import pickle
-
-from .httpHelper import httpHelper as Helper
-
-
+import json
+from httpHelper import httpHelper as Helper
+ 
 # import a check credential function
 class server:
     
@@ -14,15 +12,6 @@ class server:
         self.s.listen(5)  
         self.helper = Helper()  
         self.c = None
-        
-    def handle_user(self,c):
-        client_input = c.recv(1024).decode("utf-8") 
-        result = self.helper.post(client_input)
-        print(result)
-        if result:
-            self.send(c,"success")
-        else:
-            self.send(c,"fail")    
     
     def send(self,c,request):
        b = bytes(request,'utf-8')
@@ -30,18 +19,23 @@ class server:
        
     def read_data(self):
         client_input = self.c.recv(1024)
-        
-        data = pickle.loads(client_input)
-        print(data)
+        #data = json.loads(client_input)
+        print(client_input)
            
         
     def listen(self):
+        print('server is running')
         while True:
-            print('server is running')
-            c,addr = self.s.accept()
-            self.c=c
-            self.handle_user(c)
-            self.read_data()
             
+            try:
+                c,addr = self.s.accept()
+                self.c=c
+                self.read_data()
+            except:
+                print('client fault')
+            
+if __name__ == "__main__":
+    s= server(61134)
+    s.listen()
            
             

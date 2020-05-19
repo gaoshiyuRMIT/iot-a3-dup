@@ -1,5 +1,5 @@
-from .client import client as cl
-from .dataHelper import dataHelper as helper
+from client import client as cl
+from dataHelper import dataHelper as helper
 class ap():
     
     def __init__(self):
@@ -9,34 +9,44 @@ class ap():
         
     def login(self,user, password):
         self.client = cl('127.0.0.1',61134)
-        response = self.client.send_credential(user,password)
-        if response== "success":
-            self.username = user
-            print('sucess')
-        else:
-            print('wrong password or wrong user name')
+        data = self.dataHelper.login(user, password)
+        self.client.send_data(data)
+        self.client.close_client()    
+        self.username=user
             
         # take in user input and use the cliend class to send client to a
-    def find_brelated_car(self,userId):
+    def find_booked_car(self): 
         #take in userid and return a list of car that is related to user, here pandas is recommended
-        return
-    
-    def get_return_list(self):
-        #use panda to generate a list of car that is returnnable from the userdatetime A combination of a date and a time. 
-        return
-    
-    def get_past_list(self):
-            #use panda to generate a list of car that has been returned by the user from the userdatetime A combination of a date and a time. 
-        return
-    
-    def show_available_car(self):
-        # still using panda
-        return
-    
-    def unlock_car(self, car_id):
-        data = self.dataHelper.unlock(car_id,self.username)
+        self.client = cl('127.0.0.1',61134)
+        data = self.dataHelper.search_booking(self.username,status = 'available')
         self.client.send_data(data)
+        self.client.close_client()    
+    
+    
+    def unlock_car(self, booking_id):
+        self.client = cl('127.0.0.1',61134)
+        data = self.dataHelper.unlock_car(booking_id)
+        self.client.send_data(data)
+        self.client.close_client() 
         return
     
-    def return_car(self,car_id):
+    def return_car(self,car_id,booking_id):
+        self.client = cl('127.0.0.1',61134)
+        data = self.dataHelper.return_car(car_id,booking_id)
+        self.client.send_data(data)
+        self.client.close_client() 
         return
+    
+    def input_credential(self):
+        print("input your user name")
+        username = input()
+        print("input your password")
+        password = input()
+        return username,password
+        
+if __name__ == "__main__":
+    a1= ap()
+    a1.login('1234568', 'xinhuan')
+    a1.find_booked_car()
+    a1.unlock_car("1")
+    a1.return_car("1","1")

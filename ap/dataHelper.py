@@ -1,24 +1,55 @@
 from datetime import datetime
-import pickle
+import json
 class dataHelper:
     def __init__(self):
         self.time = None
         
-    def unlock(self,car_id,user):
-        self.time=datetime.now()
-        request_type={
-            'type' : 'unlock'
+    def login(self, username, password):
+        data={
+            'type' : 'login',
+            "username": username, 
+            "password": password
         }
-        car_data = {
-            "status": "booked"
-        }    
-        book_data={
-            "car_id": car_id,
-            "date_booking": self.time.strftime('%Y-%m-%d'),
-            "time_booking": self.time.strftime('%H-%M-%S'),
-            "username": user
-        }
+          
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+    
         
-        data = [request_type,car_data,book_data]
-        send_data = pickle.dumps(data)
-        return send_data
+    def search_booking(self,user,status):
+        self.time=datetime.now()
+        data={
+            'type' : 'search_booking',
+            "username": user,
+            "status": status
+        }
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+    
+    def unlock_car(self,booking_id): 
+        data={
+            'type' : 'unlock',
+            "booking_id": booking_id,
+            "date_booking": self.time.strftime('%Y-%m-%d'),
+            "time_booking": self.time.strftime('%H:%M:%S'),
+        }
+         
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+    
+    def return_car(self,car_id,booking_id):
+        self.time=datetime.now()
+        data ={
+            'type' : 'return_car',
+            "status": "available",
+            "booking_id": booking_id,
+            "date_return": self.time.strftime('%Y-%m-%d'),
+            "time_return": self.time.strftime('%H:%M:%S'),
+            "status": "finished"
+        }
+           
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
