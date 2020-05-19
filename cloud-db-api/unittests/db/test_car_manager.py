@@ -1,12 +1,12 @@
 import unittest as _ut
 import logging
-from . import patch_flask_g
+
+from app.errors.api_exceptions import InvalidArgument
 
 logging.basicConfig(level=logging.DEBUG)
 
 
 class TestCarManager(_ut.TestCase):
-    @patch_flask_g()
     def setUp(self):
         '''set instance variable car manager, connection and car id list,
         clear car table, and insert test car data
@@ -101,3 +101,21 @@ class TestCarManager(_ut.TestCase):
             set(car.keys())
         )
 
+    def testKeepValidFields(self):
+        '''confirm that keepValidFieldsOnly method eliminates non-existent attributes & fills in correct attributes that are not present with None
+        '''
+        data = {"car_id": 71, "car_model": "truck", "num_seats": 3, "intelligence": 100}
+        result = self.cMgr.keepValidFieldsOnly(data)
+        self.assertEqual(
+            {"car_id": 71, "car_model": "truck", "num_seats": 3, "body_type": None, 
+                "car_colour": None, "cost_hour": None, "latitude": None, "longitude": None, 
+                "car_status": None, "year": None},
+            result
+        )
+
+    def testKeepValidFieldsThrowError(self):
+        '''confirm that when an invalid attribute is passed in, and set throw to True, keepValidFieldsOnly throws InvalidArgument
+        '''
+        data = {"car_id": 71, "car_model": "truck", "num_seats": 3, "intelligence": 100}
+        with self.assertRaises(InvalidArgument):
+            self.cMgr.keepValidFieldsOnly(data, throw=True)
