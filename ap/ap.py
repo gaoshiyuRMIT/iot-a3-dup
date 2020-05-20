@@ -2,6 +2,7 @@ from client import client as cl
 from dataHelper import dataHelper as helper
 import json
 import hashlib
+
 class ap():
     
     def __init__(self):
@@ -93,9 +94,9 @@ class ap():
         
 if __name__ == "__main__":
     a1= ap()
-    a1.login('xinhuanduan', 'a6096d7f16360d8ce5e81dfa947972f6')
+    # a1.login('xinhuanduan', 'a6096d7f16360d8ce5e81dfa947972f6')
     #a1.username = "yu"
     # a1.find_booked_car()
     a1.find_inprogress()
     # a1.unlock_car("5")
-    # a1.return_car(1,"5")
+    a1.return_car(1,"5")

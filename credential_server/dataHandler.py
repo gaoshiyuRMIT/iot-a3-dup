@@ -22,12 +22,15 @@ class dataHandler:
         booking={
         'status' :'finished',
         "date_return": data['date_return'],  
-        "time_return": data['time_return']
+        "time_return": data['time_return'],
+       
     }
         self.update_booking(data['booking_id'],booking)     
         
         car={
-            'car_status': 'available'
+            'car_status': 'available',
+            "latitude": data['latitude'],
+            "longitude":data['longitude']
         }  
         
         self.update_car(car,data['car_id'])
