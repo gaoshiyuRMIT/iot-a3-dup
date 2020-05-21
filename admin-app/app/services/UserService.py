@@ -23,18 +23,3 @@ class UserService(BaseService):
 
         # (python ternary operator)
         return user['fname'] if user['success'] == True else None
-
-    def findExistingUser(self, username):
-        url="/users/search"
-        data = {'username': username }
-        user = self.post(url, data)
-    
-        # (python ternary operator)
-        return True if user['success'] == True else None
-
-    def registerUser(self, inputData:dict):
-        url="/users/registerUser"
-        data = inputData
-        output = self.post(url, data)
-
-        return True if output['success'] == True else False
