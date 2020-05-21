@@ -17,6 +17,12 @@ class dataHelper:
         data = send_data.encode('utf-8')
         return data
     
+    def login_face(self, p_data):
+        data={
+            'type' : 'loginface',
+            'face' : p_data,
+        }
+        ##???? do i need to turn pickle into json? 
         
     def search_booking(self,user):
         self.time=datetime.now()
