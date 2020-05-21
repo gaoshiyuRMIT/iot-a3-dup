@@ -22,18 +22,45 @@ def login():
 
 @app.route('/login_check', methods=['POST', 'GET'])
 def login_check():
-    service = UserService()
-    isValidUser = service.isValidUser(request.form.get('username'), request.form.get('password'))
-    validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
-    if (validUser):
-        session['username'] = request.form.get('username')
-        session['fName'] = validUser
-        session['loggedIn'] = True
-        return redirect(url_for('index'))
+    if 'login' in request.form:
+        service = UserService()
+        validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
+        if (validUser):
+            session['username'] = request.form.get('username')
+            session['fName'] = validUser
+            session['loggedIn'] = True
+            return redirect(url_for('index'))
+        else:
+            flash("Invalid credentials")
+            return redirect(url_for('login'))
     else:
-        flash("Invalid credentials")
         return redirect(url_for('login'))
 
+
+@app.route('/registerUser', methods=['POST', 'GET'])
+def registerUser():
+    if 'register' in request.form:
+        service = UserService()
+        username = request.form.get('username')
+        usernameTaken = service.findExistingUser(username)
+        if usernameTaken:
+            flash("Username: " + username + " is already taken - please try again")
+        else:
+            userInfo = {
+                'username': username,
+                'password': request.form.get('password'),
+                'fName': request.form.get('fname'),
+                'lName': request.form.get('lname'),
+                'email': request.form.get('email')
+            }
+            result = service.registerUser(userInfo)
+            if result:
+                flash("Success: Account created - please log in")
+            return render_template('login.html')
+    else:
+        flash("Something went wrong - please try again")
+        return render_template('register.html')
+    
 @app.route('/logout')
 def logout():
     session.pop('username', None)
