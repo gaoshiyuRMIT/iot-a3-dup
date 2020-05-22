@@ -1,9 +1,12 @@
 import requests as reqs
 import json
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('ap.config', encoding='UTF-8')
 
 class httpHelper:
     def __init__(self):
-        self.address = 'http://127.0.0.1:5000'
+        self.address = config['address'].get('apiAdd')
          
         
     def get(self, url):
