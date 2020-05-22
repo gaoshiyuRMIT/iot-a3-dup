@@ -1,0 +1,38 @@
+
+{% extends "navbar.html" %}
+
+{% block title %}
+Login
+
+{% endblock title %}
+
+{% block content %}
+<script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('google_map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
+  async defer></script>
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<div class="container" style="height:600;">
+    
+    <div class="panel">
+        <div class="panel-header">Test</div>
+        <div class="panel-body">
+            <div id="google_map" style="width:100%;height:400px;"></div>
+
+        </div>
+    </div>
+
+
+    </div>
+
+
+    {% endblock %}

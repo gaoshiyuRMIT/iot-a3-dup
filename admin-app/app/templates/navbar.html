@@ -6,14 +6,15 @@
         <ul class="nav navbar-nav">
             <li><a href="{{ url_for('index') }}">Home</a></li>
             {% if session['loggedIn'] %}
-            <li><a href="{{ url_for('cars') }}">Cars</a></li>
-            <li><a href="{{ url_for('users') }}">Users_TEMP</a></li> 
-            <li><a href="{{ url_for('bookings') }}">Bookings</a></li>           
+            <li><a href="{{ url_for('cars') }}">Browse Cars</a></li>
+            <li><a href="{{ url_for('map') }}">Map_TEMP</a></li> 
+                    
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if session['loggedIn'] %}
             <li><span class="navbar-text">Welcome, {{ session['fName'] }}</span> </li>
+            <li><a href="{{ url_for('bookings') }}">Your Bookings</a></li>   
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Login</a></li>
