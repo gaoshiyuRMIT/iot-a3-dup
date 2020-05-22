@@ -18,6 +18,7 @@ google-api-python-client==1.8.3
 google-auth-httplib2==0.0.3
 google-auth-oauthlib==0.4.1
 python-dateutil==2.8.1
+jsonpickle=1.4.1
 facial-recognition:
     opencv-contrib-python==4.1.0.25(later version creates errors on raspberrypi)
     (includes cv2==4.1.0)

@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import jsonpickle
 from location_monitor import create_location
 
 class dataHelper:
@@ -18,11 +19,18 @@ class dataHelper:
         return data
     
     def login_face(self, p_data):
-        data={
-            'type' : 'loginface',
-            'face' : p_data,
+        #p_data is a numpy darray in byte form 
+        data = {
+            'type': 'loginface',
+            'encodings': p_data
         }
-        ##???? do i need to turn pickle into json? 
+        #jsonpickle the dictionary (because it contains bytes)
+        data_json_string = jsonpickle.encode(data)
+        #encode jsonpickle str to bytes
+        send_data = data_json_string.encode('utf-8')
+        #send_data ready to transmit via sockets
+        return send_data
+
         
     def search_booking(self,user):
         self.time=datetime.now()

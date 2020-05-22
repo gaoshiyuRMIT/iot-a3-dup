@@ -27,11 +27,17 @@ class ap():
         return islogin
         # take in user input and use the client class to send client to a
 
+    """login_face expects the argument p_data to already be pickled
+    and is the encodings from face_recognition class"""
     def login_face(self, p_data):
         islogin = False
+        # connect
         self.client = cl('127.0.0.1', 61134)
+        #convert p_data for tranmission
         data = self.dataHelper.login_face(p_data)
+        # send data
         self.client.send_data(data)
+        # recieve response
         status = self.client.listen_from_server()
         if status == 'success':
             print('you have sucessfully logged in')
@@ -40,7 +46,6 @@ class ap():
             print('your face was not recognised!')
         self.client.close_client()
         return islogin
-
 
     def find_booked_car(self):
         #take in userid and return a list of car that is related to user, here pandas is recommended
@@ -87,7 +92,6 @@ class ap():
         print(message)
         self.client.close_client() 
         
-    
     def return_car(self,car_id,booking_id):
         self.client = cl('127.0.0.1',61134)
         data = self.dataHelper.return_car(car_id,booking_id)
@@ -96,7 +100,6 @@ class ap():
         print(message)
         self.client.close_client() 
         
-   
     def input_credential(self):
         print("input your user name")
         username = input()
@@ -121,6 +124,7 @@ class ap():
                 print("You must enter '1' or '2'. Please try again.")
         if choice == '1':
             capture.retrieve_webcam_image()
+            #if retieve image did not work, capture self.image will b none and therefore p_data will be none
             p_data = capture.encode_image()
             return p_data
         else:
