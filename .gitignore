@@ -10,3 +10,11 @@ flask.log
 cloud-db-api/dontsavetorepo.sql
 testDB.py
 playground.py
+admin-app:.flaskenv
+admin-app:config.py
+cloud-db-api:config.py.
+start_mp_web.sh
+admin-app:.flaskenv
+admin-app:config.py
+cloud-db-api:config.py.
+start_mp_web.sh
