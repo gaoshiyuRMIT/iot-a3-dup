@@ -2,6 +2,8 @@ from . import request, url_for, Blueprint, g
 from app.UserManager import UserManager
 from . import jsonifyResponseData
 
+from passlib.hash import sha256_crypt
+
 
 bp = Blueprint("users", __name__, url_prefix="/users")
 
@@ -10,6 +12,7 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 def registerUser():
     usMgr = UserManager()
     newUserVal = request.json
+    # newUserVal['password'] = sha256_crypt.using(rounds=1000).hash(newUserVal['password'])
     usrPK = usMgr.addOne(newUserVal)
     success = True if usrPK else False
     result = {"success":success}
@@ -31,7 +34,7 @@ def login():
     username, password = map(request.json.get, ("username", "password"))
     one = usMgr.getOne(username)
     result = {"success": False, "fname": ""}
-    if one is not None and one["password"] == password:
+    if one is not None and sha256_crypt.verify(password, one["password"]):
         result["success"] = True
         result["fname"] = one.get("fName", "")
     return result

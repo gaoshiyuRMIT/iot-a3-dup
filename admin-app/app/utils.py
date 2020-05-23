@@ -117,7 +117,7 @@ class PhotoUtil:
         self.rootdir = current_app.config["PHOTO_FOLDER"]
 
     @staticmethod
-    def getExt(self, filename):
+    def getExt(filename):
         i = filename.rfind(".")
         return filename[i:]
 

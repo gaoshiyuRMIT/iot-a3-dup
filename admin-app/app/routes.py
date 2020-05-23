@@ -3,6 +3,7 @@ from dateutil.tz import tzlocal
 import pickle
 from flask import request, render_template, redirect, url_for, session, flash
 from google.oauth2.credentials import Credentials
+from passlib.hash import sha256_crypt
 
 from .main import app, client_cred
 from .services.CarService import CarService
@@ -58,13 +59,14 @@ def registerUser():
     if 'register' in request.form:
         service = UserService()
         username = request.form.get('username')
+        pwHash = sha256_crypt.using(rounds=1000).hash(request.form.get('password'))
         usernameTaken = service.findExistingUser(username)
         if usernameTaken:
             flash("Username: " + username + " is already taken - please try again")
         else:
             userInfo = {
                 'username': username,
-                'password': request.form.get('password'),
+                'password': pwHash,
                 'fName': request.form.get('fname'),
                 'lName': request.form.get('lname'),
                 'email': request.form.get('email')
@@ -74,7 +76,6 @@ def registerUser():
                 flash("Success: Account created - please log in")
             return render_template('login.html')
     else:
-        flash("Something went wrong - please try again")
         return render_template('register.html')
     
 @app.route('/logout')
@@ -89,6 +90,17 @@ def users():
     service = UserService()
     users = service.getAllUsers()
     return render_template("users.html", output=users, users=users)
+
+@app.route("/uploadFaceFiles", methods=['GET', 'POST'])
+def uploadFaceFiles():
+    return render_template("addFace.html")
+
+@app.route("/map")
+def map():
+    key = app.config['GOOGLE_API_KEY']
+    return render_template("map.html", key=key)
+
+
 
 @app.route("/cars")
 def cars():
@@ -121,7 +133,11 @@ def searchCars():
 def bookings():
     username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
-    return render_template("bookings.html", bookings=bookings)
+    bookedCars = []
+    carService = CarService()
+    for booking in bookings:
+        bookedCars.append(carService.getCar(booking['car_id']))
+    return render_template("bookings.html", bookings=bookings, output=bookedCars)
 
 @app.route("/bookings/new", methods=["GET"])
 def addBooking():
