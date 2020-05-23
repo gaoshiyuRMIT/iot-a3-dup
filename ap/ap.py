@@ -94,10 +94,8 @@ class ap():
         username = input()
         print("input your password")
         password = input()
-        h = hashlib.md5(password.encode())
-        password=h.hexdigest()
         return username,password
-        
+    
 if __name__ == "__main__":
     a1= ap()
     # a1.login('xinhuanduan', 'a6096d7f16360d8ce5e81dfa947972f6')

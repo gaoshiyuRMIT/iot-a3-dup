@@ -1,5 +1,6 @@
 from httpHelper import httpHelper as Helper
 import json
+from passlib.hash import sha256_crypt
 
 class dataHandler:
     def __init__(self):
@@ -58,15 +59,20 @@ class dataHandler:
         
     def login(self, user_input):
         data = {
-           "username" :  user_input['username'],
-           "password" : user_input["password"]
+           "username" :  user_input['username']
         }
-        response = self.helper.post_data('/users/login', data)
+        response = self.helper.post_data('/users/search', data)
         login_details = json.loads(response.text) 
         if login_details['data']['success']:
-            return "success"
-        else:
-            return 'fail'
+            passwordhash = login_details['data']['user']['password']
+            print(passwordhash)
+            password = user_input['password']
+            print(password)
+            print(sha256_crypt.verify(password, passwordhash))
+            if sha256_crypt.verify(password, passwordhash):
+                return "success"
+        
+        return 'fail'
     
     def update_car(self, car, car_id):
         response = self.helper.put(('/cars/%s/update' %car_id), car)   
