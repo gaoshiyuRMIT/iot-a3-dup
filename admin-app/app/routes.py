@@ -43,10 +43,14 @@ def upload():
         return redirect(url_for("login"))
     username = session["username"]
     files = request.files.getlist("facefiles")
+    if files[0].filename == "":
+        flash("no files selected")
+        return redirect(url_for("uploadFaceFiles"))
     PhotoUtil().storePhotos(files, username)
     # TODO: train the images
     # TODO: delete the photos
     # TODO: store pickled trained model
+    return redirect(url_for("uploadFaceFiles"))
 
 
 @app.route('/registerUser', methods=['POST', 'GET'])
@@ -89,7 +93,7 @@ def users():
 @app.route("/cars")
 def cars():
     service = CarService()
-    cars = service.getAllAvailableCars()
+    cars = service.searchCars({})
     return render_template("cars.html", cars=cars)
 
 
