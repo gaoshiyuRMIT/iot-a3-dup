@@ -1,12 +1,10 @@
-import socket    
+import socket
 
 class client:
     def __init__(self, address, port):
         self.s = socket.socket()
-        self.s.connect((address,port))
+        self.s.connect((address, port))
         
-
-    
     def send_data(self, data):
         self.s.send(data)
         #response = self.listen_from_server();
