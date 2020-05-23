@@ -17,6 +17,7 @@ class ap():
         self.cient = None
         
     def login(self,user, password):
+        """the loogin function of ap, send and recieve data from the server"""
         islogin = False
         self.client = cl(ip,port)
         data = self.dataHelper.login(user, password)
@@ -31,10 +32,10 @@ class ap():
         self.client.close_client()   
         return islogin 
             
-        # take in user input and use the cliend class to send client to a
+        
     
     def find_booked_car(self): 
-        #take in userid and return a list of car that is related to user, here pandas is recommended
+        """print a list of the booked car for the user"""
         self.client = cl(ip,port)
         data = self.dataHelper.search_booking(self.username)
         self.client.send_data(data)
@@ -46,6 +47,7 @@ class ap():
             self.unlock_car(bookings[choice]['car_id'], bookings[choice]["booking_id"])
         
     def find_inprogress(self):
+        """print a list of the inprogress car for the user"""
         self.client = cl(ip,port)
         data = self.dataHelper.search_inprogress(self.username)
         self.client.send_data(data)
@@ -57,6 +59,7 @@ class ap():
             self.return_car(bookings[choice]['car_id'],bookings[choice]["booking_id"])
     
     def load_all_cars(self,bookings,type):
+        """print a the list of bookings and take in user choice"""
         num = 1
         if(len(bookings)!=0):   
             print("choose from the following car_ids: ")
@@ -72,6 +75,7 @@ class ap():
          
     
     def unlock_car(self, car_id,booking_id):
+        """unlock a car"""
         self.client = cl(ip,port)
         data = self.dataHelper.unlock_car(car_id,booking_id)
         self.client.send_data(data)
@@ -81,6 +85,7 @@ class ap():
         
     
     def return_car(self,car_id,booking_id):
+        """return a car"""
         self.client = cl(ip,port)
         data = self.dataHelper.return_car(car_id,booking_id)
         self.client.send_data(data)
@@ -90,6 +95,7 @@ class ap():
         
     
     def input_credential(self):
+        """take the user input of password and username"""
         print("input your user name")
         username = input()
         print("input your password")
