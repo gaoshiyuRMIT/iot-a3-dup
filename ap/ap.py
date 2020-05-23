@@ -43,7 +43,7 @@ class ap():
         choice = self.load_all_cars(bookings,'booked')
         self.client.close_client()
         if(choice!=None):      
-            self.unlock_car(bookings[choice]["booking_id"])
+            self.unlock_car(bookings[choice]['car_id'], bookings[choice]["booking_id"])
         
     def find_inprogress(self):
         self.client = cl(ip,port)
@@ -71,7 +71,7 @@ class ap():
             return None
          
     
-    def unlock_car(self, booking_id):
+    def unlock_car(self, car_id,booking_id):
         self.client = cl(ip,port)
         data = self.dataHelper.unlock_car(booking_id)
         self.client.send_data(data)

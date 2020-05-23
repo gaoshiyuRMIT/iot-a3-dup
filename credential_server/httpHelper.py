@@ -6,7 +6,6 @@ config.read('ap.config', encoding='UTF-8')
 
 class httpHelper:
     def __init__(self):
-        self.address = 'http://127.0.0.1:6543'
         self.address = config['address'].get('apiAdd')
          
         
