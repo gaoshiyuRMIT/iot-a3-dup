@@ -14,7 +14,7 @@ class dataHandler:
         elif data['type'] == 'search_inprogress':
             return self.search_booking(data,"inprogress")
         elif data['type'] == 'unlock':
-            return self.unlock(data['booking_id'])
+            return self.unlock(data)
         else:
             return self.return_car(data)
         
@@ -36,11 +36,16 @@ class dataHandler:
         self.update_car(car,data['car_id'])
         return "you have successfully returned the car" 
         
-    def unlock(self,booking_id):
+    def unlock(self,data):
         booking={
             'status' : 'inProgress'
         }  
-        self.update_booking(booking_id,booking) 
+        self.update_booking(data['booking_id'],booking) 
+        car={
+            'car_status': 'inUse'
+        }  
+        
+        self.update_car(car,data['car_id'])
         return "you have successfully unlocked the car" 
     
     def search_booking(self,user_input,status):
