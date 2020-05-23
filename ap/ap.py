@@ -30,11 +30,12 @@ class ap():
     """login_face expects the argument p_data to already be pickled
     and is the encodings from face_recognition class"""
     def login_face(self, p_data):
+        username = self.get_username()
         islogin = False
         # connect
         self.client = cl('127.0.0.1', 61134)
         #convert p_data for tranmission
-        data = self.dataHelper.login_face(p_data)
+        data = self.dataHelper.login_face(p_data, username)
         # send data
         self.client.send_data(data)
         # recieve response
@@ -116,7 +117,10 @@ class ap():
         capture = CaptureFace()
         input_valid = False
         while input_valid is not True:
-            print("\n\nFacial recognition requires a photo of your face: ")
+            print("""\n\nFacial recognition requires a photo of your face.\n
+            Please make sure the photo you take/upload shows you facing directly towards the camera\n
+            Do not supply a photo with other people in it.\n
+            Make sure the lighting is adequate to aid in facial recognition.\n\n""")
             choice = input("""Enter '1' to take a photo using PiCam \nEnter '2' to choose a photo from file \n""")
             if choice == '1' or choice == '2':
                 input_valid = True
@@ -124,13 +128,26 @@ class ap():
                 print("You must enter '1' or '2'. Please try again.")
         if choice == '1':
             capture.retrieve_webcam_image()
-            #if retieve image did not work, capture self.image will b none and therefore p_data will be none
+            #if retrieve image did not work, capture self.image will b none and therefore p_data will be none
             p_data = capture.encode_image()
             return p_data
         else:
             capture.retrieve_image_from_file()
+             #if retrieve image did not work, capture self.image will b none and therefore p_data will be none
             p_data = capture.encode_image()
             return p_data
+    
+    def get_username(self):
+        user = False
+        while user is False:
+            username = input("Please enter your username: ")
+            print("You have entered:" + username)
+            correct = input("Is this correct? Enter 'y' or 'n'")
+            if correct == 'y':
+                user = True
+            else:
+                print("You have not entered 'y', so try again...")
+        return username
 
 if __name__ == "__main__":
     a1= ap()

@@ -85,7 +85,7 @@ class CaptureFace:
             # ensure face is in image
             face_found = self.confirm_face_present(image_rgb)
             if face_found:
-                print("face identified! Sending to master for confirmation of identity")
+                print("face detected!")
                 self.image = image_rgb
             else:
                 ("face not identified; returning to main menu")

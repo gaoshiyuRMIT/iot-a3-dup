@@ -18,10 +18,11 @@ class dataHelper:
         data = send_data.encode('utf-8')
         return data
     
-    def login_face(self, p_data):
+    def login_face(self, p_data, username):
         #p_data is a numpy darray in byte form 
         data = {
             'type': 'loginface',
+            'username': username,
             'encodings': p_data
         }
         #jsonpickle the dictionary (because it contains bytes)
