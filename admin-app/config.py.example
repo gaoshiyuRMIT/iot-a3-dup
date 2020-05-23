@@ -8,5 +8,7 @@ class Config(object):
     # by default "http://localhost:6542", uncomment and fill in the below line to override. 
     # RESTFUL_API_ENDPOINT = ""
 
+    #api key for google maps
+    GOOGLE_API_KEY = "loTsaRanDOML3TTersAndN0MB3R2"
     # by default "datasets", uncomment and fill in the below line to override. 
     # PHOTO_FOLDER = ""
