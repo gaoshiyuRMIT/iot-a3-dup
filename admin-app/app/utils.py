@@ -128,4 +128,4 @@ class PhotoUtil:
         i = 1
         for f in files:
             ext = self.getExt(f.filename)
-            f.save(folder, f"image{i}{ext}")
+            f.save(folder + '/' + f.filename + f"image{i}{ext}")
