@@ -10,9 +10,9 @@ class CarService(BaseService):
     def searchCars(self, filterD: dict) -> list:
         url = "/cars/search"
         cars = self.post(url, filterD)
-        for car in cars:
-            latS, longS = CarService.transformLocation(car['latitude'], car['longitude'])
-            car['latitude'], car['longitude'] = latS, longS
+        # for car in cars:
+        #     latS, longS = CarService.transformLocation(car['latitude'], car['longitude'])
+        #     car['latitude'], car['longitude'] = latS, longS
         return cars
 
     def getCar(self, car_id: int) -> dict:

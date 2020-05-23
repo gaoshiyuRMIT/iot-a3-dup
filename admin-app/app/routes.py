@@ -110,13 +110,15 @@ def map():
 
 @app.route("/cars")
 def cars():
+    key = app.config['GOOGLE_API_KEY']
     service = CarService()
     cars = service.searchCars({})
-    return render_template("cars.html", cars=cars)
+    return render_template("cars.html", cars=cars, key=key)
 
 
 @app.route("/cars/search", methods=["POST"])
 def searchCars():
+    key = app.config['GOOGLE_API_KEY']
     fields = ["car_id", "year_from", "year_to", "car_model", "body_type", "num_seats_from", 
                 "num_seats_to", "car_colour", "cost_hour_from", "cost_hour_to"]
     types = [int, int, int, str, str, int, int, str, float, float]
@@ -132,7 +134,7 @@ def searchCars():
     searchD = {k: v for k,v in searchD.items() if v}
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
-    return render_template("cars.html", cars=cars)
+    return render_template("cars.html", cars=cars, key=key)
 
 
 @app.route("/bookings")
