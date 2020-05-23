@@ -20,17 +20,17 @@ class UserService(BaseService):
         url ="/users/login"
         data = {'username':username, 'password':password}
         user = self.post(url, data)
-
+        
         # (python ternary operator)
         return user['fname'] if user['success'] == True else None
 
     def findExistingUser(self, username):
         url="/users/search"
         data = {'username': username }
-        user = self.post(url, data)
+        result = self.post(url, data)
     
         # (python ternary operator)
-        return True if user['success'] == True else None
+        return result['user'] if result['success'] == True else None
 
     def registerUser(self, inputData:dict):
         url="/users/registerUser"
