@@ -25,18 +25,20 @@ def login():
 def login_check():
     if 'login' in request.form:
         service = UserService()
-        validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
-        if (validUser):
-            session['username'] = request.form.get('username')
-            session['fName'] = validUser
-            session['loggedIn'] = True
-            return redirect(url_for('index'))
+        dbUser = service.findExistingUser(request.form.get('username'))
+        validCreds = False
+        if (dbUser is not None):
+            if (sha256_crypt.verify(request.form.get('password'), dbUser['password'])):
+                session['username'] = request.form.get('username')
+                session['fName'] = dbUser['username']
+                session['loggedIn'] = True
+                validCreds = True
+                return redirect(url_for('index'))
+            else:
+                flash("Invalid credentials 1")
         else:
-            flash("Invalid credentials")
-            return redirect(url_for('login'))
-    else:
-        return redirect(url_for('login'))
-
+            flash("invalid credentials 2")
+    return redirect(url_for('login'))
 
 @app.route('/upload', methods=["POST"])
 def upload():
@@ -51,6 +53,7 @@ def upload():
     # TODO: train the images
     # TODO: delete the photos
     # TODO: store pickled trained model
+    flash('Success: Photos successfully uploaded!')
     return redirect(url_for("uploadFaceFiles"))
 
 
@@ -63,6 +66,7 @@ def registerUser():
         usernameTaken = service.findExistingUser(username)
         if usernameTaken:
             flash("Username: " + username + " is already taken - please try again")
+            return render_template('register.html')
         else:
             userInfo = {
                 'username': username,
