@@ -7,6 +7,7 @@ class dataHandler:
         self.helper = Helper()
     
     def hanle_data(self,data):
+        """choose diffrent function according to the data type"""
         if data['type'] == 'login':
             return self.login(data)
         
@@ -20,6 +21,7 @@ class dataHandler:
             return self.return_car(data)
         
     def return_car(self, data):
+        """change database via api, return situation """
         booking={
         'status' :'finished',
         "date_return": data['date_return'],  
@@ -38,6 +40,7 @@ class dataHandler:
         return "you have successfully returned the car" 
         
     def unlock(self,data):
+        """change  database via api, unlock situation """
         booking={
             'status' : 'inProgress'
         }  
@@ -50,6 +53,7 @@ class dataHandler:
         return "you have successfully unlocked the car" 
     
     def search_booking(self,user_input,status):
+        """get data from database, search situation """
         data = {
            "username" : user_input['username'],
            "status" : status
@@ -58,6 +62,7 @@ class dataHandler:
         return response.text
         
     def login(self, user_input):
+        """the login function, communicate with the database and valid credential """
         data = {
            "username" :  user_input['username']
         }
@@ -75,9 +80,11 @@ class dataHandler:
         return 'fail'
     
     def update_car(self, car, car_id):
+        """update car data"""
         response = self.helper.put(('/cars/%s/update' %car_id), car)   
     
     def update_booking(self,booking_id,booking):
+        """update booking data"""
         response = self.helper.put(('/bookings/%s/update' %booking_id),booking)
         
     

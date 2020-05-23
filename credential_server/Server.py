@@ -16,17 +16,20 @@ class server:
         self.handle =Handler()
     
     def send(self,request):
-       b = bytes(request,'utf-8')
-       print('sending...' + request)
-       self.c.send(b) 
+        """ SEND DATA TO THE CLIENT """
+        b = bytes(request,'utf-8')
+        print('sending...' + request)
+        self.c.send(b) 
        
     def read_data(self):
+        """ read DATA from THE CLIENT """
         client_input = self.c.recv(1024)
         data = json.loads(client_input)
         self.send(self.handle.hanle_data(data))
            
         
     def listen(self):
+        """the run function for client"""
         print('server is running')
         while True:
 

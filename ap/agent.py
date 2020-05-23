@@ -32,29 +32,30 @@ class ap():
         self.client.close_client()   
         return islogin 
             
-        
     
-    def find_booked_car(self): 
-        """print a list of the booked car for the user"""
+    def load_booking(self, load_type):
         self.client = cl(ip,port)
-        data = self.dataHelper.search_booking(self.username)
+        if load_type == "booked":
+            data = self.dataHelper.search_booking(self.username)
+        else:
+            data = self.dataHelper.search_inprogress(self.username)   
         self.client.send_data(data)
         bookings = self.client.listen_from_server() 
         bookings = json.loads(bookings)['data']
-        choice = self.load_all_cars(bookings,'booked')
         self.client.close_client()
+        return bookings    
+    
+    def find_booked_car(self): 
+        """print a list of the booked car for the user"""
+        bookings = self.load_booking("booked")
+        choice = self.load_all_cars(bookings,'booked')
         if(choice!=None):      
             self.unlock_car(bookings[choice]['car_id'], bookings[choice]["booking_id"])
         
     def find_inprogress(self):
         """print a list of the inprogress car for the user"""
-        self.client = cl(ip,port)
-        data = self.dataHelper.search_inprogress(self.username)
-        self.client.send_data(data)
-        bookings = self.client.listen_from_server() 
-        bookings = json.loads(bookings)['data']
+        bookings = self.load_booking("inProgress")
         choice =self.load_all_cars(bookings,'unlocked')
-        self.client.close_client()
         if(choice!=None):
             self.return_car(bookings[choice]['car_id'],bookings[choice]["booking_id"])
     
