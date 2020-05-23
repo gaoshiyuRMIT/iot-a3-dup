@@ -7,3 +7,6 @@ class Config(object):
     DEBUG = True
     # by default "http://localhost:6542", uncomment and fill in the below line to override. 
     # RESTFUL_API_ENDPOINT = ""
+
+    # by default "datasets", uncomment and fill in the below line to override. 
+    # PHOTO_FOLDER = ""

@@ -9,7 +9,7 @@ from .services.CarService import CarService
 from .services.BookingService import BookingService
 from .services.UserService import UserService
 from .errors import APIException
-from .utils import CalendarUtil, GAuthUtil
+from .utils import CalendarUtil, GAuthUtil, PhotoUtil
 
 
 @app.route('/')
@@ -35,6 +35,18 @@ def login_check():
             return redirect(url_for('login'))
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/upload', methods=["POST"])
+def upload():
+    if "username" not in session:
+        return redirect(url_for("login"))
+    username = session["username"]
+    files = request.files.getlist("facefiles")
+    PhotoUtil().storePhotos(files, username)
+    # TODO: train the images
+    # TODO: delete the photos
+    # TODO: store pickled trained model
 
 
 @app.route('/registerUser', methods=['POST', 'GET'])
