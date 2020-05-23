@@ -3,6 +3,14 @@ password = 'duan953280'
 h = hashlib.md5(password.encode())
 print(h.hexdigest())
 
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read('ap.config', encoding='UTF-8')
+
+print(config['address'].getint('port'))
+print(config['address'].get('apiAdd'))
+
 
 # {
 #     "username": "xinhuanduan",
@@ -11,3 +19,5 @@ print(h.hexdigest())
 #     "lName": "Duan",
 #     "email": "duanxinhuan@163.com"
 # }
+
+
