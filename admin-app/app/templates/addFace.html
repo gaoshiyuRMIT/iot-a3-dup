@@ -1,0 +1,31 @@
+{% extends "navbar.html" %}
+
+{% block title %}
+Register
+
+{% endblock title %}
+
+{% block content %}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+
+<form class="form-horizontal needs-validation" action="{{ url_for('upload')}}" method="post" enctype=multipart/form-data>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4><strong>Upload Photos to Train Facial Recognition Login System</strong></h4>
+        </div>
+        <div class="panel-body">
+            <input type=file name=facefiles accept=".jpg" multiple >
+        </div>
+        <div class="panel-footer">
+            <button name="submit" type="submit" class="btn btn-info">Submit</button>
+        </div>
+    </div>
+</div>
+    
+</form>
+{{ output }}
+{% endblock %}
