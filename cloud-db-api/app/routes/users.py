@@ -5,22 +5,24 @@ from . import jsonifyResponseData
 
 bp = Blueprint("users", __name__, url_prefix="/users")
 
-@bp.route("/register", methods=["POST"])
+@bp.route("/registerUser", methods=["POST"])
 @jsonifyResponseData
-def register():
+def registerUser():
     usMgr = UserManager()
     newUserVal = request.json
-    success = usMgr.addOne(newUserVal)
-    result = {"success": success}
+    usrPK = usMgr.addOne(newUserVal)
+    success = True if usrPK else False
+    result = {"success":success}
     return result
-
 
 @bp.route("/search", methods=["POST"])
 @jsonifyResponseData
-def users():
-    # not implemented
+def findUser():
     usMgr = UserManager()
-    return usMgr.getMany({})
+    username = request.json.get('username')
+    result = usMgr.getOne(username)
+    success = True if result is not None else False
+    return {"success": success}
 
 @bp.route("/login", methods=["POST"])
 @jsonifyResponseData

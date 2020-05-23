@@ -10,6 +10,7 @@ client_cred = json.load(open("credentials.json", "rb"))["web"]
 
 app = Flask(__name__)
 app.config["RESTFUL_API_ENDPOINT"] = "http://localhost:6543"
+app.config["PHOTO_FOLDER"] = "datasets"
 app.config.from_object(Config)
 
 bootstrap = Bootstrap(app)
