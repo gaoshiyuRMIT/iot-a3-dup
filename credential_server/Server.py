@@ -2,6 +2,8 @@ import socket
 import sys
 import json
 from dataHandler import dataHandler as Handler
+from configparser import ConfigParser
+
  
 # import a check credential function
 class server:
@@ -27,7 +29,7 @@ class server:
     def listen(self):
         print('server is running')
         while True:
-            
+
                 c,addr = self.s.accept()
                 self.c=c
                 self.read_data()
@@ -35,7 +37,16 @@ class server:
                
             
 if __name__ == "__main__":
-    s= server(61134)
+    config = ConfigParser()
+    config.read('ap.config', encoding='UTF-8')
+    port=config['address'].getint('port')
+    s= server(port)
     s.listen()
            
             
+# in another vs code window, the server is running, as you can see in the lest, I only open the credential_server folder
+# can u see me typing? talk to me I can hear you
+#so I will run the server now...
+#server is running
+#now i will swap to the ap side
+# can I?
