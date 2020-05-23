@@ -75,11 +75,16 @@ def users():
     users = service.getAllUsers()
     return render_template("users.html", output=users, users=users)
 
+@app.route("/uploadFaceFiles", methods=['GET', 'POST'])
+def uploadFaceFiles():
+    return render_template("addFace.html")
+
 @app.route("/map")
 def map():
     key = app.config['GOOGLE_API_KEY']
-
     return render_template("map.html", key=key)
+
+
 
 @app.route("/cars")
 def cars():

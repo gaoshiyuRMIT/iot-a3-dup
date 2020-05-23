@@ -14,6 +14,7 @@
         <ul class="nav navbar-nav navbar-right">
             {% if session['loggedIn'] %}
             <li><span class="navbar-text">Welcome, {{ session['fName'] }}</span> </li>
+            <li><a href="{{ url_for('uploadFaceFiles') }}">Add Face Data</a></li>
             <li><a href="{{ url_for('bookings') }}">Your Bookings</a></li>   
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
