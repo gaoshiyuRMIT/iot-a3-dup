@@ -73,7 +73,7 @@ class ap():
     
     def unlock_car(self, car_id,booking_id):
         self.client = cl(ip,port)
-        data = self.dataHelper.unlock_car(booking_id)
+        data = self.dataHelper.unlock_car(car_id,booking_id)
         self.client.send_data(data)
         message = self.client.listen_from_server() 
         print(message)
