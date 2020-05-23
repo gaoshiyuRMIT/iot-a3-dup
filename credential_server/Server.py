@@ -32,7 +32,6 @@ class server:
         """the run function for client"""
         print('server is running')
         while True:
-
                 c,addr = self.s.accept()
                 self.c=c
                 self.read_data()
