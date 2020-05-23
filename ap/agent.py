@@ -77,23 +77,25 @@ class ap():
     
     def unlock_car(self, car_id,booking_id):
         """unlock a car"""
-        self.client = cl(ip,port)
-        data = self.dataHelper.unlock_car(car_id,booking_id)
-        self.client.send_data(data)
-        message = self.client.listen_from_server() 
-        print(message)
-        self.client.close_client() 
+        message = self.upload(car_id,booking_id,"unlock")
+        print(message)      
         
     
     def return_car(self,car_id,booking_id):
         """return a car"""
+        message = self.upload(car_id,booking_id,"return")
+        print(message)
+    
+    def upload(self,car_id,booking_id,type):
         self.client = cl(ip,port)
-        data = self.dataHelper.return_car(car_id,booking_id)
+        if type == 'unlock':
+            data =self.dataHelper.unlock_car(car_id,booking_id)
+        else:
+            data = self.dataHelper.return_car(car_id,booking_id)
         self.client.send_data(data)
         message = self.client.listen_from_server() 
-        print(message)
         self.client.close_client() 
-        
+        return message
     
     def input_credential(self):
         """take the user input of password and username"""

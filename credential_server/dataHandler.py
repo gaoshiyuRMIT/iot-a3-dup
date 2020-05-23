@@ -14,7 +14,7 @@ class dataHandler:
         elif data['type'] == 'search_booking':
             return self.search_booking(data,"booked")
         elif data['type'] == 'search_inprogress':
-            return self.search_booking(data,"inprogress")
+            return self.search_booking(data,"inProgress")
         elif data['type'] == 'unlock':
             return self.unlock(data)
         else:
