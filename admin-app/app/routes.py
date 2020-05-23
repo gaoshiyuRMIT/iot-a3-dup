@@ -98,8 +98,11 @@ def uploadFaceFiles():
 
 @app.route("/map")
 def map():
+    
+    latitude = -float(request.args.get("latitude")[0:5])
+    longitude = float(request.args.get("longitude")[0:5])
     key = app.config['GOOGLE_API_KEY']
-    return render_template("map.html", key=key)
+    return render_template("map.html", key=key,lati= round(latitude,1), longi= round(longitude,1))
 
 
 

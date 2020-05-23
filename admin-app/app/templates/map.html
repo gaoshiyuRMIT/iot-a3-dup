@@ -9,12 +9,24 @@ Login
 {% block content %}
 <script>
     var map;
+    var lati = {{lati}}
+    var longi = {{longi}}
     function initMap() {
       map = new google.maps.Map(document.getElementById('google_map'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: lati, lng: longi},
         zoom: 8
       });
+      var marker = new google.maps.Marker({
+        position: map.getCenter(),
+        icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10
+      },
+    draggable: true,
+    map: map
+  });
     }
+    
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
   async defer></script>

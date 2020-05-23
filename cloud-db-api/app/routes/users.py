@@ -34,7 +34,7 @@ def login():
     username, password = map(request.json.get, ("username", "password"))
     one = usMgr.getOne(username)
     result = {"success": False, "fname": ""}
-    if one is not None and sha256_crypt.verify(password, one["password"]):
+    if one is not None and (password == one["password"]):
         result["success"] = True
         result["fname"] = one.get("fName", "")
     return result

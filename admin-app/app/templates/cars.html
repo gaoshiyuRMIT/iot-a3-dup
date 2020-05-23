@@ -133,7 +133,7 @@
                                 <td>{{ car['car_colour'] }}</td>
                                 <td>{{ car['cost_hour'] }}</td>
                                 <td>{{ "{}, {}".format(car['latitude'], car['longitude']) }}
-                                    (<a href="#">Show on Map</a>)
+                                    (<a href="{{ url_for('map',latitude=car['latitude'] ,longitude=car['longitude']) }}">Show on Map</a>)
                                 </td>
                                 <td>{{ car["car_status"] }}</td>
                                 <td><a href="{{ url_for('addBooking', car_id=car['car_id']) }}">Book</a></td>
