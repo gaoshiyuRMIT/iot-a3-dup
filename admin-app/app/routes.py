@@ -51,6 +51,7 @@ def upload():
     # TODO: train the images
     # TODO: delete the photos
     # TODO: store pickled trained model
+    flash('Success: Photos successfully uploaded!')
     return redirect(url_for("uploadFaceFiles"))
 
 
