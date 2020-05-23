@@ -2,7 +2,7 @@
 {% extends "navbar.html" %}
 
 {% block title %}
-Login/Signup
+Login
 
 {% endblock title %}
 
@@ -10,31 +10,35 @@ Login/Signup
 {% block error_message %}
 {{ super() }}
 {% endblock %}
-<form action="{{ url_for('login_check') }}" method="POST">
+<form class="form-horizontal" action="{{ url_for('login_check') }}" method="POST">
     <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                <h4><strong>Login</strong></h4>
+                
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="username" class="col-md-2 control-label">Username</label>
+                        <input type="text" name="username" class="col-md-2 control-form" placeholder="Username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="password" class="col-md-2 control-label">Password</label>
+                        <input type="password" name="password" class="col-md-2 control-form" placeholder="Password">
+                    </div>
+                </div>
+                <button name="login" type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="panel-footer">
 
-        <div class="form-group ">
-            <div class="row">
-                <label for="username" class="col-md-1 control-label"><strong>Log in</strong></label>
             </div>
+           
         </div>
-        <div class="row">
-            <div class="form-group">
-                <label for="username" class="col-md-1 control-label">Username</label>
-                <input type="text" name="username" class="col-md-4 control-form" placeholder="Username">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <label for="password" class="col-md-1 control-label">Password</label>
-                <input type="password" name="password" class="col-md-4 control-form" placeholder="Password">
-            </div>
-        </div>
-        <div class="align-items-center">
-            <div class="col align-self-center">
-                <button type="submit" class="btn btn-primary">Log in</button>
-            </div>
-        </div>
+        
     </div>
 </form>
 {{ output }}

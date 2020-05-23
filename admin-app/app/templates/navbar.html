@@ -17,6 +17,7 @@
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('registerUser') }}">Register</a></li>
             {% endif %}
             
         </ul>
@@ -29,9 +30,11 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-                <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}">
-                    {{ message }}
-                </div>       
+                <div class="container">
+                    <div class="alert {{ 'alert-success' if 'success' in message.lower() else 'alert-danger' }}">
+                        {{ message }}
+                    </div> 
+                </div>
             {% endfor %} 
         {% endif %}
     {% endwith %}

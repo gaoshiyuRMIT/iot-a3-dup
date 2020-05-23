@@ -3,6 +3,12 @@ from dataHelper import dataHelper as helper
 from captureface import CaptureFace
 import json
 import hashlib
+from configparser import ConfigParser
+
+config = ConfigParser()
+config.read('ap.config', encoding='UTF-8')
+port=config['address'].getint('port')
+ip = config['address'].get('ip')
 
 class ap():
     
@@ -13,7 +19,9 @@ class ap():
         
     def login(self, user, password):
         islogin = False
-        self.client = cl('127.0.0.1', 61134)
+
+        self.client = cl(ip,port)
+
         data = self.dataHelper.login(user, password)
         self.client.send_data(data)   
         status = self.client.listen_from_server() 
@@ -32,7 +40,7 @@ class ap():
     def login_face(self, p_data):
         islogin = False
         # connect
-        self.client = cl('127.0.0.1', 61134)
+        self.client = cl(ip, port)
         #convert p_data for tranmission
         data = self.dataHelper.login_face(p_data)
         # send data
@@ -49,7 +57,7 @@ class ap():
 
     def find_booked_car(self):
         #take in userid and return a list of car that is related to user, here pandas is recommended
-        self.client = cl('127.0.0.1',61134)
+        self.client = cl(ip,port)
         data = self.dataHelper.search_booking(self.username)
         self.client.send_data(data)
         bookings = self.client.listen_from_server() 
@@ -57,10 +65,10 @@ class ap():
         choice = self.load_all_cars(bookings,'booked')
         self.client.close_client()
         if(choice!=None):      
-            self.unlock_car(bookings[choice]["booking_id"])
+            self.unlock_car(bookings[choice]['car_id'], bookings[choice]["booking_id"])
         
     def find_inprogress(self):
-        self.client = cl('127.0.0.1',61134)
+        self.client = cl(ip,port)
         data = self.dataHelper.search_inprogress(self.username)
         self.client.send_data(data)
         bookings = self.client.listen_from_server() 
@@ -84,16 +92,19 @@ class ap():
             print(("you haven't %s any car" %type))        
             return None
 
-    def unlock_car(self, booking_id):
-        self.client = cl('127.0.0.1',61134)
-        data = self.dataHelper.unlock_car(booking_id)
+
+         
+    
+    def unlock_car(self, car_id,booking_id):
+        self.client = cl(ip,port)
+        data = self.dataHelper.unlock_car(car_id,booking_id)
         self.client.send_data(data)
         message = self.client.listen_from_server() 
         print(message)
         self.client.close_client() 
         
     def return_car(self,car_id,booking_id):
-        self.client = cl('127.0.0.1',61134)
+        self.client = cl(ip,port)
         data = self.dataHelper.return_car(car_id,booking_id)
         self.client.send_data(data)
         message = self.client.listen_from_server() 

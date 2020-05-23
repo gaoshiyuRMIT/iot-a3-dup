@@ -54,8 +54,9 @@ class dataHelper:
         data = send_data.encode('utf-8')
         return data
     
-    def unlock_car(self,booking_id): 
+    def unlock_car(self,car_id,booking_id): 
         data={
+            'car_id': car_id,
             'type' : 'unlock',
             "booking_id": booking_id
         }
