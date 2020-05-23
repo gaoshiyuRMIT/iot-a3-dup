@@ -42,7 +42,7 @@ class dataHandler:
         }  
         self.update_booking(data['booking_id'],booking) 
         car={
-            'car_status': 'inuse'
+            'car_status': 'inUse'
         }  
         
         self.update_car(car,data['car_id'])
