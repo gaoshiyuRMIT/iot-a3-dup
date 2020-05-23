@@ -17,6 +17,7 @@ class ap():
         self.cient = None
         
     def login(self,user, password):
+        """the loogin function of ap, send and recieve data from the server"""
         islogin = False
         self.client = cl(ip,port)
         data = self.dataHelper.login(user, password)
@@ -31,32 +32,35 @@ class ap():
         self.client.close_client()   
         return islogin 
             
-        # take in user input and use the cliend class to send client to a
     
-    def find_booked_car(self): 
-        #take in userid and return a list of car that is related to user, here pandas is recommended
+    def load_booking(self, load_type):
         self.client = cl(ip,port)
-        data = self.dataHelper.search_booking(self.username)
+        if load_type == "booked":
+            data = self.dataHelper.search_booking(self.username)
+        else:
+            data = self.dataHelper.search_inprogress(self.username)   
         self.client.send_data(data)
         bookings = self.client.listen_from_server() 
         bookings = json.loads(bookings)['data']
-        choice = self.load_all_cars(bookings,'booked')
         self.client.close_client()
+        return bookings    
+    
+    def find_booked_car(self): 
+        """print a list of the booked car for the user"""
+        bookings = self.load_booking("booked")
+        choice = self.load_all_cars(bookings,'booked')
         if(choice!=None):      
             self.unlock_car(bookings[choice]['car_id'], bookings[choice]["booking_id"])
         
     def find_inprogress(self):
-        self.client = cl(ip,port)
-        data = self.dataHelper.search_inprogress(self.username)
-        self.client.send_data(data)
-        bookings = self.client.listen_from_server() 
-        bookings = json.loads(bookings)['data']
+        """print a list of the inprogress car for the user"""
+        bookings = self.load_booking("inProgress")
         choice =self.load_all_cars(bookings,'unlocked')
-        self.client.close_client()
         if(choice!=None):
             self.return_car(bookings[choice]['car_id'],bookings[choice]["booking_id"])
     
     def load_all_cars(self,bookings,type):
+        """print a the list of bookings and take in user choice"""
         num = 1
         if(len(bookings)!=0):   
             print("choose from the following car_ids: ")
@@ -72,32 +76,35 @@ class ap():
          
     
     def unlock_car(self, car_id,booking_id):
-        self.client = cl(ip,port)
-        data = self.dataHelper.unlock_car(car_id,booking_id)
-        self.client.send_data(data)
-        message = self.client.listen_from_server() 
-        print(message)
-        self.client.close_client() 
+        """unlock a car"""
+        message = self.upload(car_id,booking_id,"unlock")
+        print(message)      
         
     
     def return_car(self,car_id,booking_id):
+        """return a car"""
+        message = self.upload(car_id,booking_id,"return")
+        print(message)
+    
+    def upload(self,car_id,booking_id,type):
         self.client = cl(ip,port)
-        data = self.dataHelper.return_car(car_id,booking_id)
+        if type == 'unlock':
+            data =self.dataHelper.unlock_car(car_id,booking_id)
+        else:
+            data = self.dataHelper.return_car(car_id,booking_id)
         self.client.send_data(data)
         message = self.client.listen_from_server() 
-        print(message)
         self.client.close_client() 
-        
+        return message
     
     def input_credential(self):
+        """take the user input of password and username"""
         print("input your user name")
         username = input()
         print("input your password")
         password = input()
-        h = hashlib.md5(password.encode())
-        password=h.hexdigest()
         return username,password
-        
+    
 if __name__ == "__main__":
     a1= ap()
     # a1.login('xinhuanduan', 'a6096d7f16360d8ce5e81dfa947972f6')
