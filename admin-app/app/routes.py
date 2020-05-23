@@ -133,7 +133,11 @@ def searchCars():
 def bookings():
     username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
-    return render_template("bookings.html", bookings=bookings)
+    bookedCars = []
+    carService = CarService()
+    for booking in bookings:
+        bookedCars.append(carService.getCar(booking['car_id']))
+    return render_template("bookings.html", bookings=bookings, output=bookedCars)
 
 @app.route("/bookings/new", methods=["GET"])
 def addBooking():
