@@ -44,7 +44,7 @@ class CarService(BaseService):
         :param dict newCarVal: a dictionary containing keys and new values
         '''
         url = "/cars/{}/update".format(car_id)
-        self.put(url, newCarVal)
+        return self.put(url, newCarVal)
 
     @staticmethod
     def transformLocation(lat, long_) -> tuple:
