@@ -1,8 +1,17 @@
 from httpHelper import httpHelper as Helper
-import json
 from passlib.hash import sha256_crypt
+import json
+import pickle
+import jsonpickle
+import face_recognition
+from pathlib import Path
+import numpy as np
 
 class dataHandler:
+    CWD = str(pathlib.Path.cwd())
+    ENCODEFOLDER = "./iot/admin-app/app/dataset/{}/encoding"
+    ENCODEFILEPATH = CWD + "/iot/admin-app/app/dataset/{}/encoding/face_encoding.pickle"
+
     def __init__(self):
         self.helper = Helper()
     
@@ -10,7 +19,8 @@ class dataHandler:
         """choose diffrent function according to the data type"""
         if data['type'] == 'login':
             return self.login(data)
-        
+        elif data['type'] == 'loginface':
+            return self.login_face(data)
         elif data['type'] == 'search_booking':
             return self.search_booking(data,"booked")
         elif data['type'] == 'search_inprogress':
@@ -78,6 +88,42 @@ class dataHandler:
                 return "success"
         
         return 'fail'
+
+    """login face compares the encoding of the supplied image to the
+    encodings on file for the user to ascertain whether the user is 
+    who they say they are."""
+    def login_face(self, data):
+        # decode from bytes to jsonpickle string
+        rec_data = data.decode('utf-8')
+		#decode from jsonpickle
+        data_dict = jsonpickle.decode(rec_data)
+        #(dict containing keys: "type" (loginface) "username" and "encodings"(pickled encodings 
+        # of numpy darray)
+        submitted_encoding = pickle.loads(data_dict["encodings"])
+		#'encodings' can now be compared to what the master pi has on file to confirm user identity
+        # get stored encodings:
+        name = data_dict["username"] 
+        #get predicted file path to encoding of user
+        user_encodings = Path(ENCODEFILEPATH.format(name))
+        # check file exists:
+        if user_encodings.is_file():
+        # file exists
+            #compare submitted image to stored images
+            matches = face_recognition.compare_faces(user_encodings, submitted_encoding, tolerance=0.1) # outputs list of arrays size 128 - one per comparison - each value being true or false 
+            neg, pos = 0
+            for count, item in enumerate(matches): #count is seperate arrays (of size 128), item are the actual arrays
+                #coutn True results in each array and deduce False results
+                sum_pos = np.sum(item)
+                neg += (128 - sum_pos)
+                #average false results, more then 10 False results per image == not a match
+                average_result = neg/(count + 1)
+                if average_result > 10:
+                    return "failed"
+                else:
+                    return "success"
+        #else file does not exist (either user doesnt exist or they havent done face recognition process)
+        else:
+            return "failed"
     
     def update_car(self, car, car_id):
         """update car data"""
