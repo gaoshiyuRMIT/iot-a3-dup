@@ -34,7 +34,7 @@ class dataHelper:
         # send_data ready to transmit via sockets
         # return send_data
 
-        return data
+        return json.dumps(data).encode("utf-8")
 
 
         

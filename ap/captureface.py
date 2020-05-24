@@ -4,6 +4,7 @@ import pickle
 from tkinter import Tk, filedialog
 import os
 import imutils
+import numpy as np
 
 # Acknowledgement
 # This code is adapted from
@@ -140,8 +141,11 @@ class CaptureFace:
                 face_coord = face_recognition.face_locations(self.image, model="hog")
                 # encode face(s)
                 encodings = face_recognition.face_encodings(self.image, face_coord)
+                # print(n[:128].shape)
+                # print(n[:128])
                 # pickle encodings for dictionary for transmission via sockets
-                p_data = pickle.dumps(encodings)
+                encoding_list_list = [list(arr) for arr in encodings]
+                p_data = encoding_list_list
             except pickle.PickleError as e:
                 print("""The face data could not be serialised, please 
                         try again. Error message is: """ + e.args)
