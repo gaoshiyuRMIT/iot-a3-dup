@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Car Manager &#8212; Car Share System API 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Manager" href="user_manager.html" />
+    <link rel="prev" title="Booking Manager" href="booking_manager.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.CarManager">
+<span id="car-manager"></span><h1>Car Manager<a class="headerlink" href="#module-app.CarManager" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="app.CarManager.CarManager">
+<em class="property">class </em><code class="sig-prename descclassname">app.CarManager.</code><code class="sig-name descname">CarManager</code><a class="headerlink" href="#app.CarManager.CarManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="app.CarManager.CarManager.addOne">
+<code class="sig-name descname">addOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">car</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.CarManager.CarManager.addOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a new car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>car</strong> (<em>dict</em>) – with all the fields and values of a car, except car_id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the auto-generated car_id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.CarManager.CarManager.getMany">
+<code class="sig-name descname">getMany</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filt</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#app.CarManager.CarManager.getMany" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all cars that satisfy the query condition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filt</strong> (<em>dict</em>) – the query condition</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of dictionaries, each representing a car</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.CarManager.CarManager.getOne">
+<code class="sig-name descname">getOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">carId</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#app.CarManager.CarManager.getOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a car by supplying car_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>car_id</strong> (<em>int</em>) – car ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the car data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.CarManager.CarManager.updateOne">
+<code class="sig-name descname">updateOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">car_id</span></em>, <em class="sig-param"><span class="n">car</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#app.CarManager.CarManager.updateOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>provided car_id and new values, update a car</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>car_id</strong> (<em>int</em>) – car ID</p></li>
+<li><p><strong>car</strong> (<em>dict</em>) – a dictionary specifying the fields to update and the values to update them with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether a row is updated successfully</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Car Share System API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="users_api_doc.html">Users API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cars_api_doc.html">Cars API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bookings_api_doc.html">Bookings API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking_manager.html">Booking Manager</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Car Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manager.html">User Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_manager.html">Base Manager</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="booking_manager.html" title="previous chapter">Booking Manager</a></li>
+      <li>Next: <a href="user_manager.html" title="next chapter">User Manager</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/car_manager.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
