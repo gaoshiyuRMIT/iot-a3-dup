@@ -1,3 +1,5 @@
 /config.py
 /.flaskenv
 credentials.json
+/datasets
+output.txt

@@ -10,6 +10,5 @@ flask.log
 cloud-db-api/dontsavetorepo.sql
 testDB.py
 playground.py
-
 admin-app/pyvenv.cfg
-
+admin-app/resp.txt
