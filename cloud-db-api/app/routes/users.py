@@ -23,14 +23,10 @@ def register():
 def findUser():
     usMgr = UserManager()
     username = request.json.get('username')
-    result = usMgr.getOne(username)
-    success = True if result is not None else False
-    return {"success": success}
-
     user = usMgr.getOne(username)
     result = {"success": False}
     success = True if user is not None else False
     if (success):
         result["success"] = True
-        result["fname"] = one.get("fName", "")
+        result["user"] = user
     return result
