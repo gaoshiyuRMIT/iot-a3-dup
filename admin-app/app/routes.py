@@ -54,7 +54,7 @@ def upload():
         flash('Success: Photos successfully uploaded!')
     else:
         flash("Failure: 10 photos of your face required, and " + str(num_valid) + "supplied.")
-        return redirect(url_for("uploadFaceFiles"))
+    return redirect(url_for("uploadFaceFiles"))
 
 
 @app.route('/registerUser', methods=['POST', 'GET'])
