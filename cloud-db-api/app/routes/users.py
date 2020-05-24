@@ -9,7 +9,7 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 
 @bp.route("/registerUser", methods=["POST"])
 @jsonifyResponseData
-def registerUser():
+def register():
     usMgr = UserManager()
     newUserVal = request.json
     # newUserVal['password'] = sha256_crypt.using(rounds=1000).hash(newUserVal['password'])
@@ -27,14 +27,10 @@ def findUser():
     success = True if result is not None else False
     return {"success": success}
 
-@bp.route("/login", methods=["POST"])
-@jsonifyResponseData
-def login():
-    usMgr = UserManager()
-    username, password = map(request.json.get, ("username", "password"))
-    one = usMgr.getOne(username)
-    result = {"success": False, "fname": ""}
-    if one is not None and (password == one["password"]):
+    user = usMgr.getOne(username)
+    result = {"success": False}
+    success = True if user is not None else False
+    if (success):
         result["success"] = True
         result["fname"] = one.get("fName", "")
     return result

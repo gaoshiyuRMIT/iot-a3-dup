@@ -3,7 +3,6 @@ import unittest as _ut
 from unittest.mock import patch
 
 from . import mock_jsonify, mock_req
-from app.errors.api_exceptions import DuplicateKey, InvalidArgument
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +45,7 @@ class TestUsersRoute(_ut.TestCase):
     def testRegisterDuplicateUsername(self):
         '''confirm that when a duplicate username is present, the view function propagates the exception
         '''
+        from app.errors.api_exceptions import DuplicateKey
         from app.UserManager import UserManager
         with patch.object(UserManager, 'addOne', side_effect=DuplicateKey("duplicate username")):
             with self.assertRaises(DuplicateKey):
@@ -55,6 +55,7 @@ class TestUsersRoute(_ut.TestCase):
     def testRegisterEmptyEmail(self):
         '''confirm that when email is not provided, the view function propagates the exception
         '''
+        from app.errors.api_exceptions import InvalidArgument
         from app.UserManager import UserManager
         with patch.object(UserManager, 'addOne', side_effect=InvalidArgument("empty email")):
             with self.assertRaises(InvalidArgument):
@@ -70,45 +71,34 @@ class TestUsersRoute(_ut.TestCase):
             register()
             self.mock_jsonify.assert_called_with({"data": {"success": True}})
 
-    def testLogin(self):
+    def testFindUser(self):
         '''confirm that the username is passed to user manager's getOne method
         '''
         username = self.users[1]["username"]
         password = self.users[1]["password"]
-        self.mock_req.json = {"username": username, "password": password}
+        self.mock_req.json = {"username": username}
         from app.UserManager import UserManager
         with patch.object(UserManager, 'getOne') as mock_get_one:
-            from app.routes.users import login
-            login()
+            from app.routes.users import findUser
+            findUser()
             mock_get_one.assert_called_with(username)
 
-    def testLoginSuccess(self):
-        '''confirm that when crendentials exist and are correct, the view function returns success and user's first name
+    def testFindUserSuccess(self):
+        '''confirm that when crendentials exist, the view function returns success and user data
         '''
         user_data = self.users[2]
-        self.mock_req.json = {"username": user_data["username"], "password": user_data["password"]}
+        self.mock_req.json = {"username": user_data["username"]}
         from app.UserManager import UserManager
         with patch.object(UserManager, 'getOne', return_value=user_data):
-            from app.routes.users import login
-            login()
-            self.mock_jsonify.assert_called_with({"data": {"success": True, "fname": user_data["fName"]}})
+            from app.routes.users import findUser
+            findUser()
+            self.mock_jsonify.assert_called_with({"data": {"success": True, "user": user_data}})
 
-    def testLoginNonExistentUser(self):
+    def testFindNonExistentUser(self):
         '''confirm that when username does not exist, the view function returns failure
         '''
         from app.UserManager import UserManager
         with patch.object(UserManager, 'getOne', return_value=None):
-            from app.routes.users import login
-            login()
-            self.mock_jsonify.assert_called_with({"data": {"success": False, "fname": ""}})
-
-    def testLoginWrongPassword(self):
-        '''confirm that when crendentials are incorrect, the view function returns failure
-        '''
-        user_data = self.users[1]
-        self.mock_req.json = {"username": user_data["username"], "password": "wrong"}
-        from app.UserManager import UserManager
-        with patch.object(UserManager, 'getOne', return_value=user_data):
-            from app.routes.users import login
-            login()
-            self.mock_jsonify.assert_called_with({"data": {"success": False, "fname": ""}})
+            from app.routes.users import findUser
+            findUser()
+            self.mock_jsonify.assert_called_with({"data": {"success": False}})

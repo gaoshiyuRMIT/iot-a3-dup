@@ -64,6 +64,7 @@ def registerUser():
         usernameTaken = service.findExistingUser(username)
         if usernameTaken:
             flash("Username: " + username + " is already taken - please try again")
+            return render_template('register.html')
         else:
             userInfo = {
                 'username': username,
