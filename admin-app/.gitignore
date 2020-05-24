@@ -2,3 +2,4 @@
 /.flaskenv
 credentials.json
 /datasets
+output.txt

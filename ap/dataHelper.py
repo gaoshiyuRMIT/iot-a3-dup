@@ -18,6 +18,20 @@ class dataHelper:
         data = send_data.encode('utf-8')
         return data
     
+    def login_face(self, p_data, username):
+        #p_data is a numpy darray in byte form 
+        data = {
+            'type': 'loginface',
+            'username': username,
+            'encodings': p_data
+        }
+        #jsonpickle the dictionary (because it contains bytes)
+        data_json_string = jsonpickle.encode(data)
+        #encode jsonpickle str to bytes
+        send_data = data_json_string.encode('utf-8')
+        #send_data ready to transmit via sockets
+        return send_data
+
         
     def search_booking(self,user):
         """gnerate the search booking data for ap, it will show all the booked status booking of the user """
