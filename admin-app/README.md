@@ -1,3 +1,9 @@
+### Prerequisites on Mac OS
+- `brew install cmake`
+- `brew install dlib`
+- `sudo python3 -m pip install dlib`
+- `inside ap, python3 -m venv --system-site-packages venv`
+
 ### usage
 - set up virtual environment in mac
   * `python3 -m venv venv`
@@ -9,7 +15,7 @@
   * download credentials.json from google API console (see below & refer to credentials.json.example)
 - `flask run --host=0.0.0.0`
 
-- set up virtual environment in mac 
+- set up virtual environment in Unix-like OS
   * `pip install --upgrade pip`
   * `pip install --upgrade -r requirements.txt`
   * create a config.py with the correct config values (refer to config.py.example)

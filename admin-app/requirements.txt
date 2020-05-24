@@ -26,4 +26,4 @@ face_recognition==1.2.3
 imutils==0.5.3
 pathlib==1.0.1
 Sphinx==3.0.1
-
+passlib
