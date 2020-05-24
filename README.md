@@ -7,10 +7,14 @@
 - Shiyu Gao s3734720
     - RESTFUL API Shell
     - Google Credentials API
+    - RESTFUL API functionality
+    - Car Search 
+    - Car Booking
 - Aspen Forster s3330837
     - Admin-app Shell
     - Google Maps API
-    - Front-end for website
+    - Login / Registration
+    - Input validation
     - Silly art for website
 - Kaspian Fitzptrick (Kase) s3630115
     - Facial Recognition
