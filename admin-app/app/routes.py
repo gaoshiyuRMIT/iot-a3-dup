@@ -10,7 +10,7 @@ from .services.CarService import CarService
 from .services.BookingService import BookingService
 from .services.UserService import UserService
 from .errors import APIException
-from .utils import CalendarUtil, GAuthUtil, PhotoUtil
+from .utils import CalendarUtil, GAuthUtil, PhotoUtil, FaceEncodeUtil
 
 
 @app.route('/')
@@ -48,11 +48,13 @@ def upload():
         flash("no files selected")
         return redirect(url_for("uploadFaceFiles"))
     PhotoUtil().storePhotos(files, username)
-    # TODO: train the images
-    # TODO: delete the photos
-    # TODO: store pickled trained model
-    flash('Success: Photos successfully uploaded!')
-    return redirect(url_for("uploadFaceFiles"))
+    # check images for face, encode if has, delete if not:
+    num_valid = FaceEncodeUtil(username).encode_user_images()
+    if num_valid > 9:
+        flash('Success: Photos successfully uploaded!')
+    else:
+        flash("Failure: 10 photos of your face required, and " + str(num_valid) + "supplied.")
+        return redirect(url_for("uploadFaceFiles"))
 
 
 @app.route('/registerUser', methods=['POST', 'GET'])

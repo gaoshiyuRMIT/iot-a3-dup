@@ -136,6 +136,8 @@ class PhotoUtil:
         for f in files:
             ext = self.getExt(f.filename)
             f.save(os.path.join(folder, f"image{i}{ext}"))
+            i += 1
+        
 
 
 class FaceEncodeUtil:
@@ -155,7 +157,7 @@ class FaceEncodeUtil:
         self.encodings = []
 
 
-    def encode_user_images(self, username):
+    def encode_user_images(self):
         #examine each saved image
         for path in pathlib.Path(self.folder).iterdir():
             if path.is_file():
@@ -191,6 +193,7 @@ class FaceEncodeUtil:
                     one_encoding = face_recognition.face_encodings(img, boxes)
                     #add encoding to list
                     self.encodings.append(one_encoding)
+        return len(self.encodings)
         
     
 
