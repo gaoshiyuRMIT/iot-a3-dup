@@ -23,7 +23,7 @@ class server:
        
     def read_data(self):
         """ read DATA from THE CLIENT """
-        client_input = self.c.recv(1024)
+        client_input = self.c.recv(16384)
         data = json.loads(client_input)
         self.send(self.handle.hanle_data(data))
            
