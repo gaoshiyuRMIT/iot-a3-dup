@@ -6,12 +6,10 @@ from flask import session, current_app
 from dateutil.tz import tzlocal
 import cv2
 import face_recognition
-from tkinter import Tk, filedialog
 import os
 import imutils
 import pathlib
-from PIL import Image
-import numpy as np
+
 
 class CalendarUtil:
     def __init__(self, google_crendetial):

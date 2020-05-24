@@ -128,7 +128,7 @@ class CaptureFace:
             finally:
                 return image
     
-    """encode_image changes a vs2 gray scale facial image into encoded
+    """encode_image changes a vs2 facial image into encoded
     vectors of size 128 in a numpy array, and this encodng(s) is then
     serialised (or pickled), for tranmission (via sockets) to the Master
     Pi for authentication."""

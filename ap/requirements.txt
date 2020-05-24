@@ -1,6 +1,7 @@
-import cv2
-import face_recognition
-import pickle
-from tkinter import Tk, filedialog
-import os
-import imutils
+jsonpickle==1.4.1
+opencv-contrib-python==4.1.0.25
+face_recognition==1.2.3
+numpy==1.16.2
+dlib==19.19.0
+imutils==0.5.3
+pathlib==1.0.1
