@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Booking Service &#8212; Car Share System API 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Service" href="user_service.html" />
+    <link rel="prev" title="Car Service" href="car_service.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.services.BookingService">
+<span id="booking-service"></span><h1>Booking Service<a class="headerlink" href="#module-app.services.BookingService" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="app.services.BookingService.BookingService">
+<em class="property">class </em><code class="sig-prename descclassname">app.services.BookingService.</code><code class="sig-name descname">BookingService</code><a class="headerlink" href="#app.services.BookingService.BookingService" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="app.services.BookingService.BookingService.addBooking">
+<code class="sig-name descname">addBooking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.services.BookingService.BookingService.addBooking" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a new booking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>booking</strong> (<em>dict</em>) – a dictionary representing the new booking</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>booking_id of the new booking</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.bookingsSortKey">
+<em class="property">static </em><code class="sig-name descname">bookingsSortKey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking</span></em><span class="sig-paren">)</span> &#x2192; tuple<a class="headerlink" href="#app.services.BookingService.BookingService.bookingsSortKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function to map a booking to a key used for sorting.
+Sort bookings first by status (active ones first), and then by booking_id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>booking</strong> (<em>dict</em>) – a dictionary representing the booking</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a key to sort the bookings against</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.findConflicts">
+<code class="sig-name descname">findConflicts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">car_id</span></em>, <em class="sig-param"><span class="n">date_booking</span></em>, <em class="sig-param"><span class="n">date_return</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#app.services.BookingService.BookingService.findConflicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>find out if there’s any active booking of this car that conflict with the supplied booking &amp; return date</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>car_id</strong> (<em>int</em>) – car ID</p></li>
+<li><p><strong>date_booking</strong> (<em>str</em>) – start date of booking as an ISO string</p></li>
+<li><p><strong>date_return</strong> (<em>str</em>) – return date of booking as an ISO string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether timetabling conflicts exist</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.getBooking">
+<code class="sig-name descname">getBooking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking_id</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#app.services.BookingService.BookingService.getBooking" title="Permalink to this definition">¶</a></dt>
+<dd><p>get one booking, providing booking_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>booking_id</strong> (<em>int</em>) – booking ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>booking data with this id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.getBookings">
+<code class="sig-name descname">getBookings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filt</span><span class="p">:</span> <span class="n">dict</span></em>, <em class="sig-param"><span class="n">sortKey</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#app.services.BookingService.BookingService.getBookings" title="Permalink to this definition">¶</a></dt>
+<dd><p>search for bookings using a filter dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filt</strong> (<em>dict</em>) – filter dictionary</p></li>
+<li><p><strong>sortKey</strong> (<em>function</em>) – sorting key to sort the returned list of bookings, default None (not sorted)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bookings as a result of the search</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.getBookingsForUser">
+<code class="sig-name descname">getBookingsForUser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">username</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#app.services.BookingService.BookingService.getBookingsForUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all bookings of a user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – username</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of dictionaries each representing a booking</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.BookingService.BookingService.updateBooking">
+<code class="sig-name descname">updateBooking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking_id</span></em>, <em class="sig-param"><span class="n">updateDict</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.services.BookingService.BookingService.updateBooking" title="Permalink to this definition">¶</a></dt>
+<dd><p>update a booking, providing bookind_id and the new value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>booking_id</strong> (<em>int</em>) – booking ID</p></li>
+<li><p><strong>updateDict</strong> (<em>dict</em>) – a dictionary containing pairs of (key, new value)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether the update is successful</p>
+</dd>
+<dt class="field-odd">Rypte</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Car Share System API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_service.html">Base Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="car_service.html">Car Service</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Booking Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_service.html">User Service</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="car_service.html" title="previous chapter">Car Service</a></li>
+      <li>Next: <a href="user_service.html" title="next chapter">User Service</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/booking_service.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

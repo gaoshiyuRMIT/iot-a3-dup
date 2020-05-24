@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Car Service &#8212; Car Share System API 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Booking Service" href="booking_service.html" />
+    <link rel="prev" title="Base Service" href="base_service.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.services.CarService">
+<span id="car-service"></span><h1>Car Service<a class="headerlink" href="#module-app.services.CarService" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="app.services.CarService.CarService">
+<em class="property">class </em><code class="sig-prename descclassname">app.services.CarService.</code><code class="sig-name descname">CarService</code><a class="headerlink" href="#app.services.CarService.CarService" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="app.services.CarService.CarService.getAllAvailableCars">
+<code class="sig-name descname">getAllAvailableCars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.services.CarService.CarService.getAllAvailableCars" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all available cars</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>all available cars</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.CarService.CarService.getCar">
+<code class="sig-name descname">getCar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">car_id</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#app.services.CarService.CarService.getCar" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a car’s data, providing car_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>car_id</strong> (<em>int</em>) – car ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary representing a car</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.CarService.CarService.searchCars">
+<code class="sig-name descname">searchCars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filterD</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#app.services.CarService.CarService.searchCars" title="Permalink to this definition">¶</a></dt>
+<dd><p>search for cars, providing a filter dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filterD</strong> (<em>dict</em>) – filter dictionary, specifying the exact value / range of a car’s fields</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of cars - search result</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.CarService.CarService.transformLocation">
+<em class="property">static </em><code class="sig-name descname">transformLocation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat</span></em>, <em class="sig-param"><span class="n">long_</span></em><span class="sig-paren">)</span> &#x2192; tuple<a class="headerlink" href="#app.services.CarService.CarService.transformLocation" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform coordinates with pos/neg sign to direction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lat</strong> (<em>float</em>) – latitude, &gt;0 means north, &lt;0 means south</p></li>
+<li><p><strong>long</strong> (<em>float</em>) – longitude, &gt;0 means east, &lt;0 means west</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>transformed latitude and longitude strings</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.services.CarService.CarService.updateCar">
+<code class="sig-name descname">updateCar</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">car_id</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">newCarVal</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.services.CarService.CarService.updateCar" title="Permalink to this definition">¶</a></dt>
+<dd><p>update a car, given its car_id and new value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>car_id</strong> (<em>int</em>) – car ID</p></li>
+<li><p><strong>newCarVal</strong> (<em>dict</em>) – a dictionary containing keys and new values</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Car Share System API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_service.html">Base Service</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Car Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking_service.html">Booking Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_service.html">User Service</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="base_service.html" title="previous chapter">Base Service</a></li>
+      <li>Next: <a href="booking_service.html" title="next chapter">Booking Service</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/car_service.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
