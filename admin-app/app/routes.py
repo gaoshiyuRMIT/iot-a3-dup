@@ -219,7 +219,7 @@ def cancelBooking(booking_id):
             flash("No booking with ID {} exists!".format(booking_id))
             return redirect(url_for("bookings"))
 
-    CarService().updateCar(booking["car_id"], {"car_status": "available"})
+    bkService.updateBooking(booking_id, {"status": "cancelled"})
     flash("Booking {} successfully cancelled!".format(booking_id))
     # remove calendar event
     cred = GAuthUtil().getCredential()
