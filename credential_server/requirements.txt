@@ -1,2 +1,6 @@
 requests==2.23.0
 passlib==1.7.2
+jsonpickle==1.4.1
+face_recognition==1.2.3
+pathlib==1.0.1
+numpy==1.16.2

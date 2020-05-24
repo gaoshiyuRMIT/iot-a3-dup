@@ -25,12 +25,16 @@ class dataHelper:
             'username': username,
             'encodings': p_data
         }
-        #jsonpickle the dictionary (because it contains bytes)
-        data_json_string = jsonpickle.encode(data)
-        #encode jsonpickle str to bytes
-        send_data = data_json_string.encode('utf-8')
-        #send_data ready to transmit via sockets
-        return send_data
+        # Below process would be used if sending over sockets
+        # jsonpickle the dictionary (because it contains bytes)
+        # data_json_string = jsonpickle.encode(data)
+        # encode jsonpickle str to bytes
+        # send_data = data_json_string.encode('utf-8')
+        # send_data ready to transmit via sockets
+        # return send_data
+
+        return data
+
 
         
     def search_booking(self,user):

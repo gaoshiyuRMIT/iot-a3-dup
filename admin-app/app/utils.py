@@ -155,7 +155,7 @@ class FaceEncodeUtil:
         self.encodings = []
 
 
-    def checkImagesAndEncode(self, username):
+    def encode_user_images(self, username):
         #examine each saved image
         for path in pathlib.Path(self.folder).iterdir():
             if path.is_file():
