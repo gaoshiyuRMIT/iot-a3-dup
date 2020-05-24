@@ -87,11 +87,6 @@ def logout():
     session.pop('fName', None)
     return redirect(url_for('index'))
 
-@app.route("/users")
-def users():
-    service = UserService()
-    users = service.getAllUsers()
-    return render_template("users.html", output=users, users=users)
 
 @app.route("/uploadFaceFiles", methods=['GET', 'POST'])
 def uploadFaceFiles():
