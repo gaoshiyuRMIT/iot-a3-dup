@@ -5,3 +5,4 @@ numpy==1.16.2
 dlib==19.19.0
 imutils==0.5.3
 pathlib==1.0.1
+Sphinx==3.0.1
