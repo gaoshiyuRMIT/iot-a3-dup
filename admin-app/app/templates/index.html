@@ -8,16 +8,19 @@ Home
     <div class="container">
         <div class="panel panel-default">
             <div class="panel heading text-center">
-                <h4>Welcome to the Car Sharing System</h4>
+                <h2><i>Welcome to </i><strong>Sharing is Car(ing)</strong></h2>
             </div>
             <div class="panel body text-center">
+                <div class="row">
+                    <img class="img-fluid" width="20%" src="{{ url_for('static', filename='car_system.png') }}">
+                </div>
                 <div class="btn-group btn-group btn-group-lg">
                     {% if not session['loggedIn'] %}
                     <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'login') }}';">Login</button>
                     <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'registerUser') }}';">Register</button>
                     {% else %}
-                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars') }}';">Cars</button>
-                    <button type="button" class="btn btn-info-*" onclick="window.location.href='{{ url_for( 'bookings') }}';">Bookings</button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars') }}';">Browse Cars</button>
+                    <button type="button" class="btn btn-info-*" onclick="window.location.href='{{ url_for( 'bookings') }}';">Your Bookings</button>
                     {% endif %}
                 </div>
             </div>

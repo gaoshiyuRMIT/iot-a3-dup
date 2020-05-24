@@ -1,7 +1,6 @@
 import unittest as _ut
 import logging
 
-from app.errors.api_exceptions import InvalidArgument
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -116,6 +115,7 @@ class TestCarManager(_ut.TestCase):
     def testKeepValidFieldsThrowError(self):
         '''confirm that when an invalid attribute is passed in, and set throw to True, keepValidFieldsOnly throws InvalidArgument
         '''
+        from app.errors.api_exceptions import InvalidArgument
         data = {"car_id": 71, "car_model": "truck", "num_seats": 3, "intelligence": 100}
         with self.assertRaises(InvalidArgument):
             self.cMgr.keepValidFieldsOnly(data, throw=True)

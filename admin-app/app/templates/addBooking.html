@@ -11,6 +11,15 @@
 
 {% block scripts %}
     {{super()}}
+    <script>
+        function fillCarInfo(){
+            var carinfo = document.getElementById("car-info").innerText;
+
+            console.log(carinfo);
+            var inputField = document.getElementById("car_information");
+            inputField.value = carinfo;
+        }
+    </script>
     {% if g_client_id is defined %}
     <script>
         function _sendToken(id_token) {
@@ -68,30 +77,41 @@
         <div id="my-signin2"></div>
     {% endif %}
     <div class="row col-md-3">
-        <form method="post" action="{{ url_for('addBookingPost') }}">
+        <form method="post" action="{{ url_for('addBookingPost') }}" onload="fillCarInfo();">
             <div class="form-group">
                 <label class="control-label" for="car_id">Car ID</label>
+                {% if car is defined %}
                 <input class="form-control" type="number" id="car_id" name="car_id" value="{{ car['car_id'] }}" readonly>
-                <small class="text text-info">
+                {% else %}
+                <input class="form-control" type="number" id="car_id" name="car_id" value="{{ car_id }}" readonly>
+                {% endif %}
+                <small class="text text-info" id="car-info">
+                {% if car is defined %}
                     {% for k,v in car.items() %}
                         {% if k != 'car_id' %}
                             {{ "{}: {}; ".format(k,v) }}
                         {% endif %}
-                    {% endfor %}
+                    {% endfor %} 
+                {% elif carinfo is defined %}
+                    {{ carinfo }}
+                {% endif %}
                 </small>
             </div>
             <div class="form-group">
                 <label class="control-label" for="datetime_booking">Start Date</label>
-                <input class="form-control" type="datetime-local" id="datetime_booking" name="datetime_booking">
+                <input class="form-control" type="datetime-local" id="datetime_booking" name="datetime_booking" required>
             </div>
             <div class="form-group">
                 <label class="control-label" for="datetime_return">End Date</label>
-                <input class="form-control" type="datetime-local" id="datetime_return" name="datetime_return">
+                <input class="form-control" type="datetime-local" id="datetime_return" name="datetime_return" required>
             </div>
-            <input id="submit" type="submit" class="btn btn-primary" value="Submit"
+            <input type="hidden" id="car_information" name="carinfo" value="test">
+            <input id="submit" type="submit" class="btn btn-primary" value="Submit" onclick="fillCarInfo();"
                 {{ "disabled" if g_client_id is defined else "" }}
             >
+            
         </form>
     </div>
 </div>
+
 {% endblock %}

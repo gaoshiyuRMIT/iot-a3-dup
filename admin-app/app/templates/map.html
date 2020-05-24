@@ -1,0 +1,64 @@
+
+{% extends "navbar.html" %}
+
+{% block title %}
+Map
+
+{% endblock title %}
+
+{% block content %}
+<script>
+    var map;
+
+    var lat = getParameterByName('latitude');
+    var lng = getParameterByName('longitude');
+
+    
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('google_map'), {
+        center: position,
+        zoom: 8
+      });
+      var position = new google.maps.LatLng(lat, lng);
+      var marker = new google.maps.Marker({
+        position: map.getCenter(),
+        icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10
+      },
+    draggable: true,
+    map: map
+  });
+    }
+
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  } 
+    
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
+  async defer></script>
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<div class="container" style="height:600;">
+    
+    <div class="panel">
+        <div class="panel-header">Test</div>
+        <div class="panel-body">
+            <div id="google_map" style="width:100%;height:400px;"></div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+    {% endblock %}

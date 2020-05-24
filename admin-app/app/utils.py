@@ -117,7 +117,7 @@ class PhotoUtil:
         self.rootdir = current_app.config["PHOTO_FOLDER"]
 
     @staticmethod
-    def getExt(self, filename):
+    def getExt(filename):
         i = filename.rfind(".")
         return filename[i:]
 
@@ -128,4 +128,4 @@ class PhotoUtil:
         i = 1
         for f in files:
             ext = self.getExt(f.filename)
-            f.save(folder, f"image{i}{ext}")
+            f.save(os.path.join(folder, f"image{i}{ext}"))

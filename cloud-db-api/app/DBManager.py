@@ -9,19 +9,31 @@ logger = logging.getLogger(__name__)
 
 class DBManager(ABC):
     FIELDS = []
-    TYPES = []
     TABLE_NAME = ""
     PK = ""
 
     @property
     def conn(self):
+        '''get db connection
+        '''
         return getConn()
 
     def getCursor(self, conn):
+        '''create a cursor that returns dictionaries instead of lists
+
+        :param pymysql.Connection conn: db connection
+        :return: a cursor that returns dictionaries
+        '''
         return conn.cursor(pymysql.cursors.DictCursor)    
 
     @classmethod
     def keepValidFieldsOnly(cls, d: dict, throw=False) -> dict:
+        '''provided a dictionary, remove fields that does not belong to this entity (see subclass),
+        and fill in empty fields with None
+
+        :param dict d: a dictionary representing an entity instance or a filter
+        :param bool throw: whether to throw an error if a field is found to not belong to this entity
+        '''
         if throw:
             invalidKeys = set(d.keys()) - set(cls.FIELDS)
             if len(invalidKeys) > 0:
@@ -32,6 +44,12 @@ class DBManager(ABC):
 
     @abstractmethod
     def getMany(self, filt: dict) -> list:
+        '''get all the records that satisfy the query condition specified in a dictionary
+
+        :param dict filt: a query condition dictionary, specifying either the exact value or the range of certain fields
+        :return: entities (see subclasses) that match this query
+        :rtype: list
+        '''
         # default implementation
         sql = f"select * from {self.TABLE_NAME}"
         if len(filt) > 0:
@@ -72,6 +90,12 @@ class DBManager(ABC):
 
     @abstractmethod
     def getOne(self, id) -> list:
+        '''provided the primary key value, get one entity instance
+
+        :param (any) id: value of id or primary key
+        :return: one record which has this id
+        :rtype: dict
+        '''
         sql = f"select * from {self.TABLE_NAME} where {self.PK} = %s"
         vals = [id]
         one = None
@@ -87,6 +111,13 @@ class DBManager(ABC):
 
     @abstractmethod
     def updateOne(self, id, newVal: dict) -> bool:
+        '''provided id and new values to update, update one record 
+
+        :param (any) id: value of primary key
+        :param dict newVal: a dictionary specifying the new values for certain fields
+        :return: whether a row is updated successfully
+        :rtype: bool
+        '''
         sql = f"update {self.TABLE_NAME} set "
         sqlAssg = []
         vals = []

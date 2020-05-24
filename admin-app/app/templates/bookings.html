@@ -2,38 +2,58 @@
 {% block title %}My Bookings{% endblock %}
 
 {% block content %}
+    <script>
+        function displayDetails(car_id){
+            var detailsRow = document.getElementById("details_" + car_id);
+
+            if (detailsRow.style.display === "none"){
+                detailsRow.style.display = "block";
+            } else {
+                detailsRow.style.display = "none";
+            }
+        }
+    </script>
     <div class="container">
         {% block error_message %}
             {{ super() }}
         {% endblock %}
-
-        <table class='table'>
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Car ID</th>
-                    <th>Booking Start Date/Time</th>
-                    <th>Booking End Date/Time</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bk in bookings %}
-                <tr>
-                    <td>{{ bk['booking_id'] }}</td>
-                    <td>{{ bk['car_id'] }}
-                        (<a href="#">Detail</a>)
-                    </td>
-                    <td>{{ "{} {}".format(bk["date_booking"], bk['time_booking']) }}</td>
-                    <td>{{ "{} {}".format(bk["date_return"], bk['time_return']) }}</td>
-                    <td>{{ bk["status"] }}
-                        {% if bk['status'] == "booked" %}
-                            (<a href="{{ url_for('cancelBooking', booking_id=bk['booking_id']) }}">Cancel</a>)
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">        
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Booking ID</th>
+                                <th>Car ID</th>
+                                <th>Booking Start Date/Time</th>
+                                <th>Booking End Date/Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bk in bookings %}
+                            <tr>
+                                <td class="col-xs-1"><img class="img-fluid img-thumbnail" src="{{ url_for('static', filename='car_system.png') }}"></td>
+                                <td>{{ bk['booking_id'] }}</td>
+                                <td>{{ bk['car_id'] }}
+                                    <button onclick="displayDetails('{{ bk['car_id'] }}');">Details</button>
+                                </td>
+                                <td>{{ "{} {}".format(bk["date_booking"], bk['time_booking']) }}</td>
+                                <td>{{ "{} {}".format(bk["date_return"], bk['time_return']) }}</td>
+                                <td>{{ bk["status"] }}
+                                    {% if bk['status'] == "booked" %}
+                                        (<a href="{{ url_for('cancelBooking', booking_id=bk['booking_id']) }}">Cancel</a>)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr style="display:none" id="details_{{ bk['car_id'] }}"><td>Test</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+    
 {% endblock %}

@@ -3,6 +3,7 @@ from dateutil.tz import tzlocal
 import pickle
 from flask import request, render_template, redirect, url_for, session, flash
 from google.oauth2.credentials import Credentials
+from passlib.hash import sha256_crypt
 
 from .main import app, client_cred
 from .services.CarService import CarService
@@ -24,18 +25,18 @@ def login():
 def login_check():
     if 'login' in request.form:
         service = UserService()
-        validUser = service.getValidUser(request.form.get('username'), request.form.get('password'))
-        if (validUser):
-            session['username'] = request.form.get('username')
-            session['fName'] = validUser
-            session['loggedIn'] = True
-            return redirect(url_for('index'))
+        dbUser = service.findExistingUser(request.form.get('username'))
+        if (dbUser is not None):
+            if (sha256_crypt.verify(request.form.get('password'), dbUser['password'])):
+                session['username'] = request.form.get('username')
+                session['fName'] = dbUser['username']
+                session['loggedIn'] = True
+                return redirect(url_for('index'))
+            else:
+                flash("Invalid credentials 1")
         else:
-            flash("Invalid credentials")
-            return redirect(url_for('login'))
-    else:
-        return redirect(url_for('login'))
-
+            flash("invalid credentials 2")
+    return redirect(url_for('login'))
 
 @app.route('/upload', methods=["POST"])
 def upload():
@@ -50,6 +51,7 @@ def upload():
     # TODO: train the images
     # TODO: delete the photos
     # TODO: store pickled trained model
+    flash('Success: Photos successfully uploaded!')
     return redirect(url_for("uploadFaceFiles"))
 
 
@@ -58,13 +60,15 @@ def registerUser():
     if 'register' in request.form:
         service = UserService()
         username = request.form.get('username')
+        pwHash = sha256_crypt.using(rounds=1000).hash(request.form.get('password'))
         usernameTaken = service.findExistingUser(username)
         if usernameTaken:
             flash("Username: " + username + " is already taken - please try again")
+            return render_template('register.html')
         else:
             userInfo = {
                 'username': username,
-                'password': request.form.get('password'),
+                'password': pwHash,
                 'fName': request.form.get('fname'),
                 'lName': request.form.get('lname'),
                 'email': request.form.get('email')
@@ -74,7 +78,6 @@ def registerUser():
                 flash("Success: Account created - please log in")
             return render_template('login.html')
     else:
-        flash("Something went wrong - please try again")
         return render_template('register.html')
     
 @app.route('/logout')
@@ -90,15 +93,31 @@ def users():
     users = service.getAllUsers()
     return render_template("users.html", output=users, users=users)
 
+@app.route("/uploadFaceFiles", methods=['GET', 'POST'])
+def uploadFaceFiles():
+    return render_template("addFace.html")
+
+@app.route("/map")
+def map():
+    
+    latitude = -float(request.args.get("latitude")[0:5])
+    longitude = float(request.args.get("longitude")[0:5])
+    key = app.config['GOOGLE_API_KEY']
+    return render_template("map.html", key=key,lati= round(latitude,1), longi= round(longitude,1))
+
+
+
 @app.route("/cars")
 def cars():
+    key = app.config['GOOGLE_API_KEY']
     service = CarService()
     cars = service.searchCars({})
-    return render_template("cars.html", cars=cars)
+    return render_template("cars.html", cars=cars, key=key)
 
 
 @app.route("/cars/search", methods=["POST"])
 def searchCars():
+    key = app.config['GOOGLE_API_KEY']
     fields = ["car_id", "year_from", "year_to", "car_model", "body_type", "num_seats_from", 
                 "num_seats_to", "car_colour", "cost_hour_from", "cost_hour_to"]
     types = [int, int, int, str, str, int, int, str, float, float]
@@ -114,14 +133,18 @@ def searchCars():
     searchD = {k: v for k,v in searchD.items() if v}
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
-    return render_template("cars.html", cars=cars)
+    return render_template("cars.html", cars=cars, key=key)
 
 
 @app.route("/bookings")
 def bookings():
     username = session.get("username") or "janedoe1"
     bookings = BookingService().getBookingsForUser(username)
-    return render_template("bookings.html", bookings=bookings)
+    bookedCars = []
+    carService = CarService()
+    for booking in bookings:
+        bookedCars.append(carService.getCar(booking['car_id']))
+    return render_template("bookings.html", bookings=bookings, output=bookedCars)
 
 @app.route("/bookings/new", methods=["GET"])
 def addBooking():
@@ -141,14 +164,34 @@ def addBooking():
 
 @app.route("/bookings/new", methods=["POST"])
 def addBookingPost():
+
+    raw_booking = request.form['datetime_booking']
+    booking_date, booking_time = raw_booking.split("T")
+    raw_return = request.form['datetime_return']
+    return_date, return_time = raw_return.split("T")
+
+    car_id = request.form['car_id']
+    carinfo = request.form['carinfo']
+    if datetime.strptime(booking_date, "%Y-%m-%d") < datetime.now():
+        flash("Date is invalid")
+        return render_template("addBooking.html", car_id=car_id, carinfo=carinfo)
+
+    f = open('output.txt', "w")
+    f.write(raw_booking + " " + raw_return)
+    f.close()
+
+    # if raw_booking < datetime.now() or raw_return < datetime.now():
+    #     flash("Dates cannot be in the past.")
+    #     return redirect(url_for("cars"))
     # clean/transform form data
     data = {}
     data["username"] = session.get("username") or "janedoe1"
     data['car_id'] = int(request.form["car_id"])
-    data['date_booking'], data['time_booking'] = request.form['datetime_booking'].split("T")
+    data['date_booking'], data['time_booking'] = raw_booking.split("T")
     data['time_booking'] += ":00"
-    data['date_return'], data['time_return'] = request.form['datetime_return'].split("T")
+    data['date_return'], data['time_return'] = raw_return.split("T")
     data['time_return'] += ":00"
+
     # check for conflicts
     service = BookingService()
     if service.findConflicts(data["car_id"], data["date_booking"], data["date_return"]):
@@ -175,7 +218,7 @@ def cancelBooking(booking_id):
         if e.error_code == "MissingKey":
             flash("No booking with ID {} exists!".format(booking_id))
             return redirect(url_for("bookings"))
-    success = bkService.updateBooking(booking_id, {"status": "cancelled"})
+
     CarService().updateCar(booking["car_id"], {"car_status": "available"})
     flash("Booking {} successfully cancelled!".format(booking_id))
     # remove calendar event
