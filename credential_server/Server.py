@@ -37,14 +37,13 @@ class server:
             self.read_data()
 
     def stop(self):
-        self.s.shutdown()
         self.s.close()
          
                
             
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('ap.config', encoding='UTF-8')
+    config.read('server.config', encoding='UTF-8')
     port=config['address'].getint('port')
     s= server(port)
     try:
