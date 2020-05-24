@@ -2,6 +2,8 @@ from . import request, url_for, Blueprint, g
 from app.UserManager import UserManager
 from . import jsonifyResponseData
 
+from passlib.hash import sha256_crypt
+
 
 bp = Blueprint("users", __name__, url_prefix="/users")
 
@@ -21,7 +23,6 @@ def register():
 def findUser():
     usMgr = UserManager()
     username = request.json.get('username')
-
     user = usMgr.getOne(username)
     result = {"success": False}
     success = True if user is not None else False
