@@ -27,7 +27,7 @@ if [ ! -d venv ]; then
 else
     . venv/bin/activate
 fi
-FLASK_DEBUG=0 flask run > flask.log 2>&1 & 
+FLASK_DEBUG=0 python -m flask run > flask.log 2>&1 & 
 api_pid=$! 
 deactivate
 echo "* cloud-db-api successfully started"
@@ -41,7 +41,7 @@ if [ ! -d venv ]; then
 else
     . venv/bin/activate
 fi
-FLASK_DEBUG=0 flask run --host=0.0.0.0 > flask.log 2>&1 &
+FLASK_DEBUG=0 python -m flask run --host=0.0.0.0 > flask.log 2>&1 &
 website_pid=$!
 deactivate
 echo "* admin-app successfully started"

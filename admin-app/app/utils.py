@@ -4,6 +4,10 @@ import pickle
 from googleapiclient.discovery import build
 from flask import session, current_app
 from dateutil.tz import tzlocal
+import cv2
+import face_recognition
+import os
+import imutils
 
 
 class CalendarUtil:
@@ -129,3 +133,67 @@ class PhotoUtil:
         for f in files:
             ext = self.getExt(f.filename)
             f.save(os.path.join(folder, f"image{i}{ext}"))
+            i += 1
+        
+
+
+class FaceEncodeUtil:
+    HEIGHT = 640
+    WIDTH = 480
+    CASCADE = "haarcascade_frontalface_default.xml"
+
+    def __init__(self, username):
+        self.name = username
+        root_folder = current_app.config["PHOTO_FOLDER"]
+        self.folder = os.path.join(root_folder, username)
+        self.encode_folder = os.path.join(self.folder, "encoding")
+        if not os.path.isdir(self.encode_folder):
+            os.makedirs(self.encode_folder)
+        self.encode_file_path = os.path.join(self.encode_folder, "face_encoding.pickle")
+        self.encodings = []
+
+    def encode_user_images(self):
+        #examine each saved image
+        for path in os.listdir(self.folder):
+            if os.path.isfile(os.path.join(self.folder, path)):
+                #establish filepath for current image
+                image_path = os.path.join(self.folder, path)
+                # read image into opencv - returns numpy array
+                bgr_img = cv2.imread(image_path)
+                # convert from rgb to bgr
+                img = cv2.cvtColor(bgr_img, cv2.COLOR_BGR2RGB)
+                
+                # resize image (if necessary) to reduce computing time 
+                height, width = img.shape[:2]
+                if height > self.HEIGHT or width > self.WIDTH:
+                    img = imutils.resize(img, width = self.WIDTH, height=self.HEIGHT)
+
+                #convert image to grayscale for more effective face detection
+                gray_image = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+                # load the haar cascade for frontal face detection
+                face_detector = cv2.CascadeClassifier(cv2.data.haarcascades + self.CASCADE)
+                # confirm there is a detectable face in image 
+                # 'face' will contain the border locations of found face in order: top, right, bottom, left 
+                face = face_detector.detectMultiScale(gray_image, 1.3, 5)
+                if len(face) > 4 or len(face) == 0:
+                    # photo has more then one face dected in it or no (recognisable) face 
+                    # therefore reject photo (delete)
+                    os.remove(image_path)
+                else:
+                    # find location of face
+                    # NOTE: hog is faster then cnn, slightly less accurate 
+                    # (boxes are not necessary to face_encoding function, but improves speed)
+                    boxes = face_recognition.face_locations(img, model="hog") 
+                    # encode face - returns 128 vetor numpy darray
+                    one_encoding = face_recognition.face_encodings(img, boxes)
+                    #add encoding to list
+                    self.encodings.append(one_encoding)
+        data ={"username": self.name, "encodings": self.encodings}
+        
+        with open(self.encode_file_path, "wb") as fh:
+            pickle.dump(data, fh)
+        return len(self.encodings)
+        
+    
+
+                

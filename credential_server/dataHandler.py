@@ -1,8 +1,20 @@
+import os
 from httpHelper import httpHelper as Helper
-import json
 from passlib.hash import sha256_crypt
+import json
+import pickle
+import jsonpickle
+import pathlib
+import face_recognition
+from pathlib import Path
+import numpy as np
 
 class dataHandler:
+    CWD = os.getcwd()
+    # ENCODEFOLDER = "../admin-app/app/dataset/{}/encoding"
+    # ENCODEFILEPATH = CWD + "/iot/admin-app/app/dataset/{}/encoding/face_encoding.pickle"
+    ENCODEFOLDER = os.path.realpath("../admin-app/app/dataset/{}/encoding")
+
     def __init__(self):
         self.helper = Helper()
     
@@ -10,7 +22,8 @@ class dataHandler:
         """choose diffrent function according to the data type"""
         if data['type'] == 'login':
             return self.login(data)
-        
+        elif data['type'] == 'loginface':
+            return self.login_face(data)
         elif data['type'] == 'search_booking':
             return self.search_booking(data,"booked")
         elif data['type'] == 'search_inprogress':
@@ -78,6 +91,42 @@ class dataHandler:
                 return "success"
         
         return 'fail'
+
+    def get_encode_file_path(self, username):
+        return os.path.realpath(f"../admin-app/datasets/{username}/encoding/face_encoding.pickle")
+
+    """login face compares the encoding of the supplied image to the
+    encodings on file for the user to ascertain whether the user is 
+    who they say they are."""
+    def login_face(self, data):
+        data_dict = data
+        #(dict containing keys: "type" (loginface) "username" and "encodings"(pickled encodings 
+        # of numpy darray)
+        submitted_encoding = data_dict["encodings"]
+        submitted_encoding = [np.array(l) for l in submitted_encoding][0]
+		#'encodings' can now be compared to what the master pi has on file to confirm user identity
+        # get stored encodings:
+        name = data_dict["username"] 
+        #get predicted file path to encoding of user
+        # user_encodings = self.get_encode_file_path(name)
+        # check file exists:
+        user_encodings_file = self.get_encode_file_path(name)
+        if os.path.isfile(user_encodings_file):
+            user_encodings = None
+            with open(user_encodings_file, "rb") as fh:
+                stored_dict = pickle.load(fh)
+                user_encodings = stored_dict["encodings"]
+                user_encodings = [l[0] for l in user_encodings]
+            #compare submitted image to stored images
+            matches = face_recognition.compare_faces(user_encodings, submitted_encoding, tolerance=0.8) # outputs list of arrays size 128 - one per comparison - each value being true or false 
+            pos = 0
+            for match in matches:
+                if match:
+                    pos += 1
+            return "success" if float(pos) / len(matches) >= 0.8 else "failed"
+        #else file does not exist (either user doesnt exist or they havent done face recognition process)
+        else:
+            return "failed"
     
     def update_car(self, car, car_id):
         """update car data"""
