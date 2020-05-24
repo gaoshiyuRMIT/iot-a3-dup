@@ -3,5 +3,4 @@
 
 *.pyc
 /config.py
-/docs/html
 /unittests/test_config.py
