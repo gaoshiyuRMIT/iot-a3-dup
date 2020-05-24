@@ -20,7 +20,7 @@ class CarService(BaseService):
         car = self.get(url)
         return car
 
-    def updateCar(self, car_id: int, newCarVal):
+    def updateCar(self, car_id:int, newCarVal):
         url = "/cars/{}/update".format(car_id)
         self.put(url, newCarVal)
 

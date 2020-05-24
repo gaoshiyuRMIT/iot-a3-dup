@@ -7,32 +7,51 @@
         var map;
         var bounds;
         var markers = [];
-        var uluru = {lat: -36.986724853515625, lng: 144.17018127441406};
+        var maxZoomLevel = 15;
+        var rmit = {lat: -37.807308, lng: 144.964246};
 
         carInfoDiv = document.getElementById("car-location-info");
         carDivs = carInfoDiv.getElementsByTagName("div");  
 
         var mapOptions = {
-            center: uluru,
-            zoom: 7
+            center: rmit,
+            zoom: maxZoomLevel
         };
 
         function markCar(car, mapObj){
             var lat = parseFloat(car.getAttribute("data-lat"));
             var lon = parseFloat(car.getAttribute("data-lon"));
+            var model = car.getAttribute("data-model");
             var id = car.id;
-            // console.log("car" + lat + " " + lon);
 
             var location = new google.maps.LatLng(lat, lon);
 
-            console.log(location);
             var mark = new google.maps.Marker({
                 position: location,
                 map: mapObj
             });
 
+            var infowindow = new google.maps.InfoWindow({
+                content: "<strong>Car ID:" +car.id+ " </strong><p>Model:"+model+"</p>"
+            })
+
+            mark.addListener('mouseover', function(){
+                infowindow.open(map, mark);
+            });
+
+            mark.addListener('mouseout', function(){
+                infowindow.close(map, mark);
+            });
+
+            mark.addListener('click', function(){
+                map.panTo(location);
+                map.setZoom(maxZoomLevel);
+            });
+
             markers.push(location);
         }
+
+        
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
@@ -44,10 +63,10 @@
                 bounds.extend(markers[i]);
             }
             google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
-                console.log(bounds);
                 map.fitBounds(bounds);
-                //map.setCenter(bounds.getCenter());
+                if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
             });
+
         }
 
         
@@ -171,7 +190,7 @@
                                 <th>Number of Seats</th>
                                 <th>Colour</th>
                                 <th>Cost per Hour</th>
-                                <th>Location(Coordinates)</th>
+                                <!-- <th>Location(Coordinates)</th> -->
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -186,9 +205,9 @@
                                 <td>{{ car['num_seats'] }}</td>
                                 <td>{{ car['car_colour'] }}</td>
                                 <td>{{ car['cost_hour'] }}</td>
-                                <td>{{ "{}, {}".format(car['latitude'], car['longitude']) }}
+                                <!-- <td>{{ "{}, {}".format(car['latitude'], car['longitude']) }}
                                     (<a href="{{ url_for('map',latitude=car['latitude'] ,longitude=car['longitude']) }}">Show on Map</a>)
-                                </td>
+                                </td> -->
                                 <td>{{ car["car_status"] }}</td>
                                 <td><a href="{{ url_for('addBooking', car_id=car['car_id']) }}">Book</a></td>
                             </tr>
@@ -202,7 +221,7 @@
 
     <div id="car-location-info">
         {% for car in cars %}    
-        <div id={{ car['car_id'] }} data-lat={{ car['latitude'] }} data-lon={{ car['longitude' ]}}></div>
+        <div id={{ car['car_id'] }} data-lat="{{ car['latitude'] }}" data-lon="{{ car['longitude' ]}}" data-model="{{ car['car_model'] }}"></div>
         {% endfor %}
     </div>
 {% endblock %}
