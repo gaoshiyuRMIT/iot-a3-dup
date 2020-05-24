@@ -32,23 +32,21 @@ class server:
         """the run function for client"""
         print('server is running')
         while True:
-                c,addr = self.s.accept()
-                self.c=c
-                self.read_data()
+            c,addr = self.s.accept()
+            self.c=c
+            self.read_data()
+
+    def stop(self):
+        self.s.close()
          
                
             
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('ap.config', encoding='UTF-8')
+    config.read('server.config', encoding='UTF-8')
     port=config['address'].getint('port')
     s= server(port)
-    s.listen()
-           
-            
-# in another vs code window, the server is running, as you can see in the lest, I only open the credential_server folder
-# can u see me typing? talk to me I can hear you
-#so I will run the server now...
-#server is running
-#now i will swap to the ap side
-# can I?
+    try:
+        s.listen()
+    except KeyboardInterrupt:
+        s.stop()

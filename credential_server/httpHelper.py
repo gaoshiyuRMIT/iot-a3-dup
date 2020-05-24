@@ -2,7 +2,7 @@ import requests as reqs
 import json
 from configparser import ConfigParser
 config = ConfigParser()
-config.read('ap.config', encoding='UTF-8')
+config.read('server.config', encoding='UTF-8')
 
 class httpHelper:
     def __init__(self):

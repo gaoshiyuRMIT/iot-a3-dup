@@ -3,7 +3,6 @@ import unittest as _ut
 from unittest.mock import patch
 
 from . import mock_jsonify
-from app.errors.api_exceptions import MissingKey
 
 
 logger = logging.getLogger(__name__)
@@ -95,6 +94,7 @@ class TestBookingsRoute(_ut.TestCase):
     def testGetNonExistentBooking(self):
         '''confirm that when providing a non-existent booking_id, the view function raises an exception
         '''
+        from app.errors.api_exceptions import MissingKey
         from app.BookingManager import BookingManager
         with patch.object(BookingManager, 'getOne', return_value=None):
             from app.routes.bookings import getBooking
