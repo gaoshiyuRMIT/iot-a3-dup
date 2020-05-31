@@ -32,9 +32,9 @@ api_pid=$!
 deactivate
 echo "* cloud-db-api successfully started"
 
-cd .. customer-app
+cd ../customer-app
 if [ ! -d venv ]; then
-    $python -m venv venv
+    $python -m venv --system-site-packages venv
     . venv/bin/activate
     pip install --upgrade pip > pip.log 2>&1
     pip install --upgrade -r requirements.txt > pip.log 2>&1
