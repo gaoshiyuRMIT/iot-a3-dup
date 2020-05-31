@@ -1,8 +1,7 @@
 from . import request, url_for, Blueprint, g
 from app.UserManager import UserManager
 from . import jsonifyResponseData
-
-from passlib.hash import sha256_crypt
+from app.errors.api_exceptions import MissingKey
 
 
 bp = Blueprint("users", __name__, url_prefix="/users")
@@ -12,7 +11,6 @@ bp = Blueprint("users", __name__, url_prefix="/users")
 def register():
     usMgr = UserManager()
     newUserVal = request.json
-    # newUserVal['password'] = sha256_crypt.using(rounds=1000).hash(newUserVal['password'])
     usrPK = usMgr.addOne(newUserVal)
     success = True if usrPK else False
     result = {"success":success}
@@ -22,11 +20,18 @@ def register():
 @jsonifyResponseData
 def findUser():
     usMgr = UserManager()
-    username = request.json.get('username')
+    query = usMgr.keepValidFieldsOnly(request.json, throw=True)
+    # ignore empty values
+    query = {k:v for k,v in query.items() if v is not None and v != "" and v != []}
+    users = usMgr.getMany(query)
+    return users
+
+@bp.route("/<string:username>", methods=["DELETE"])
+@jsonifyResponseData
+def deleteUser(username):
+    usMgr = UserManager()
     user = usMgr.getOne(username)
-    result = {"success": False}
-    success = True if user is not None else False
-    if (success):
-        result["success"] = True
-        result["user"] = user
-    return result
+    if user is None:
+        raise MissingKey("no user with this username exists")
+    success = usMgr.deleteOne(username)
+    return {"success": success}

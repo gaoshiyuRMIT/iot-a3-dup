@@ -34,6 +34,7 @@ class DBManager(ABC):
         :param dict d: a dictionary representing an entity instance or a filter
         :param bool throw: whether to throw an error if a field is found to not belong to this entity
         '''
+        d = d or {}
         if throw:
             invalidKeys = set(d.keys()) - set(cls.FIELDS)
             if len(invalidKeys) > 0:
@@ -108,6 +109,28 @@ class DBManager(ABC):
             logger.exception("getting one item by id failed")
             raise
         return one
+
+    @abstractmethod
+    def deleteOne(self, id) -> bool:
+        '''delete one instance of this entity, provided the value of primary key is given
+
+        :param (any) id: value of primary key
+        :return: whether a row is deleted successfully
+        :rtype: bool
+        '''
+        sql = f"delete from {self.TABLE_NAME} where {self.PK} = %s"
+        vals = [id]
+        row = -1
+        conn = self.conn
+        try:
+            with conn.cursor() as cur:
+                row = cur.execute(sql, vals)
+            conn.commit()
+        except:
+            conn.rollback()
+            logger.exception("deleting one instance failed")
+            raise
+        return row == 1
 
     @abstractmethod
     def updateOne(self, id, newVal: dict) -> bool:

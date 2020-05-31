@@ -45,7 +45,7 @@ class UserManager(DBManager):
             conn.rollback()
             logger.exception("inserting one user failed")
             raise
-        # returns primary key
+        # returns iff. one row is updated
         return row == 1
 
     def getOne(self, username: str) -> list:
@@ -75,3 +75,8 @@ class UserManager(DBManager):
         :rtype: bool
         '''
         return super().updateOne(username, newUserVal)
+
+    def deleteOne(self, username: str) -> bool:
+        '''delete a user given username
+        '''
+        return super().deleteOne(username)

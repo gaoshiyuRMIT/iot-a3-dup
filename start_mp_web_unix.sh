@@ -3,7 +3,7 @@
 # prerequisite: 
 # if venv is not set up, you need to set $python -- which python to use
 
-for conf_file in admin-app/.flaskenv admin-app/config.py cloud-db-api/config.py admin-app/credentials.json
+for conf_file in customer-app/.flaskenv customer-app/config.py cloud-db-api/config.py customer-app/credentials.json
 do
     if [ ! -f $conf_file ]
     then
@@ -12,7 +12,7 @@ do
     fi
 done
 
-if ( [ ! -d cloud-db-api/venv ] || [ ! -d admin-app/venv ] ) && [ -z $python ]
+if ( [ ! -d cloud-db-api/venv ] || [ ! -d customer-app/venv ] ) && [ -z $python ]
 then
     echo "pls set environment variable $python. e.g. export python=python3.7"
     exit 1
@@ -32,9 +32,9 @@ api_pid=$!
 deactivate
 echo "* cloud-db-api successfully started"
 
-cd ../admin-app
+cd ../customer-app
 if [ ! -d venv ]; then
-    $python -m venv venv
+    $python -m venv --system-site-packages venv
     . venv/bin/activate
     pip install --upgrade pip > pip.log 2>&1
     pip install --upgrade -r requirements.txt > pip.log 2>&1
@@ -44,7 +44,7 @@ fi
 FLASK_DEBUG=0 python -m flask run --host=0.0.0.0 > flask.log 2>&1 &
 website_pid=$!
 deactivate
-echo "* admin-app successfully started"
+echo "* customer-app successfully started"
 
 # echo "API PID: $api_pid, website PID: $website_pid"
 # echo "to stop both background processes: kill $api_pid $website_pid"
@@ -68,7 +68,7 @@ do
         website_exited=1
         if ! wait $website_pid
         then
-            echo "* admin-app exited with an error"
+            echo "* customer-app exited with an error"
         fi
     fi
     sleep 1

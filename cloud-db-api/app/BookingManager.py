@@ -65,3 +65,8 @@ class BookingManager(DBManager):
         '''
         data = super().getOne(booking_id)
         return BookingManager.tranformDateTime(data) if data is not None else None
+
+    def deleteOne(self, booking_id) -> dict:
+        '''deleted one booking given booking ID
+        '''
+        return super().deleteOne(booking_id)

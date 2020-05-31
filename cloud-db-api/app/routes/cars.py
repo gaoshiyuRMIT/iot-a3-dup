@@ -53,4 +53,13 @@ def addCar():
     carId = carMgr.addOne(newCarVal)
     return {"car_id": carId}
 
+@bp.route("/<int:car_id>", methods=["DELETE"])
+@jsonifyResponseData
+def delete_car(car_id):
+    cMgr = CarManager()
+    car = cMgr.getOne(car_id)
+    if car is None:
+        raise MissingKey("no car with this car_id exists")
+    success = cMgr.deleteOne(car_id)
+    return {"success": success}
 
