@@ -17,8 +17,7 @@ class UserService(BaseService):
         data = {'username': username }
         result = self.post(url, data)
     
-        # (python ternary operator)
-        return result['user'] if result['success'] == True else None
+        return result[0] if len(result) > 0 else None
 
     def registerUser(self, inputData:dict):
         '''register a user

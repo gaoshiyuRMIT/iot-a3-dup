@@ -59,3 +59,8 @@ class CarManager(DBManager):
         '''
         car_id = super().addOne(car)
         return car_id
+
+    def deleteOne(self, car_id: int) -> bool:
+        '''delete a car, given car_id
+        '''
+        return super().deleteOne(car_id)
