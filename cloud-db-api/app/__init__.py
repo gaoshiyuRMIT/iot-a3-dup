@@ -4,11 +4,12 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-from .routes import bookings_bp, cars_bp, users_bp
+from .routes import bookings_bp, cars_bp, users_bp, employees_bp
 
 app.register_blueprint(bookings_bp)
 app.register_blueprint(cars_bp)
 app.register_blueprint(users_bp)
+app.register_blueprint(employees_bp)
 
 from .BookingManager import BookingManager
 from .CarManager import CarManager

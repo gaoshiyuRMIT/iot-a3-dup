@@ -11,3 +11,4 @@ def ping():
 from .bookings import bp as bookings_bp
 from .cars import bp as cars_bp
 from .users import bp as users_bp
+from .employees import bp as employees_bp
