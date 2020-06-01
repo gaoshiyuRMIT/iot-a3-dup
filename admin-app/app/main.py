@@ -9,4 +9,9 @@ app.config.from_object(Config)
 
 bootstrap = Bootstrap(app)
 
-from . import routes
+from .routes import cars_bp, employees_bp, users_bp, dashboard_bp
+
+app.register_blueprint(cars_bp)
+app.register_blueprint(employees_bp)
+app.register_blueprint(users_bp)
+app.register_blueprint(dashboard_bp)
