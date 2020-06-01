@@ -9,6 +9,16 @@ CREATE TABLE IF NOT EXISTS User (
     CONSTRAINT PK_User PRIMARY KEY (username)
 );
 
+CREATE TABLE IF NOT EXISTS Employee (
+    username VARCHAR(32) not null, 
+    password VARCHAR(255) not null,
+    fName VARCHAR(32) not null,
+    lName VARCHAR(32) not null,
+    email VARCHAR(255) not null,   
+    role VARCHAR(32) not null default 'admin',
+    CONSTRAINT PK_Admin PRIMARY KEY (username)
+);
+
 CREATE TABLE IF NOT EXISTS Car ( 
     car_id INT not null auto_increment, 
     year INT not null, 
