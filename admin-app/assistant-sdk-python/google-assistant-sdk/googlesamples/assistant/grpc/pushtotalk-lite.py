@@ -432,6 +432,8 @@ def main(api_endpoint, credentials, project_id,
         else:
             logging.info('Turning device off')
 
+    
+
     @device_handler.command('com.example.commands.BlinkLight')
     def blink(speed, number):
         logging.info('Blinking device %s times.' % number)

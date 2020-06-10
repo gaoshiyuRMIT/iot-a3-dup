@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
+from app.services.admintalk import AdminTalk
 
 bp = Blueprint("cars", __name__, url_prefix="/cars")
 
@@ -51,3 +52,8 @@ def report_car_with_issue(car_id):
 @bp.route("/<int:car_id>/map")
 def show_car_on_map(car_id):
     pass
+
+@bp.route("/admintalk")
+def admin_talk():
+    a = AdminTalk()
+    return a.test()
