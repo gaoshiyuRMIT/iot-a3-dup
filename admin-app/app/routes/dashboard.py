@@ -4,7 +4,7 @@ from app.services.user_service import UserService
 
 bp = Blueprint("dashboard", __name__, "/dashboard")
 
-@bp.route("/")
+@bp.route("/dashboard")
 def dashboard():
     pass
 
