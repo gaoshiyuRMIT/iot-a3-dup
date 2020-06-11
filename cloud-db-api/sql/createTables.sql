@@ -9,6 +9,15 @@ CREATE TABLE IF NOT EXISTS User (
     CONSTRAINT PK_User PRIMARY KEY (username)
 );
 
+CREATE TABLE `UserActivity` (
+  `username` varchar(32) NOT NULL,
+  `activity` varchar(32) NOT NULL DEFAULT 'login',
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_UserLogin_username` (`username`),
+  CONSTRAINT `FK_UserLogin_username` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE IF NOT EXISTS Employee (
     username VARCHAR(32) not null, 
     password VARCHAR(255) not null,

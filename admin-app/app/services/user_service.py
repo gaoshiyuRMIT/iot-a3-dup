@@ -16,3 +16,7 @@ class UserService(BaseService):
         url = f"/users/{quote(username)}"
         data = self.put(url, new_val)
         return data["success"]
+
+    def get_activity_types(self):
+        url = f"/users/activity/types"
+        return self.get(url, {})
