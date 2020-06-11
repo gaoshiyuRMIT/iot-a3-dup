@@ -1,10 +1,5 @@
 Flask==1.1.2
 Flask-Bootstrap==3.3.7.1
 requests==2.23.0
-<<<<<<< HEAD
-passlib
-python-dotenv==0.13.0
-=======
 python-dotenv==0.13.0
 passlib
->>>>>>> df730d5841e7fb35a301b044d893a0dae1d4bb6e
