@@ -1,6 +1,13 @@
+import logging
 import pymysql as _p
 import datetime
 from .DBManager import DBManager
+from .CarManager import CarManager
+
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 
 class BookingManager(DBManager):
@@ -70,3 +77,17 @@ class BookingManager(DBManager):
         '''deleted one booking given booking ID
         '''
         return super().deleteOne(booking_id)
+
+    def getAllWCars(self):
+        sql = f"select * from {self.TABLE_NAME} join {CarManager.TABLE_NAME} on {self.TABLE_NAME}.car_id = {CarManager.TABLE_NAME}.car_id;"
+        conn = self.conn
+        res = []
+        try:
+            with self.getCursor(conn) as cur:
+                cur.execute(sql)
+                res = cur.fetchall()
+        except Exception:
+            logger.exception("getting bookings with car info failed")
+            raise
+        res = [self.tranformDateTime(bk) for bk in res]
+        return res
