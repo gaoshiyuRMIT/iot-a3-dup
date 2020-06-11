@@ -9,26 +9,16 @@ def list_users():
     users = UserService().get_all_users()
     return render_template('users.html', users=users)
 
-
 @bp.route("/", methods=["POST"])
 def search_users():
     fields = ["username", "fName", "lName", "email"]
     types = [str, str, str, str]
+    #transform and clean dict for search 
     searchDict = {k: request.form[k] for k in fields}
-
-    # transform/clean search dict
-    searchD = {k: request.form[k] for k in fields}
-    searchD = {k: (t(searchD[k]) if searchD[k] else "") for k,t in zip(fields, types)}
-    for rangeK in ("year", "num_seats", "cost_hour"):
-        fromK = rangeK + "_from"
-        toK = rangeK + "_to"
-        searchD[rangeK] = [searchD.pop(fromK), searchD.pop(toK)]
-        if searchD[rangeK][0] == searchD[rangeK][1]:
-            searchD[rangeK] = searchD[rangeK][0]
-    searchD = {k: v for k,v in searchD.items() if v}
-    # call CarService to search for cars, providing search dict
-    cars = CarService().searchCars(searchD)
-    return render_template("cars.html", cars=cars, key=key)
+    searchD = {k: v for k,v in searchDict.items() if v}
+    # call UserService to search for users, providing search dict
+    users = UserService().search_users(searchD)
+    return render_template("users.html", users=users)
 
 @bp.route("/<string:username>/update", methods=["GET"])
 def update_user_page(username):

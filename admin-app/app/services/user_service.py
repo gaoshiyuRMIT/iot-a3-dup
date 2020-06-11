@@ -36,3 +36,9 @@ class UserService(BaseService):
         url = f"/users/{quote(username)}"
         data = self.get(url)
         return data
+    
+    def search_users(self, query: dict):
+        url = "/users/search"
+        data = query
+        cars = self.post(url, data)
+        return cars

@@ -18,7 +18,7 @@ def login():
         dbEmp = service.find_employee(username)
         if (dbEmp is not None):
             if (sha256_crypt.verify(password, dbEmp['password'])):
-                #session.clear()  ???
+                #session.clear()  
                 session['username'] = username
                 session['fName'] = dbEmp['fName']
                 session['loggedIn'] = True
@@ -67,7 +67,7 @@ def logout():
     session.clear()
     return redirect(url_for('employees.index'))
 
-@bp.route("/menu", methods=["GET","POST"])
+@bp.route("/menu")
 def menu():
     return render_template('menu.html')
 

@@ -16,31 +16,31 @@ Menu
             <div class="panel body text-center">
                 <div class="btn-group btn-group btn-group-lg">
                     {% if not session['loggedIn'] %}
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('employees.login')}}';">Login</button>
-                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'employees.register') }}';">Register</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('employees.login') }}';">Login</button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('employees.register') }}';">Register</button>
                     {% else %}
                         <!--list of cars with search functionality-->
                         <p>
                         <label >View Cars in order to search, view rental history, update, remove, or report an issue</label><br>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars' ) }}';">View Cars</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('cars.list_cars') }}';">View Cars</button>
                         <br></p>
                         <!--list of cars with reported issues-->
                         <p>
                         <br><label>View Cars with reported issues, and see their locations</label><br>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars_reported_with_issues' ) }}';">Cars with Reported Issues</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('cars.list_cars_reported_with_issues') }}';">Cars with Reported Issues</button>
                         <br><br></p>
                         <p>
                         <label>Create a new Car</label><br>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.add_car_page' ) }}';">Add Car</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('cars.add_car_page') }}';">Add Car</button>
                         <br><br></p>
                         <!--list of users with search functionality-->
                         <p>
                         <label>View Users in order to search, update or remove</label><br>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'users.list_users' ) }}';">View Users</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('users.list_users') }}';">View Users</button>
                         <br><br></p>
                         <p>
                         <label>Create a new User</label><br>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'users.add_user_page' ) }}';">Add User</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('users.add_user_page') }}';">Add User</button>
                             <br><br></p>
                     {% endif %}
                 </div>
@@ -49,3 +49,6 @@ Menu
     </div>
 {{ output }}
 {% endblock %}
+
+
+
