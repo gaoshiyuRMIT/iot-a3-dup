@@ -23,3 +23,6 @@ values ("shiyu_admin", 1, "2019-01-01", "19:00:00", "2019-01-05", "11:00:00", "f
         ("shiyu_admin", 1, "2020-05-04", "19:00:00", "2020-05-10", "11:00:00", "inProgress"),
         ("shiyu_admin", 1, "2020-06-01", "19:00:00", "2020-06-05", "11:00:00", "booked");
 
+INSERT INTO 'Employee' ('username', 'password', 'fName', 'lName', 'email', 'role') VALUES ('emp1', 'root', 'kase', 'fitz', 'fitz@gmail.com', 'admin');
+INSERT INTO 'Employee' ('username', 'password', 'fName', 'lName', 'email', 'role') VALUES ('emp2', 'root', 'kase', 'fitz', 'fitz@gmail.com', 'manager');
+INSERT INTO 'Employee' ('username', 'password', 'fName', 'lName', 'email', 'role') VALUES ('emp3', 'root', 'kase', 'fitz', 'fitz@gmail.com', 'engineer');

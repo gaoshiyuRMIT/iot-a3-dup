@@ -24,10 +24,10 @@ Home
                             <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'employees.menu') }}';">Main Menu</button>
                         {% endif %}
                         {% if session['role'] == 'manager' %}
-                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'dashboard') }}';">Dashboard</button>
+                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'dashboard.dashboard') }}';">Dashboard</button>
                         {% endif %}
                         {% if session['role'] == 'engineer' %}
-                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars/reported') }}';">Reported Cars</button>
+                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars_reported_with_issues') }}';">Reported Cars</button>
                         {% endif %}
                     {% endif %}
                 </div>

@@ -70,3 +70,5 @@ def logout():
 @bp.route("/menu")
 def menu():
     return render_template('menu.html')
+
+@bp.route("")
