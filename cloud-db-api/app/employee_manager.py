@@ -1,7 +1,7 @@
 from .DBManager import DBManager
 
 class EmployeeManager(DBManager):
-    FIELDS = ["username", "password", "fName", "lName", "email"]
+    FIELDS = ["username", "password", "fName", "lName", "email", "role"]
     PK = "username"
     TABLE_NAME = "Employee"
 
