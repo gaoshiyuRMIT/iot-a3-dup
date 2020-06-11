@@ -15,6 +15,10 @@ to generate the API documentation:
 - make sure your virtualenv is activated and has all libraries in requirements.txt installed
 - `sphinx-build docs docs/html`
 - open docs/html/index.html
+- need conf.py
+- some .rst files - one for each page
+
+
 
 ### Unit Tests
 - activate venv
