@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel heading text-center">
+                <h2><i>Welcome to </i><strong>Sharing is Car(ing)</strong></h2>
+                <h2><strong>Employee Portal</strong></h2>
+            </div>
+            <div class="panel body text-center">
+                <div class="row">
+                    <img class="img-fluid" width="20%" src="{{ url_for('static', filename='car_system.png') }}">
+                </div>
+                <div class="btn-group btn-group btn-group-lg">
+                    {% if not session['loggedIn'] %}
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'employees.login') }}';">Login</button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'employees.register') }}';">Register</button>
+                    {% else %}
+                        {% if session['role'] == 'admin' %}
+                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'employees.menu') }}';">Main Menu</button>
+                        {% endif %}
+                        {% if session['role'] == 'manager' %}
+                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'dashboard.dashboard') }}';">Dashboard</button>
+                        {% endif %}
+                        {% if session['role'] == 'engineer' %}
+                            <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars_reported_with_issues') }}';">Reported Cars</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

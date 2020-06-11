@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Menu
+{% endblock title %}
+
+{% block content %}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel heading text-center">
+                <h2><strong>Main Menu</strong></h2>
+            </div>
+            <div class="panel body text-center">
+                <div class="row">
+                    <img class="img-fluid" width="20%" src="{{ url_for('static', filename='car_system.png') }}">
+                </div>
+                <div class="btn-group btn-group btn-group-lg">
+                    {% if not session['loggedIn'] %}
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('login')}}';">Login</button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'register') }}';">Register</button>
+                    {% else %}
+                        <!--list of cars with search functionality-->
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'cars' ) }}':">Cars</button>
+                        <!--list of cars with reported issues-->
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'cars/reported' ) }}':">Cars with Reported Issues</button>"
+                         <!--list of users with search functionality-->
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'users' ) }}';">Users</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
