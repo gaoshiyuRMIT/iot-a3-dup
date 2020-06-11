@@ -3,9 +3,9 @@ from passlib.hash import sha256_crypt
 from app.services.employee_service import EmployeeService
 from app.utils import AuthUtil
 
-bp = Blueprint("employees", __name__, url_prefix="/employees")
+bp = Blueprint("employees", __name__)
 
-bp.route('/')
+@bp.route('/')
 def index():
    return render_template('index.html')
 
@@ -22,6 +22,7 @@ def login():
                 session['username'] = username
                 session['fName'] = dbEmp['fName']
                 session['loggedIn'] = True
+                session['role'] = dbEmp['role']
                 # depending on type of employee direct to correct landing page
                 if (dbEmp['role'] == 'admin'):
                     return redirect(url_for('menu'))
@@ -36,7 +37,7 @@ def login():
     return render_template('login.html')
 
 @bp.route("/register", methods=["GET", "POST"])
-def regiser():
+def register():
     if request.method == 'POST':
         service = EmployeeService()
         username = request.form['username']
@@ -61,9 +62,11 @@ def regiser():
                 return render_template('login.html')
     return render_template('register.html')
 
-
-
 @bp.route("/logout")
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+@bp.route("/menu")
+def menu():
+    return render_template('menu.html')

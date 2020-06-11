@@ -2,3 +2,4 @@ Flask==1.1.2
 Flask-Bootstrap==3.3.7.1
 requests==2.23.0
 passlib
+python-dotenv==0.13.0
