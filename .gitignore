@@ -14,3 +14,4 @@ admin-app/pyvenv.cfg
 admin-app/resp.txt
 iot.code-workspace
 admin-app/app/01_microphoneGoogle.py
+assistant-sdk-python
