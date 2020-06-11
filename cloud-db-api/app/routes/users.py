@@ -1,5 +1,6 @@
 from . import request, url_for, Blueprint, g
 from app.UserManager import UserManager
+from app.ActivityManager import ActivityManager
 from . import jsonifyResponseData
 from app.errors.api_exceptions import MissingKey
 
@@ -35,3 +36,9 @@ def deleteUser(username):
         raise MissingKey("no user with this username exists")
     success = usMgr.deleteOne(username)
     return {"success": success}
+
+@bp.route("/activity/types", methods=["GET"])
+@jsonifyResponseData
+def get_activity_types():
+    aMgr = ActivityManager()
+    return aMgr.get_type_counts()
