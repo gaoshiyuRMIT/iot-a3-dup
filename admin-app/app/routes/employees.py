@@ -25,11 +25,11 @@ def login():
                 session['role'] = dbEmp['role']
                 # depending on type of employee direct to correct landing page
                 if (dbEmp['role'] == 'admin'):
-                    return redirect(url_for('menu'))
+                    return redirect(url_for('employees.menu'))
                 elif (dbEmp['role'] == 'manager'):
-                    return redirect(url_for('dashboard'))
+                    return redirect(url_for('dashboard.dashboard'))
                 else:
-                    return redirect(url_for('cars/reported'))
+                    return redirect(url_for('cars.list_cars_reported_with_issues'))
             else:
                 flash("Invalid credentials, please try again")
         else:
@@ -65,10 +65,10 @@ def register():
 @bp.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('employees.index'))
 
-@bp.route("/menu")
+@bp.route("/menu", methods=["GET","POST"])
 def menu():
     return render_template('menu.html')
 
-#@bp.route("")
+

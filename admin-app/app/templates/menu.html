@@ -8,32 +8,44 @@ Menu
 {% block error_message %}
 {{ super() }}
 {% endblock %}
-
-{% block content %}
     <div class="container">
         <div class="panel panel-default">
             <div class="panel heading text-center">
                 <h2><strong>Main Menu</strong></h2>
             </div>
             <div class="panel body text-center">
-                <div class="row">
-                    <img class="img-fluid" width="20%" src="{{ url_for('static', filename='car_system.png') }}">
-                </div>
                 <div class="btn-group btn-group btn-group-lg">
                     {% if not session['loggedIn'] %}
-                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('login')}}';">Login</button>
-                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'register') }}';">Register</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('employees.login')}}';">Login</button>
+                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'employees.register') }}';">Register</button>
                     {% else %}
                         <!--list of cars with search functionality-->
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'cars' ) }}':">Cars</button>
+                        <p>
+                        <label >View Cars in order to search, view rental history, update, remove, or report an issue</label><br>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars' ) }}';">View Cars</button>
+                        <br></p>
                         <!--list of cars with reported issues-->
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'cars/reported' ) }}':">Cars with Reported Issues</button>"
-                         <!--list of users with search functionality-->
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for( 'users' ) }}';">Users</button>
+                        <p>
+                        <br><label>View Cars with reported issues, and see their locations</label><br>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.list_cars_reported_with_issues' ) }}';">Cars with Reported Issues</button>
+                        <br><br></p>
+                        <p>
+                        <label>Create a new Car</label><br>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'cars.add_car_page' ) }}';">Add Car</button>
+                        <br><br></p>
+                        <!--list of users with search functionality-->
+                        <p>
+                        <label>View Users in order to search, update or remove</label><br>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'users.list_users' ) }}';">View Users</button>
+                        <br><br></p>
+                        <p>
+                        <label>Create a new User</label><br>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for( 'users.add_user_page' ) }}';">Add User</button>
+                            <br><br></p>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-
+{{ output }}
 {% endblock %}
