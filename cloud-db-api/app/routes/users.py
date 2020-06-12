@@ -29,11 +29,13 @@ def addUser():
 
 @bp.route("/<string:username>/update", methods=["POST"])
 @jsonifyResponseData
-def updateUser():
+def updateUser(username):
     usMgr = UserManager()
     newUserVal = request.json
-    usrPk = usMgr.updateOne(newUserVal)
-    success = True if usrPk else False
+    newUserVal = usMgr.keepValidFieldsOnly(newUserVal)
+    # pop 'None' values
+    newUserVal = {k: v for k,v in newUserVal.items() if v is not None and v != ""}
+    success = usMgr.updateOne(username, newUserVal)
     result = {"success":success}
     return result
 

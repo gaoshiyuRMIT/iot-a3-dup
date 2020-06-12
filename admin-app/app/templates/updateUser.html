@@ -22,7 +22,7 @@ Update User Details
                 <div class="row">
                     <div class="form-group">
                         <label for="username" class="col-md-2 control-label">Username (cannot be changed):</label>
-                        <label for="username" class="col-md-2 control-label">{{ user['username'] }}</label>
+                        <label for="username" class="col-md-0 control-label">{{ user['username'] }}</label>
                     </div>
                 </div>
                 <div class="row">
@@ -34,13 +34,13 @@ Update User Details
                 <div class="row">
                     <div class="form-group">
                         <label for="fname" class="col-md-2 control-label">Update First name: </label>
-                        <input type="text" name="fname" class="col-md-2 control-form" placeholder={{ user['fName'] }} pattern="^[A-Za-z0-9\-]+$">
+                        <input type="text" name="fname" class="col-md-2 control-form" placeholder={{ user['fName'] }} pattern="^[A-Za-z0-9\-]+$" title="First name can not contain any white spaces">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group">
                         <label for="lname" class="col-md-2 control-label">Update Last name: </label>
-                        <input type="text" name="lname" class="col-md-2 control-form" placeholder={{ user['lName'] }} pattern="^[A-Za-z0-9\-]+$">
+                        <input type="text" name="lname" class="col-md-2 control-form" placeholder={{ user['lName'] }} pattern="^[A-Za-z0-9\-]+$" title="Last name can not contain any white spaces">
                     </div>
                 </div>
                 <div class="row">
@@ -54,7 +54,7 @@ Update User Details
                 
             </div>
             <div class="panel-footer">
-                <button name="update" type="submit" class="btn btn-info" onclick="return confirm('Confirm Update Details?')">Update User</button>
+                <button name="update" type="submit" class="btn btn-info" onclick="return confirm('Confirm: Update User Details?')">Update User</button>
             </div>
            
         </div>

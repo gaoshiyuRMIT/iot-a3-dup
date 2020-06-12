@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}
+Update Car Details
+{% endblock title %}
+
+{% block content %}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<form class="form-horizontal needs-validation" action="{{ url_for('cars.update_car', car_id=car['car_id']) }}" method="POST">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><strong>Update Car Details</strong></h3><br>
+                <label>Details to be updated should be entered in the input boxes below</label>
+            </div>
+            <div class="panel-body"></div>
+            <br>
+            <div class="row">
+                <div class="form-group">
+                    <label for="username" class="col-md-3 control-label">Car ID (cannot be changed):</label>
+                    <label for="username" class="col-md-0 control-label">{{ car['car_id'] }}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="car_model">Update Car Model:</label>
+                    <input class="col-md-2 control-form" type="text" id="car_model" name="car_model" placeholder="{{ car['car_model'] }}" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="body_type">Update Body Type:</label>
+                    <input class="col-md-2 control-form" type="text" id="body_type" name="body_type" placeholder="{{ car['body_type'] }}" pattern="^[A-Za-z0-9\-]+$" title="Body type can not contain any white spaces">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="car_colour">Update Car Colour:</label>
+                    <input class="col-md-2 control-form" type="text" id="car_colour" name="car_colour" placeholder="{{ car['car_colour'] }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="year">Update Year:</label>
+                    <input class="col-md-2 control-form" type="text" id="year" name="year" placeholder="{{ car['year'] }}" pattern="(200[0-9]|201[0-9]|2020)" title="Must be year from 2000 to 2020" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="num_seats">Update Number of Seats:</label>
+                    <input class="col-md-2 control-form" type="text" id="num_seats" name="num_seats" placeholder="{{ car['num_seats'] }}" title="Must be a whole number" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="cost_hour">Update Cost per Hour:</label>
+                    <input class="col-md-2 control-form" type="text" id="cost_hour" name="cost_hour" placeholder="{{ car['cost_hour'] }}" >
+                </div>
+            </div>    
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="latitutde">Update latitutude:</label>
+                    <input class="col-md-2 control-form" type="text" id="latitude" name="latitude" placeholder="{{ car['latitude'] }}">
+                </div>
+            </div>  
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="longitude">Update longitude:</label>
+                    <input class="col-md-2 control-form" type="text" id="longitude" name="longitude" placeholder="{{ car['longitude'] }}">
+                </div>
+            </div> 
+            <div class="row">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="car_status">Update Status:</label>
+                    <input class="col-md-2 control-form" type="text" id="car_status" name="car_status" placeholder="{{ car['car_status'] }}">
+                </div>
+            </div> 
+        </div>
+        <div class="panel-footer">
+            <button name="register" type="submit" class="btn btn-info" onclick="return confirm('Confirm: Update Car Details?')">Update Car</button>
+        </div>
+       
+    </div>
+    
+</div>
+</form>
+{{ output }}
+{% endblock %}

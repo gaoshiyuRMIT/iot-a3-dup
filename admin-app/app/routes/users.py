@@ -43,10 +43,10 @@ def update_user(username):
         'lName': request.form['lname'],
         'email': request.form['email']
     }
-    result = service.update_user(data)
+    result = service.update_user(username, data)
     if result is not None:
-        flash("User details for username: " + username + " updated")
-        return render_template('menu.html')
+        flash("Success! User details updated")
+        return redirect(url_for('users.list_users'))
 
 @bp.route("/<string:username>/remove", methods=["GET"])
 def remove_user(username):
@@ -83,6 +83,6 @@ def add_user():
         }
         result = service.add_user(data)
         if result is not None:
-            flash("User created. Returning to main menu")
+            flash("Success! User created ")
             return render_template('menu.html')
     

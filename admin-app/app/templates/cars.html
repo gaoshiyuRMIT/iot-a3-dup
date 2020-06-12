@@ -162,7 +162,9 @@
                                 <label class="control-label" for=""></label>
                                 <div class="input-group">
                                     <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('cars.list_cars') }}';">Clear Search Results</button>
                                 </div>
+                                
                             </div>
                         </div>
                     </form>
@@ -212,8 +214,8 @@
                                 <td>{{ car["car_status"] }}</td>
                                 <td><a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report Issue</a></td>
                                 <td><a href="{{ url_for('cars.rental_history', car_id=car['car_id']) }}">Rental History</a></td>
-                                <td><a href="{{ url_for('cars.update_car', car_id=car['car_id']) }}">Update Car Details</a></td>
-                                <td><a href="{{ url_for('cars.remove_car', car_id=car['car_id']) }}" onclick="return confirm('Confirm Delete Car')">Delete Car</a> </td>
+                                <td><a href="{{ url_for('cars.update_car', car_id=car['car_id']) }}">Update Details</a></td>
+                                <td><a href="{{ url_for('cars.remove_car', car_id=car['car_id']) }}" onclick="return confirm('Delete Car? This action cannot be undone')">Delete Car</a> </td>
                             </tr>
                         {% endfor %}
                         </tbody>
