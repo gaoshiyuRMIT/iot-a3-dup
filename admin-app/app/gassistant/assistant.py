@@ -72,7 +72,7 @@ class AspenAssistant(object):
     """
 
     def __init__(self):
-        self.language_code = "en-US"
+        self.language_code = "en-US" 
         self.device_model_id = "iot-a2-275604-iot-a3-yx3rus"
         self.device_id = "747f0c62-a723-11ea-9ec7-b827eb4dc132"
         self.display = None
@@ -203,15 +203,16 @@ class AspenAssistant(object):
                     self.conversation_stream.stop_recording()
                     
                     self.conversation_stream.start_playback()
-                    logging.info('Playing assistant response.')
+                    print('Playing assistant response.')
+                    print (resp)
                 self.conversation_stream.write(resp.audio_out.audio_data)
             if resp.dialog_state_out.conversation_state:
                 conversation_state = resp.dialog_state_out.conversation_state
-                logging.debug('Updating conversation state.')
+                print('Updating conversation state.')
                 self.conversation_state = conversation_state
             if resp.dialog_state_out.volume_percentage != 0:
                 volume_percentage = resp.dialog_state_out.volume_percentage
-                logging.info('Setting volume to %s%%', volume_percentage)
+                print('Setting volume to %s%%', volume_percentage)
                 self.conversation_stream.volume_percentage = volume_percentage
             if resp.dialog_state_out.microphone_mode == DIALOG_FOLLOW_ON:
                 continue_conversation = True
