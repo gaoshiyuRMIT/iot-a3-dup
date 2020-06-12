@@ -9,7 +9,9 @@
         {% block error_message %}
             {{ super() }}
         {% endblock %}
-    
+        <h1>View/Search all Users</h1>
+        <br>
+        <br>
         <div class="panel">
             <div class="panel-body">
                 <div class="row">
@@ -33,9 +35,9 @@
                                 <input class="form-control" type="email" id="email" name="email">
                             </div>
                             <div class="form-group col-md-3">
-                                <label class="control-label" for=""></label>
+                                <label class="control-label" for="submit">Enter search terms above and submit for results</label>
                                 <div class="input-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -51,7 +53,6 @@
                     <table class='table' style="width:100%">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Username</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -67,8 +68,8 @@
                                 <td>{{ user['fName'] }}</td>
                                 <td>{{ user['lName'] }}</td>
                                 <td>{{ user['email'] }}</td>
-                                <td>{{ <a href="{{ url_for('users.update_user_page', user['username']) }}">Update User Details</a> }}</td>
-                                <td>{{ <a href="{{ url_for('users.remove_user', user['username']) }}">Remove User</a> }}</td>
+                                <td><a href="{{ url_for('users.update_user_page', username=user['username']) }}">Update User Details</a> </td>
+                                <td><a href="{{ url_for('users.remove_user', username=user['username']) }}">Remove User</a> </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -80,4 +81,3 @@
 
 {% endblock %}
 
-   
