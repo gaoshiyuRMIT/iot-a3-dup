@@ -21,7 +21,7 @@ class UserService(BaseService):
         return data['success']
 
     def update_user(self, username: str, new_val: dict) -> bool:
-        url = f"/users/{quote(username)}"
+        url = f"/users/{quote(username)}/update"
         data = self.put(url, new_val)
         return data["success"]
 

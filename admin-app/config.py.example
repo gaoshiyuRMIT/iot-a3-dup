@@ -10,3 +10,9 @@ class Config(object):
 
     #api key for google maps
     GOOGLE_API_KEY = "loTsaRanDOML3TTersAndN0MB3R2"
+
+    # pushbullet details
+    # step 1. create your own access token at https://www.pushbullet.com/#settings/account, fill in the key
+    # step 2. create a channel at https://www.pushbullet.com/my-channel, fill in the channel name
+    PUSHBULLET_KEY = ""
+    PUSHBULLET_CHANNEL = ""
