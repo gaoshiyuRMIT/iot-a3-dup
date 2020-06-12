@@ -70,7 +70,10 @@ def add_car():
 
 @bp.route("/<int:car_id>/bookings")
 def rental_history(car_id):
-    pass
+    '''display all bookings made for specific car'''
+    service = BookingService()
+    bookings = service.get_bookings_for_car(car_id)
+    return render_template('carHistory.html', car_id=car_id, bookings=bookings)
 
 @bp.route("/<int:car_id>/update")
 def update_car_page(car_id):

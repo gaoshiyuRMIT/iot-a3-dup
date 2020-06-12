@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Rental History{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        {% block error_message %}
+            {{ super() }}
+        {% endblock %}
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                    
+                <h4><strong>Rental History</strong></h4>
+                <h4>Car ID: {{ car_id }} </h4>
+            </div>
+            <div class="panel-body">
+                <div class='row'>
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Booking ID</th>
+                                        <th>User</th>
+                                        <th>Start Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Date</th>
+                                        <th>End Time</th>
+                                        <th>Booking Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking in bookings %}
+                                    <tr>
+                                        <td>{{ booking['booking_id'] }}</td>
+                                        <td>{{ booking['username'] }}</td>
+                                        <td>{{ booking['date_booking'] }}</td>
+                                        <td>{{ booking['time_booking'] }}</td>
+                                        <td>{{ booking['date_return'] }}</td>
+                                        <td>{{ booking['time_return'] }}</td>
+                                        <td>{{ booking['status'] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('cars.list_cars') }}';">Return to Cars</button>    
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
