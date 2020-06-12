@@ -31,9 +31,9 @@ def login():
                 else:
                     return redirect(url_for('cars.list_cars_reported_with_issues'))
             else:
-                flash("Invalid credentials, please try again")
+                flash("2 Invalid credentials, please try again")
         else:
-            flash("Invalid credentials, please try again")
+            flash("1 Invalid credentials, please try again")
     return render_template('login.html')
 
 @bp.route("/register", methods=["GET", "POST"])
@@ -41,7 +41,7 @@ def register():
     if request.method == 'POST':
         service = EmployeeService()
         username = request.form['username']
-        usernameTaken = service.find_employee(username)
+        usernameTaken = service.find_existing_employee(username)
         if usernameTaken is not None:
             flash("Username: " + username + " is already taken. Try again")
             return render_template('register.html')
@@ -56,6 +56,7 @@ def register():
                 'email': request.form['email'],
                 'role': request.form['role']
             }
+            #role must be admin, engineer or manager
             result = service.register_employee(data)
             if result is not None:
                 flash("Account created. Please log in.")
@@ -65,7 +66,7 @@ def register():
 @bp.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for('employees.index'))
+    return redirect(url_for('employees.login'))
 
 @bp.route("/menu")
 def menu():

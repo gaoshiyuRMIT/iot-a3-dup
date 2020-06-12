@@ -3,6 +3,7 @@ from .base_service import BaseService
 
 '''EmployeeService communicates with cloud-db-api, which communicates with database'''
 class EmployeeService(BaseService):
+    
     def find_employee(self, username):
         '''find an emplyoee with <username>, return all employee data or None 
         if username does not exist
@@ -10,9 +11,4 @@ class EmployeeService(BaseService):
         url = f"/employees/{quote(username)}"
         data = self.get(url)
         return data
-    
-    def register_employee(self, data:dict):
-        '''register a new employee 
-        '''
-        pass
-        
+

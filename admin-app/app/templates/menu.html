@@ -17,7 +17,7 @@ Menu
                 <div class="btn-group btn-group btn-group-lg">
                     {% if not session['loggedIn'] %}
                     <button type="button" class="btn btn-primary" onclick="window.location.href='{{ url_for('employees.login') }}';">Login</button>
-                    <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('employees.register') }}';">Register</button>
+                  
                     {% else %}
                         <!--list of cars with search functionality-->
                         <p>
