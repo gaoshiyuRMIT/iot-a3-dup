@@ -63,3 +63,15 @@ def delete_car(car_id):
     success = cMgr.deleteOne(car_id)
     return {"success": success}
 
+@bp.route("/assistant/", methods=["POST", "GET"])
+def assistant_test():
+    test = request.json
+
+    if test is None:
+      return {"fulfillmentText" : "Hmm.. something went wrong."}
+
+    logger.debug(test["queryResult"])
+
+    response = {"fulfillmentText" : "come on plz work"}
+    return response
+
