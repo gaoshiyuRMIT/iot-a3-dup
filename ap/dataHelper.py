@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import jsonpickle
-from location_monitor import create_location
+from agent.location_monitor import create_location
 
 class dataHelper:
     def __init__(self):
@@ -95,7 +95,15 @@ class dataHelper:
         return data
 
     def validate_blue(self, MACAdd):
+        """
+        create validation data for blur tooth
+        :param string: the mac address read by the bluetooth
+        :return string: the data that will be sent via socket
+        """
         data={
-            'MAC' = MACAdd,
-            'type' = 'valid_blue'
+            'MAC' : MACAdd,
+            'type' : 'valid_blue'
         }    
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
