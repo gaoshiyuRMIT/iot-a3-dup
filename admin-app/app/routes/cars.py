@@ -1,4 +1,6 @@
+from datetime import datetime
 from flask import Blueprint, request, redirect, url_for, render_template, current_app
+from pushbullet import Pushbullet
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.services.admintalk import AdminTalk
@@ -15,7 +17,8 @@ def list_cars():
 @bp.route("/reported")
 def list_cars_reported_with_issues():
     cars = CarService().search_cars({"car_status": "hasIssue"})
-    return render_template("reported_cars.html", cars=cars)
+    pb_channel = current_app.config.get("PUSHBULLET_CHANNEL", "")
+    return render_template("reported_cars.html", cars=cars, pb_channel=pb_channel)
 
 @bp.route("/", methods=["POST"])
 def search_cars():
@@ -72,6 +75,9 @@ def remove_car(car_id):
 @bp.route("/<int:car_id>/report")
 def report_car_with_issue(car_id):
     car_svc = CarService()
+    pb = Pushbullet(current_app.config["PUSHBULLET_KEY"])
+    car_channel = [c for c in pb.channels if c.name == current_app.config["PUSHBULLET_CHANNEL"]][0]
+    response = car_channel.push_note(f"Car #{car_id} Issues", f"Car #{car_id} is reported with issues at {datetime.now().isoformat()}")
     car_svc.report_car_with_issue(car_id)
     return redirect(url_for("cars.list_cars"))
 
