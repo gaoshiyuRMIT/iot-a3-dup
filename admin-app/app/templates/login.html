@@ -10,7 +10,7 @@ Login
 {% block error_message %}
 {{ super() }}
 {% endblock %}
-<form class="form-horizontal needs-validation" action="{{ url_for('login_check') }}" method="POST">
+<form class="form-horizontal needs-validation" action="{{ url_for('employees.login') }}" method="POST">
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">

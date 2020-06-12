@@ -1,0 +1,11 @@
+click==7.1.2
+jsonpickle==1.4.1
+opencv-contrib-python==4.1.0.25
+numpy==1.18.1
+cmake==3.17.2
+wheel==0.34.2
+dlib==19.19.0
+face_recognition==1.2.3
+imutils==0.5.3
+urllib3==1.25.8
+Sphinx==3.0.1

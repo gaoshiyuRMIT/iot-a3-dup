@@ -9,6 +9,15 @@ CREATE TABLE IF NOT EXISTS User (
     CONSTRAINT PK_User PRIMARY KEY (username)
 );
 
+CREATE TABLE `UserActivity` (
+  `username` varchar(32) NOT NULL,
+  `activity` varchar(32) NOT NULL DEFAULT 'login',
+  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_UserLogin_username` (`username`),
+  CONSTRAINT `FK_UserLogin_username` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 CREATE TABLE IF NOT EXISTS Employee (
     username VARCHAR(32) not null, 
     password VARCHAR(255) not null,
@@ -17,6 +26,13 @@ CREATE TABLE IF NOT EXISTS Employee (
     email VARCHAR(255) not null,   
     role VARCHAR(32) not null default 'admin',
     CONSTRAINT PK_Admin PRIMARY KEY (username)
+);
+
+create table if not exists Engineer (
+    username VARCHAR(32) not null, 
+    mac_address VARCHAR(255),
+    experience int default 1,
+    CONSTRAINT `FK_Engineer_username` FOREIGN KEY (`username`) REFERENCES `Employee` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Car ( 

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Users
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        {% block error_message %}
+            {{ super() }}
+        {% endblock %}
+        <h1>View and Search all Users</h1>
+        <br>
+        <br>
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                    <form method="post" action="{{ url_for('users.search_users') }}" id="search-user-form">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="fName">First Name</label>
+                                <input class="form-control" type="text" id="fName" name="fName">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="lName">Last Name</label>
+                                <input class="form-control" type="text" id="lName" name="lName">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="email">Email Address</label>
+                                <input class="form-control" type="email" id="email" name="email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="submit">Enter search terms and submit</label>
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <br>
+                                <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('users.list_users') }}';">Clear Search Results</button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">        
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class='table' style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user['username'] }}</td>
+                                <td>{{ user['fName'] }}</td>
+                                <td>{{ user['lName'] }}</td>
+                                <td>{{ user['email'] }}</td>
+                                <td><a href="{{ url_for('users.update_user_page', username=user['username']) }}">Update User Details</a> </td>
+                                <td><a href="{{ url_for('users.remove_user', username=user['username']) }}" onclick="return confirm('Confirm delete?')">Remove User</a> </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

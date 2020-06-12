@@ -1,5 +1,6 @@
 from . import request, url_for, Blueprint, g
 from app.UserManager import UserManager
+from app.ActivityManager import ActivityManager
 from . import jsonifyResponseData
 from app.errors.api_exceptions import MissingKey
 
@@ -13,6 +14,26 @@ def register():
     newUserVal = request.json
     usrPK = usMgr.addOne(newUserVal)
     success = True if usrPK else False
+    result = {"success":success}
+    return result
+
+@bp.route("/add", methods=["POST"])
+@jsonifyResponseData
+def addUser():
+    usMgr = UserManager()
+    newUserVal = request.json
+    usrPk = usMgr.addOne(newUserVal)
+    success = True if usrPk else False
+    result = {"success":success}
+    return result
+
+@bp.route("/<string:username>/update", methods=["POST"])
+@jsonifyResponseData
+def updateUser():
+    usMgr = UserManager()
+    newUserVal = request.json
+    usrPk = usMgr.updateOne(newUserVal)
+    success = True if usrPk else False
     result = {"success":success}
     return result
 
@@ -35,3 +56,9 @@ def deleteUser(username):
         raise MissingKey("no user with this username exists")
     success = usMgr.deleteOne(username)
     return {"success": success}
+
+@bp.route("/activity/types", methods=["GET"])
+@jsonifyResponseData
+def get_activity_types():
+    aMgr = ActivityManager()
+    return aMgr.get_type_counts()

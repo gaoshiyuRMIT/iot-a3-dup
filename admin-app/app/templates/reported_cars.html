@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Browse Cars{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+        {% block error_message %}
+            {{ super() }}
+        {% endblock %}
+        <div class='row'>
+            <div class="col">
+                <div class="table-responsive">
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Car ID</th>
+                                <th>Year</th>
+                                <th>Model</th>
+                                <th>Body Type</th>
+                                <th>Number of Seats</th>
+                                <th>Colour</th>
+                                <th>Cost per Hour</th>
+                                <th>Location(Coordinates)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for car in cars %}
+                            <tr>
+                                <td class="col-xs-1"><img class="img-fluid img-thumbnail" src="{{ url_for('static', filename='car_system.png') }}"></td>
+                                <td>{{ car['car_id'] }}</td>
+                                <td>{{ car['year'] }}</td>
+                                <td>{{ car['car_model'] }}</td>
+                                <td>{{ car['body_type'] }}</td>
+                                <td>{{ car['num_seats'] }}</td>
+                                <td>{{ car['car_colour'] }}</td>
+                                <td>{{ car['cost_hour'] }}</td>
+                                <td>{{ "{}, {}".format(car['latitude'], car['longitude']) }}
+                                    (<a href="{{ url_for('cars.map', car_id=car['car_id'], back_to=url_for(request.endpoint)) }}">Show on Map</a>)
+                                </td>
+                                <td>{{ car["car_status"] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

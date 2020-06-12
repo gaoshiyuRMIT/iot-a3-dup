@@ -16,6 +16,13 @@ def bookings():
     return bookings
 
     
+@bp.route("/all_with_cars", methods=["GET"])
+@jsonifyResponseData
+def bookings_w_cars():
+    mgr = BookingManager()
+    return mgr.getAllWCars()
+
+
 @bp.route("/<int:bookingNo>/update", methods=["PUT"])
 @jsonifyResponseData
 def updateBooking(bookingNo):

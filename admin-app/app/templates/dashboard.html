@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+    {{super()}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.js"></script>
+    <script src="{{url_for('static', filename='util.js')}}"></script>
+    <script src="{{url_for('static', filename='chart_factory.js')}}"></script>
+
+    <script>
+        let myChart;
+        $("#car_usage_link").click(function(event) {
+            if (myChart)
+                myChart.destroy();
+            $.ajax({
+                url: "{{ url_for('dashboard.car_usage') }}",
+            }).done(function(car_usage_raw) {
+                console.log("car usage raw data: ");
+                console.log(car_usage_raw);
+                const data = [];
+                car_usage_raw.forEach(function(item, index, array) {
+                    data.push({
+                        x: item["date"],
+                        y: item["n_cars"]
+                    });
+                });
+                myChart = generate_date_bar_chart("chart_cvs", data);
+            });
+        });
+        $("#revenue_link").click(function(event) {
+            if (myChart)
+                myChart.destroy();
+            $.ajax({
+                url: "{{ url_for('dashboard.rental_revenue') }}"
+            }).done(function(raw_data) {
+                console.log("raw revenue data:");
+                console.log(raw_data);
+                const data = [];
+                raw_data.forEach(function(item, index, array) {
+                    data.push({
+                        x: item["date"],
+                        y: item["revenue"]
+                    });
+                });
+                myChart = generate_date_revenue_line_chart("chart_cvs", data);
+            })
+        });
+        $("#user_activities").click(function(event) {
+            if (myChart)
+                myChart.destroy();
+            $.ajax({
+                url: "{{ url_for('dashboard.user_activities') }}"
+            }).done(function(raw_data) {
+                console.log("raw user activity data:");
+                console.log(raw_data);
+                const data = [];
+                const labels = [];
+                raw_data.forEach(function(item, index, array) {
+                    data.push(item["count"]);
+                    labels.push(item["activity"]);
+                });
+                myChart = generate_activity_polar_area("chart_cvs", data, labels);
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+<div class="text-center container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item col-sm">
+            <a class="nav-link" href="#" id="car_usage_link">Car Usage</a>
+        </li>
+        <li class="nav-item col-sm">
+            <a class="nav-link" href="#" id="revenue_link">Revenue</a>
+        </li>
+        <li class="nav-item col-sm">
+            <a class="nav-link" href="#" id="user_activities">User Activities</a>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <canvas id="chart_cvs"></canvas>
+</div>
+
+{% endblock %}

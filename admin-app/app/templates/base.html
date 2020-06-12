@@ -3,27 +3,23 @@
 {% block navbar %}
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-        <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            {% if session['loggedIn'] %}
-            <li><a href="3">Browse Cars</a></li>
-            <li><a href="#">Map_TEMP</a></li> 
-                    
-            {% endif %}
-        </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if session['loggedIn'] %}
             <li><span class="navbar-text">Welcome, {{ session['fName'] }}</span> </li>
-            <li><a href="#">Add Face Data</a></li>
-            <li><a href="#">Your Bookings</a></li>
- 
-            <li><a href="#">Logout</a></li>
+            <li><a href="{{ url_for('employees.logout') }}">Logout</a></li>
             {% else %}
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="{{ url_for('employees.login') }}">Login</a></li>
             {% endif %}
-            <li><a href="{{ url_for('cars.admin_talk') }}"> Admin </a></li>  
-            
+            {% if session['role'] == 'admin' %}
+                <li><a href="{{ url_for( 'employees.menu') }}">Main Menu</a></li>
+            {% endif %}
+            {% if session['role'] == 'manager' %}
+            <li><a href="{{ url_for( 'dashboard.dashboard') }}">Dashboard</a></li>
+            {% endif %}
+            {% if session['role'] == 'engineer' %}
+                <li><a href="{{ url_for( 'cars.list_cars_reported_with_issues') }}">Reported Cars</a></li>
+            {% endif %}
+
         </ul>
     </div>
 </nav>
