@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% block title %}Browse Cars{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    <script defer>
+        var map;
+        var bounds;
+        var markers = [];
+        var maxZoomLevel = 15;
+        var rmit = {lat: -37.807308, lng: 144.964246};
+
+        carInfoDiv = document.getElementById("car-location-info");
+        carDivs = carInfoDiv.getElementsByTagName("div");  
+
+        var mapOptions = {
+            center: rmit,
+            zoom: maxZoomLevel
+        };
+
+        function markCar(car, mapObj){
+            var lat = parseFloat(car.getAttribute("data-lat"));
+            var lon = parseFloat(car.getAttribute("data-lon"));
+            var model = car.getAttribute("data-model");
+            var id = car.id;
+
+            var location = new google.maps.LatLng(lat, lon);
+
+            var mark = new google.maps.Marker({
+                position: location,
+                map: mapObj
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: "<strong>Car ID:" +car.id+ " </strong><p>Model:"+model+"</p>"
+            })
+
+            mark.addListener('mouseover', function(){
+                infowindow.open(map, mark);
+            });
+
+            mark.addListener('mouseout', function(){
+                infowindow.close(map, mark);
+            });
+
+            mark.addListener('click', function(){
+                map.panTo(location);
+                map.setZoom(maxZoomLevel);
+            });
+
+            markers.push(location);
+        }
+
+        
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
+            for(i=0; i < carDivs.length; i++){
+              markCar(carDivs[i], map);
+            }
+            bounds = new google.maps.LatLngBounds();
+            for(i=0; i < markers.length; i++){
+                bounds.extend(markers[i]);
+            }
+            google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+                map.fitBounds(bounds);
+                if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+            });
+
+        }
+
+        
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"></script>
+    <script>  
+        function toggleVisibility(id) {
+            const x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function toggleSearchForm() {
+            toggleVisibility("search-form");
+            const b = document.getElementById("toggle-form-button");
+            if (b.innerHTML.trim() === "Search / Filter")
+                b.innerHTML = "Hide";
+            else
+                b.innerHTML = "Search / Filter";
+        }
+
+        document.addEventListener('DOMContentLoaded', function(event) {
+            toggleSearchForm();
+        })
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% block error_message %}
+            {{ super() }}
+        {% endblock %}
+    
+        <button onclick="toggleSearchForm()" id="toggle-form-button" class="btn btn-info">Hide</button>
+        <div class="panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                    <form method="post" action="{{ url_for('cars.search_cars') }}" id="search-form">
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="car_id">Car ID</label>
+                                <input class="form-control" type="number" id="car_id" name="car_id">
+                            </div>
+    
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="car_model">Car Model</label>
+                                <input class="form-control" type="text" id="car_model" name="car_model">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="body_type">Body Type</label>
+                                <input class="form-control" type="text" id="body_type" name="body_type">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="car_colour">Car Colour</label>
+                                <input class="form-control" type="text" id="car_colour" name="car_colour">
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="year">Year</label>
+                                <div id="year" class="input-group">
+                                    <div class="input-group-addon">from</div>
+                                    <input class="form-control col-3" type="number" id="year_from" min="1886" name="year_from">
+                                    <div class="input-group-addon">to</div>
+                                    <input class="form-control col-3" type="number" id="year_to" min="1886" name="year_to">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="num_seats">Number of Seats</label>
+                                <div id="num_seats" class="input-group">
+                                    <div class="input-group-addon">from</div>
+                                    <input class="form-control" type="number" id="num_seats_from" min="1" name="num_seats_from">
+                                    <div class="input-group-addon">to</div>
+                                    <input class="form-control" type="number" id="num_seats_to" max="12" name="num_seats_to">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for="cost_hour">Cost per Hour</label>
+                                <div id="cost_hour" class="input-group">
+                                    <div class="input-group-addon">from</div>
+                                    <input class="form-control" type="number" id="cost_hour_from" name="cost_hour_from" min="0.01" step="0.01">
+                                    <div class="input-group-addon">to</div>
+                                    <input class="form-control" type="number" id="cost_hour_to" name="cost_hour_to" min="0.01" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label" for=""></label>
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class='row'>
+            <div class="col-md-4">
+                <div id="google_map" style="width:100%;height:400px;"></div>
+            </div>
+            <div class="col-md-8">
+                <div class="table-responsive">
+                    <table class='table'>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Car ID</th>
+                                <th>Year</th>
+                                <th>Model</th>
+                                <th>Body Type</th>
+                                <th>Number of Seats</th>
+                                <th>Colour</th>
+                                <th>Cost per Hour</th>
+                                <!-- <th>Location(Coordinates)</th> -->
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for car in cars %}
+                            <tr>
+                                <td class="col-xs-1"><img class="img-fluid img-thumbnail" src="{{ url_for('static', filename='car_system.png') }}"></td>
+                                <td>{{ car['car_id'] }}</td>
+                                <td>{{ car['year'] }}</td>
+                                <td>{{ car['car_model'] }}</td>
+                                <td>{{ car['body_type'] }}</td>
+                                <td>{{ car['num_seats'] }}</td>
+                                <td>{{ car['car_colour'] }}</td>
+                                <td>{{ car['cost_hour'] }}</td>
+                                <td>{{ car["car_status"] }}</td>
+                                <td><a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report with Issues</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="car-location-info">
+        {% for car in cars %}    
+        <div id={{ car['car_id'] }} data-lat="{{ car['latitude'] }}" data-lon="{{ car['longitude' ]}}" data-model="{{ car['car_model'] }}"></div>
+        {% endfor %}
+    </div>
+{% endblock %}

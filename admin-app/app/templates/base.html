@@ -6,7 +6,7 @@
         <ul class="nav navbar-nav navbar-right">
             {% if session['loggedIn'] %}
             <li><span class="navbar-text">Welcome, {{ session['fName'] }}</span> </li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('employees.logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('employees.login') }}">Login</a></li>
             <li><a href="{{ url_for('employees.register') }}">Register</a></li>

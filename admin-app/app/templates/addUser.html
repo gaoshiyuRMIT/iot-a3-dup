@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Add User
+
+{% endblock title %}
+
+{% block content %}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<form class="form-horizontal needs-validation" action="{{ url_for('users.add_user') }}" method="POST">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                <h4><strong>Create a new user</strong></h4>
+                
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label for="fname" class="col-md-2 control-label">First name</label>
+                        <input type="text" name="fname" class="col-md-2 control-form" placeholder="First Name" pattern="^[A-Za-z0-9\-]+$" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="lname" class="col-md-2 control-label">Last name</label>
+                        <input type="text" name="lname" class="col-md-2 control-form" placeholder="Last Name" pattern="^[A-Za-z0-9\-]+$" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="email" class="col-md-2 control-label">Email</label>
+                        <input type="email" name="email" class="col-md-4 control-form" placeholder="example@example.com" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="form-group">
+                        <label for="username" class="col-md-2 control-label">Username</label>
+                        <input type="text" name="username" class="col-md-2 control-form" placeholder="Username" pattern="^[A-Za-z0-9_-]+$" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="password" class="col-md-2 control-label">Password</label>
+                        <input type="password" name="password" class="col-md-2 control-form" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain 8 or more letters - at least one uppercase, lowercase" required>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="panel-footer">
+                <button name="register" type="submit" class="btn btn-info">Add User</button>
+            </div>
+           
+        </div>
+        
+    </div>
+</form>
+{{ output }}
+{% endblock %}
