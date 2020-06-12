@@ -20,33 +20,29 @@ def search_users():
     users = UserService().search_users(searchD)
     return render_template("users.html", users=users)
 
-@bp.route("/<string:username>/update", methods=["GET"])
+@bp.route("/<string:username>/update_form", methods=["GET"])
 def update_user_page(username):
     #get user details
     user = UserService().findExistingUser(username)
     #return template with user details attached
     return render_template('updateUser.html', user=user)
 
-@bp.route("/<string:username>/update", methods=["PUT"])
+@bp.route("/<string:username>/update", methods=["POST"])
 def update_user(username):
     #get current user details in order to retain password if needed
     service = UserService()
-    user = service.findExistingUser(username)
-    if request.form['password'] is None:
-        password = user['password']
-    #store data in dict for transmission
-    pwHash = sha256_crypt.using(rounds=1000).hash(password)
     data = {
-        'username': username,
-        'password': pwHash,
         'fName': request.form['fname'],
         'lName': request.form['lname'],
         'email': request.form['email']
     }
-    result = service.update_user(data)
-    if result is not None:
-        flash("User details for username: " + username + " updated")
-        return render_template('menu.html')
+    if request.form["password"] != "":
+        data["password"] = sha256_crypt.using(rounds=1000).hash(request.form["password"])
+    # call user service to send new user value
+    service.update_user(username, data)
+    flash(f"successfully updated user {username}")
+    return redirect(url_for("users.list_users"))
+
 
 @bp.route("/<string:username>/remove", methods=["GET"])
 def remove_user(username):
