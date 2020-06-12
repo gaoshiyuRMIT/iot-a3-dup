@@ -17,6 +17,26 @@ def register():
     result = {"success":success}
     return result
 
+@bp.route("/add", methods=["POST"])
+@jsonifyResponseData
+def addUser():
+    usMgr = UserManager()
+    newUserVal = request.json
+    usrPk = usMgr.addOne(newUserVal)
+    success = True if usrPk else False
+    result = {"success":success}
+    return result
+
+@bp.route("/<string:username>/update", methods=["POST"])
+@jsonifyResponseData
+def updateUser():
+    usMgr = UserManager()
+    newUserVal = request.json
+    usrPk = usMgr.updateOne(newUserVal)
+    success = True if usrPk else False
+    result = {"success":success}
+    return result
+
 @bp.route("/search", methods=["POST"])
 @jsonifyResponseData
 def findUser():
