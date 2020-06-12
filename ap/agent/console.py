@@ -15,7 +15,7 @@ class console():
                 input_valid = True
             else:
                 print("you must enter '1' or '2'. Try again!")
-        if user_input == 1:
+        if user_input == '1':
             username, password = self.agent.input_credential()
             self.islogin = self.agent.login(username, password)
         else:

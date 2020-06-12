@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import jsonpickle
-from location_monitor import create_location
+from agent.location_monitor import create_location
 
 class dataHelper:
     def __init__(self):
@@ -90,6 +90,35 @@ class dataHelper:
             "longitude": y
         }
            
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+
+    def validate_blue(self, MACAdd):
+        """
+        create validation data for blur tooth
+        :param string: the mac address read by the bluetooth
+        :return: the data that will be sent via socket
+        :rtype: string
+        """
+        data={
+            'MAC' : MACAdd,
+            'type' : 'valid_blue'
+        }    
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+    def valid_QR(self, decode):
+        """
+        create validation data for blur tooth
+        :param string: the string decoded from the QRcode
+        :return: the data that will be sent via socket
+        :rtype: string
+        """
+        data={
+            'decode' : MACAdd,
+            'type' : 'valid_QR'
+        }    
         send_data = json.dumps(data)
         data = send_data.encode('utf-8')
         return data

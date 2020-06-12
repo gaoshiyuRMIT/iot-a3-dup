@@ -49,6 +49,7 @@ class ap():
         # recieve response
         status = self.client.listen_from_server()
         if status == 'success':
+            self.username = username
             print('you have sucessfully logged in')
             islogin = True
         else:
@@ -117,8 +118,6 @@ class ap():
         username = input()
         print("input your password")
         password = input()
-        h = hashlib.md5(password.encode())
-        password=h.hexdigest()
         return username,password
 
     """input_image_credentials coordinates the capturing of a facial image
