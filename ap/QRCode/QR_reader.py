@@ -4,6 +4,11 @@ from tkinter import Tk, filedialog
 import os
 from pyzbar import pyzbar
 import cv2
+from dataHelper import dataHelper
+from client import client
+c = client()
+helper = dataHelper()
+
 class QR_reader:
     def get_path(self):
         """
@@ -18,7 +23,8 @@ class QR_reader:
         """
         scan the QR code
         :param string: the encode data
-        :return string: the Json String decoded from the QR code
+        :return: the Json String decoded from the QR code
+        :rtype: string
         """   
         path = self.get_path()
         image = cv2.imread(path)
@@ -32,7 +38,18 @@ class QR_reader:
             # the barcode data is a bytes object so if we want to draw it on
             # our output image we need to convert it to a string first
             barcodeData = barcode.data.decode("utf-8")
-            barcodeType = barcode.type
-            # print the barcode type and data to the terminal
-            print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
+            print(self.send_and_recieve(barcodeData))     
+
+    def send_and_recieve(self,data):
+    """
+    sending and valid MAC address
+    :param string data: the sent data
+    :return: the profile of a user
+    :rtype: boolean
+    """
+        valid_data =helper.valid_QR(self, data)
+        c.send_data(valid_data)   
+        engineereer_data = c.listen_from_server() 
+        profile_data = json.loads(engineereer_data)['data']
+        return profile_data      
       

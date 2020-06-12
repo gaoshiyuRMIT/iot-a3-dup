@@ -1,18 +1,20 @@
 import bluetooth
 from dataHelper import dataHelper
 from client import client
+c = client()
 helper = dataHelper()
 def send_and_valid(data):
     """
     sending and valid MAC address
-    :param string: the sent data
-    :return boolean: if the mac address is valid return true elase false
+    :param string data: the sent data
+    :return: if the mac address is valid return true elase false
+    :rtype: boolean
     """
-    data = self.dataHelper.login(user, password)
-    self.client.send_data(data)   
-    status = self.client.listen_from_server() 
+    c.send_data(data)   
+    status = c.listen_from_server() 
     if status == 'success':
         return True
+        
 def main():
     while(True):
         nearby_devices = bluetooth.discover_devices(lookup_names = True)

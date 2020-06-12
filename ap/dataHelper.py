@@ -98,11 +98,26 @@ class dataHelper:
         """
         create validation data for blur tooth
         :param string: the mac address read by the bluetooth
-        :return string: the data that will be sent via socket
+        :return: the data that will be sent via socket
+        :rtype: string
         """
         data={
             'MAC' : MACAdd,
             'type' : 'valid_blue'
+        }    
+        send_data = json.dumps(data)
+        data = send_data.encode('utf-8')
+        return data
+    def valid_QR(self, decode):
+        """
+        create validation data for blur tooth
+        :param string: the string decoded from the QRcode
+        :return: the data that will be sent via socket
+        :rtype: string
+        """
+        data={
+            'decode' : MACAdd,
+            'type' : 'valid_QR'
         }    
         send_data = json.dumps(data)
         data = send_data.encode('utf-8')
