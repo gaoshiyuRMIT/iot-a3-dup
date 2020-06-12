@@ -9,10 +9,13 @@ important notes:
 - something ?? was saving over my .asoundrc file (seemingly when i ran the google assistant demo files) so watch out for that
 
 ### Prerequisites on Mac OS
-- `brew install cmake`
-- `brew install dlib`
-- `sudo python3 -m pip install dlib`
-- `inside ap, python3 -m venv --system-site-packages venv`
+- `brew install portaudio`
+- inside venv,
+  * `git clone https://github.com/RPi-Distro/RTIMULib`
+  * `cd ./RTIMULib/Linux/python/`
+  * `python setup.py build`
+  * `python setup.py install`
+  * `rm -rf RTIMULib`
 
 ### usage
 - set up virtual environment in mac
