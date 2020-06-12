@@ -1,4 +1,8 @@
 import bluetooth
+from dataHelper import dataHelper
+
+helper = dataHelper()
+helper.
 
 while(True):
     nearby_devices = bluetooth.discover_devices(lookup_names = True)

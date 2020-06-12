@@ -93,3 +93,9 @@ class dataHelper:
         send_data = json.dumps(data)
         data = send_data.encode('utf-8')
         return data
+
+    def validate_blue(self, MACAdd):
+        data={
+            'MAC' = MACAdd,
+            'type' = 'valid_blue'
+        }    
