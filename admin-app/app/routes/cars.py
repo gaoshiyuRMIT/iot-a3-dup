@@ -3,7 +3,7 @@ from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.services.admintalk import AdminTalk
 
-bp = Blueprint("cars", __name__)
+bp = Blueprint("cars", __name__, url_prefix="/cars")
 
 @bp.route("/")
 def list_cars():
