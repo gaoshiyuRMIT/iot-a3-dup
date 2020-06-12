@@ -1,9 +1,9 @@
-from flask import Blueprint, request, redirect, url_for, render_template, current_app
+from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.services.admintalk import AdminTalk
 
-bp = Blueprint("cars", __name__)
+bp = Blueprint("cars", __name__, url_prefix="/cars")
 
 @bp.route("/")
 def list_cars():
@@ -45,12 +45,28 @@ def map(car_id):
 
 @bp.route("/add")
 def add_car_page():
-    pass
+    return render_template("addCar.html")
 
 @bp.route("/add", methods=["POST"])
 def add_car():
     # get new car info from request.form
-    pass
+    service = CarService()
+    data = {
+        'year': request.form['year'],
+        'car_model': request.form['car_model'],
+        'body_type' : request.form['body_type'],
+        'num_seats' : request.form['num_seats'],
+        'car_colour' : request.form['car_colour'],
+        'cost_hour' : request.form['cost_hour'],
+        'latitude' : request.form['latitude'],
+        'longitude' : request.form['longitude'],
+        'car_status' : "available"
+        }
+    result = service.add_car(data)
+    if result is not None:
+        flash("Success! Car created")
+        return render_template('menu.html')
+
 
 @bp.route("/<int:car_id>/bookings")
 def rental_history(car_id):
