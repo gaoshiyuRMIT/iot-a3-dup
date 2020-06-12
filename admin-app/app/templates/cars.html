@@ -206,7 +206,11 @@
                                 <td>{{ car['car_colour'] }}</td>
                                 <td>{{ car['cost_hour'] }}</td>
                                 <td>{{ car["car_status"] }}</td>
-                                <td><a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report with Issues</a></td>
+                                <td>
+                                {% if car['car_status'] != "hasIssue" %}
+                                    <a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report with Issues</a>
+                                {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

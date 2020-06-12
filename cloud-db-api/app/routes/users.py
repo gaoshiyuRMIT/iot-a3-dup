@@ -21,19 +21,22 @@ def register():
 @jsonifyResponseData
 def addUser():
     usMgr = UserManager()
-    newUserVal = request.json
+    newUserVal = usMgr.keepValidFieldsOnly(request.json, throw=True)
+    # pop None / empty values
+    newUserVal = {k:v for k,v in newUserVal.items() if v is not None and v != ""}
     usrPk = usMgr.addOne(newUserVal)
     success = True if usrPk else False
     result = {"success":success}
     return result
 
-@bp.route("/<string:username>/update", methods=["POST"])
+@bp.route("/<string:username>/update", methods=["PUT"])
 @jsonifyResponseData
-def updateUser():
+def updateUser(username):
     usMgr = UserManager()
-    newUserVal = request.json
-    usrPk = usMgr.updateOne(newUserVal)
-    success = True if usrPk else False
+    newUserVal = usMgr.keepValidFieldsOnly(request.json, throw=True)
+    # pop None / empty values
+    newUserVal = {k:v for k,v in newUserVal.items() if v is not None and v != ""}
+    success = usMgr.updateOne(username, newUserVal)
     result = {"success":success}
     return result
 
