@@ -3,6 +3,7 @@ from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.services.admintalk import AdminTalk
 
+bp = Blueprint("cars", __name__)
 
 @bp.route("/")
 def list_cars():
@@ -36,7 +37,7 @@ def search_cars():
     cars = CarService().search_cars(searchD)
     return render_template("cars.html", cars=cars, key=key)
 
-@bp.route("<int:car_id>/map")
+@bp.route("/<int:car_id>/map")
 def map(car_id):
     car = CarService().get_car(car_id)
     key = current_app.config['GOOGLE_API_KEY']
