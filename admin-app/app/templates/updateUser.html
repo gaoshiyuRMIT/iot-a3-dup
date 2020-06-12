@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+Update User Details
+
+{% endblock title %}
+
+{% block content %}
+{% block error_message %}
+{{ super() }}
+{% endblock %}
+<form class="form-horizontal needs-validation" action="{{ url_for('users.update_user', username=user['username']) }}" method="POST">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                <h3><strong>Update User Details</strong></h3><br>
+                <label>Enter new user details in input boxes below, any changes you make will be recorded</label>
+            </div>
+            <div class="panel-body">
+                <br>        
+                <div class="row">
+                    <div class="form-group">
+                        <label for="username" class="col-md-2 control-label">Username (cannot be changed):</label>
+                        <label for="username" class="col-md-2 control-label">{{ user['username'] }}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="password" class="col-md-2 control-label">Update Password:</label>
+                        <input type="password" name="password" class="col-md-2 control-form" placeholder="current password hidden" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain 8 or more letters - at least one uppercase, lowercase, plus one non-letter character">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="fname" class="col-md-2 control-label">Update First name: </label>
+                        <input type="text" name="fname" class="col-md-2 control-form" placeholder={{ user['fName'] }} pattern="^[A-Za-z0-9\-]+$">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="lname" class="col-md-2 control-label">Update Last name: </label>
+                        <input type="text" name="lname" class="col-md-2 control-form" placeholder={{ user['lName'] }} pattern="^[A-Za-z0-9\-]+$">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="email" class="col-md-2 control-label">Update Email: </label>
+                        <input type="email" name="email" class="col-md-4 control-form" placeholder={{ user['email'] }}>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="panel-footer">
+                <button name="update" type="submit" class="btn btn-info" onclick="return confirm('Confirm Update Details?')">Update User</button>
+            </div>
+           
+        </div>
+        
+    </div>
+</form>
+{{ output }}
+{% endblock %}

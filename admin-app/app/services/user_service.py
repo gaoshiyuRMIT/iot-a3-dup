@@ -11,7 +11,7 @@ class UserService(BaseService):
         return users
     
     def add_user(self, new_val: dict) -> bool:
-        url = "/users/add"
+        url = "/users/registerUser"
         data = self.post(url, new_val)
         return data["success"]
 
@@ -42,3 +42,12 @@ class UserService(BaseService):
         data = query
         cars = self.post(url, data)
         return cars
+    
+    def findExistingUser(self, username):
+        '''find a user with <username>, return user data or None if not exists
+        '''
+        url="/users/search"
+        data = {'username': username }
+        result = self.post(url, data)
+    
+        return result[0] if len(result) > 0 else None

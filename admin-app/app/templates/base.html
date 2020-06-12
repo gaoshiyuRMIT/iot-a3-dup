@@ -9,8 +9,17 @@
             <li><a href="{{ url_for('employees.logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('employees.login') }}">Login</a></li>
-            <li><a href="{{ url_for('employees.register') }}">Register</a></li>
             {% endif %}
+            {% if session['role'] == 'admin' %}
+                <li><a href="{{ url_for( 'employees.menu') }}">Main Menu</a></li>
+            {% endif %}
+            {% if session['role'] == 'manager' %}
+            <li><a href="{{ url_for( 'dashboard.dashboard') }}">Dashboard</a></li>
+            {% endif %}
+            {% if session['role'] == 'engineer' %}
+                <li><a href="{{ url_for( 'cars.list_cars_reported_with_issues') }}">Reported Cars</a></li>
+            {% endif %}
+
         </ul>
     </div>
 </nav>
