@@ -7,7 +7,7 @@ from app.services.booking_service import BookingService
 
 bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
-@bp.route("/dashboard")
+@bp.route("/")
 def dashboard():
     return render_template("dashboard.html")
 

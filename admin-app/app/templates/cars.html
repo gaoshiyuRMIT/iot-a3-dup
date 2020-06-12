@@ -108,7 +108,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <form method="post" action="{{ url_for('searchCars') }}" id="search-form">
+                    <form method="post" action="{{ url_for('cars.search_cars') }}" id="search-form">
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="car_id">Car ID</label>
@@ -205,11 +205,8 @@
                                 <td>{{ car['num_seats'] }}</td>
                                 <td>{{ car['car_colour'] }}</td>
                                 <td>{{ car['cost_hour'] }}</td>
-                                <!-- <td>{{ "{}, {}".format(car['latitude'], car['longitude']) }}
-                                    (<a href="{{ url_for('map',latitude=car['latitude'] ,longitude=car['longitude']) }}">Show on Map</a>)
-                                </td> -->
                                 <td>{{ car["car_status"] }}</td>
-                                <td><a href="{{ url_for('addBooking', car_id=car['car_id']) }}">Book</a></td>
+                                <td><a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report with Issues</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

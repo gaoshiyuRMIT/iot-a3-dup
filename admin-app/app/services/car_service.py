@@ -5,6 +5,9 @@ class CarService(BaseService):
         query = {"car_status": "hasIssue"}
         return self.search_cars(query)
     
+    def report_car_with_issue(self, car_id):
+        return self.update_car(car_id, {"car_status": "hasIssue"})
+
     def search_cars(self, query: dict):
         url = "/cars/search"
         data = query
@@ -17,7 +20,7 @@ class CarService(BaseService):
         return success
 
     def update_car(self, car_id: int, new_val: dict) -> bool:
-        url = f"/cars/{car_id}"
+        url = f"/cars/{car_id}/update"
         success = self.put(url, new_val)
         return success
 
@@ -28,3 +31,7 @@ class CarService(BaseService):
         url = f"/cars/add"
         data = self.post(url, new_val)
         return data["car_id"]
+
+    def get_car(self, car_id) -> dict:
+        url = f"/cars/{car_id}"
+        return self.get(url, {})
