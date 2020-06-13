@@ -15,8 +15,10 @@ class QR_reader:
         call a window to let user choose photoes
         :return string: the file path chosen by the user
         """
-        Tk().withdraw()        
-        image_filepath = filedialog.askopenfilename(filetypes=[("jpg files", "*.jpg")], initialdir='/home/pi/Desktop/IotA3/iot/ap/QRCode/Images', title="Choose a QR code image")
+        root = Tk()
+        root.update()
+        root.withdraw()        
+        image_filepath = filedialog.askopenfilename(filetypes=[("jpg files", "*.jpg")], initialdir='/home/pi/Desktop/IotA3/iot/ap/QRCode', title="Choose a QR code image")
         return image_filepath
 
     def scan_QR(self):
