@@ -26,7 +26,7 @@ def send_and_valid(data):
         
 def main():
     while(True):
-        nearby_devices = bluetooth.discover_devices(lookup_names = True)
+        nearby_devices = bluetooth.discover_devices(duration =8,lookup_names = True)
         print(len(nearby_devices))
         if len(nearby_devices)>0:
             print('welcome, {}'.format(nearby_devices[0][1]))
@@ -35,7 +35,7 @@ def main():
             data = helper.validate_blue(bd_address)
             if send_and_valid(data):
                 print('welcome, engineer!')
-                #exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
+                exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
                 print('See u next time!')
             quit()
         else:
