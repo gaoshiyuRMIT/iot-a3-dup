@@ -32,6 +32,8 @@ class dataHandler:
             return self.search_booking(data,"inProgress")
         elif data['type'] == 'unlock':
             return self.unlock(data)
+        elif data['type'] == 'valid_blue':
+            return self.valid_bluetooth(data['MAC'])
         else:
             return self.return_car(data)
         
@@ -163,10 +165,21 @@ class dataHandler:
         response = self.helper.put(('/cars/%s/update' %car_id), car)   
     
     def update_booking(self,booking_id,booking):
-        """update booking data"""
+        """update booking data
+        :param string booking_id: the booking id of the booking
+        :param string booking: the booking data to be put in the database
+        """
         response = self.helper.put(('/bookings/%s/update' %booking_id),booking)
         
-    
+    def valid_bluetooth(self, MAC):
+        """update booking data
+        :param string MAC: the MAC address recieved from the user
+        """
+        response = self.helper.get('/employees/engineers/mac/%s' %MAC)
+        if(response.status_code == 200):
+            return 'success'
+        else:
+            return 'fail'
     
     
     
