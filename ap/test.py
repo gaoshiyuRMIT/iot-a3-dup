@@ -26,7 +26,7 @@ def send_and_valid(data):
         
 def main():
     while(True):
-        nearby_devices = bluetooth.discover_devices(lookup_names = True)
+        nearby_devices = bluetooth.discover_devices(duration =8,lookup_names = True)
         print(len(nearby_devices))
         if len(nearby_devices)>0:
             print('welcome, {}'.format(nearby_devices[0][1]))
