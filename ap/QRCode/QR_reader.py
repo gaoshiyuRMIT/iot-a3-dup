@@ -6,7 +6,7 @@ from pyzbar import pyzbar
 import cv2
 from dataHelper import dataHelper
 from client import client
-c = client()
+import json
 helper = dataHelper()
 
 class QR_reader:
@@ -38,18 +38,23 @@ class QR_reader:
             # the barcode data is a bytes object so if we want to draw it on
             # our output image we need to convert it to a string first
             barcodeData = barcode.data.decode("utf-8")
-            print(self.send_and_recieve(barcodeData))     
+            username = json.loads(barcodeData)['name']
+            print(username)     
 
     def send_and_recieve(self,data):
-    """
-    sending and valid MAC address
-    :param string data: the sent data
-    :return: the profile of a user
-    :rtype: boolean
-    """
+        """
+        sending and valid MAC address
+        :param string data: the sent data
+        :return: the profile of a user
+        :rtype: boolean
+        """
         valid_data =helper.valid_QR(self, data)
         c.send_data(valid_data)   
         engineereer_data = c.listen_from_server() 
         profile_data = json.loads(engineereer_data)['data']
         return profile_data      
       
+if __name__ == "__main__":
+    
+    reader = QR_reader()
+    reader.scan_QR()

@@ -35,7 +35,7 @@ def main():
             data = helper.validate_blue(bd_address)
             if send_and_valid(data):
                 print('welcome, engineer!')
-                #exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
+                exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
                 print('See u next time!')
             quit()
         else:
