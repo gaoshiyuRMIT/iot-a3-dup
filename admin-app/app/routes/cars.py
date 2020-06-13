@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, request, redirect, url_for, render_template, current_app
+from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash
 from pushbullet import Pushbullet
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
@@ -54,21 +54,15 @@ def add_car_page():
 def add_car():
     # get new car info from request.form
     service = CarService()
-    data = {
-        'year': request.form['year'],
-        'car_model': request.form['car_model'],
-        'body_type' : request.form['body_type'],
-        'num_seats' : request.form['num_seats'],
-        'car_colour' : request.form['car_colour'],
-        'cost_hour' : request.form['cost_hour'],
-        'latitude' : request.form['latitude'],
-        'longitude' : request.form['longitude'],
-        'car_status' : "available"
-        }
-    result = service.add_car(data)
-    if result is not None:
-        flash("Success! Car created")
-        return render_template('menu.html')
+    fields = ['year', 'car_model', 'body_type', 'num_seats', 'car_colour', 'cost_hour', 'latitude', 'longitude']
+    data = {"car_status": "available"}
+    for k in fields:
+        if request.form[k]:
+            data[k] = request.form[k]
+    print(data)
+    service.add_car(data)
+    flash("Success! Car created")
+    return render_template('menu.html')
 
 
 @bp.route("/<int:car_id>/bookings")
@@ -86,7 +80,7 @@ def update_car_page(car_id):
     #return template with car details attached
     return render_template('updateCar.html', car=car)
 
-@bp.route("/<int:car_id>/update", methods=["PUT"])
+@bp.route("/<int:car_id>/update", methods=["POST"])
 def update_car(car_id):
     service = CarService()
     #store data in dict for transmission
@@ -100,11 +94,10 @@ def update_car(car_id):
         'latitude': request.form['latitude'],
         'longitude': request.form['longitude'],
         'car_status': request.form['car_status']
-        }
-    result = service.update_car(car_id, data)
-    if result is not None:
-        flash(f"Success! Car #{car_id} details updated")
-        return redirect(url_for('cars.list_cars'))
+    }
+    service.update_car(car_id, data)
+    flash(f"Success! Car #{car_id} details updated")
+    return redirect(url_for('cars.list_cars'))
 
 
 @bp.route("/<int:car_id>/remove", methods=["GET"])
