@@ -244,7 +244,7 @@ class AspenAssistant(object):
 
         logging.info('Finished playing assistant response.')
         self.conversation_stream.stop_playback()
-        return continue_conversation, text_response, user_input, rthing
+        return continue_conversation, text_response, user_input
 
     def gen_assist_requests(self):
         """Yields: AssistRequest messages to send to the API."""
