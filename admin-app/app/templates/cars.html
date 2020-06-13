@@ -103,12 +103,16 @@
             {{ super() }}
         {% endblock %}
     
-        <button onclick="toggleSearchForm()" id="toggle-form-button" class="btn btn-info">Hide</button>
         <div class="panel">
-            <div class="panel-body">
+            <a class="btn btn-primary" href="{{ url_for('cars.add_car_page') }}">Add a Car</a>
+        </div>
+
+        <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide</button>
+        <div class="panel">
+            <div class="panel-body" id="search-form">
                 <div class="row">
                     <div class="col-md-12">
-                    <form method="post" action="{{ url_for('cars.search_cars') }}" id="search-form">
+                    <form method="post" action="{{ url_for('cars.search_cars') }}">
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="car_id">Car ID</label>
@@ -160,9 +164,11 @@
                             </div>
                             <div class="form-group col-md-3">
                                 <label class="control-label" for=""></label>
-                                <div class="input-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary col">Submit</button>
+                                    <button type="button" class="btn btn-light col" onclick="window.location.href='{{ url_for('cars.list_cars') }}';">Clear Input</button>
                                 </div>
+                                
                             </div>
                         </div>
                     </form>
@@ -177,7 +183,7 @@
             <div class="col-md-4">
                 <div id="google_map" style="width:100%;height:400px;"></div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="table-responsive">
                     <table class='table'>
                         <thead>
@@ -192,6 +198,10 @@
                                 <th>Cost per Hour</th>
                                 <!-- <th>Location(Coordinates)</th> -->
                                 <th>Status</th>
+                                <th>Report Issue</th>
+                                <th>Rental History</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -207,10 +217,13 @@
                                 <td>{{ car['cost_hour'] }}</td>
                                 <td>{{ car["car_status"] }}</td>
                                 <td>
-                                {% if car['car_status'] != "hasIssue" %}
-                                    <a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report with Issues</a>
-                                {% endif %}
+                                    {% if car['car_status'] != "hasIssue" %}
+                                        <a href="{{ url_for('cars.report_car_with_issue', car_id=car['car_id']) }}">Report Issue</a>
+                                    {% endif %}
                                 </td>
+                                <td><a href="{{ url_for('cars.rental_history', car_id=car['car_id']) }}">Rental History</a></td>
+                                <td><a href="{{ url_for('cars.update_car', car_id=car['car_id']) }}">Update Details</a></td>
+                                <td><a href="{{ url_for('cars.remove_car', car_id=car['car_id']) }}" onclick="return confirm('Delete Car? This action cannot be undone')">Delete Car</a> </td>
                             </tr>
                         {% endfor %}
                         </tbody>

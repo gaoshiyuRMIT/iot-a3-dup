@@ -9,10 +9,11 @@
         {% block error_message %}
             {{ super() }}
         {% endblock %}
-        <h1>View and Search all Users</h1>
-        <br>
-        <br>
         <div class="panel">
+            <a class="btn btn-primary" href="{{ url_for('users.add_user_page') }}">Add a User</a>
+        </div>
+        <div class="panel">
+            <h4>Search/Filter</h4>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -37,14 +38,11 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label class="control-label" for="submit">Enter search terms and submit</label>
-                                <div class="input-group">
-                                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                                <button type="button" class="btn btn-light" onclick="window.location.href='{{ url_for('users.list_users') }}';">Clear Input</button>
                             </div>
                             <div class="form-group col-md-3">
-                                <br>
-                                <button type="button" class="btn btn-info" onclick="window.location.href='{{ url_for('users.list_users') }}';">Clear Search Results</button>
+                                
                             </div>
                         </div>
                     </form>
@@ -76,7 +74,7 @@
                                 <td>{{ user['lName'] }}</td>
                                 <td>{{ user['email'] }}</td>
                                 <td><a href="{{ url_for('users.update_user_page', username=user['username']) }}">Update User Details</a> </td>
-                                <td><a href="{{ url_for('users.remove_user', username=user['username']) }}" onclick="return confirm('Confirm delete?')">Remove User</a> </td>
+                                <td><a href="{{ url_for('users.remove_user', username=user['username']) }}" onclick="return confirm('Delete User? This action can not be undone.')">Delete User</a> </td>
                             </tr>
                             {% endfor %}
                         </tbody>

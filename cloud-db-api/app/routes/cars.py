@@ -25,14 +25,12 @@ def cars():
 @jsonifyResponseData
 def updateCar(carId):
     carMgr = CarManager()
-    newCarVal = request.json
-    newCarVal = carMgr.keepValidFieldsOnly(newCarVal)
+    newCarVal = carMgr.keepValidFieldsOnly(request.json, throw=True)
     # pop 'None' values
     newCarVal = {k: v for k,v in newCarVal.items() if v is not None and v != ""}
     success = carMgr.updateOne(carId, newCarVal)
     result = {"success": success}
     return result
-
 
 @bp.route("/<int:carId>")
 @jsonifyResponseData
