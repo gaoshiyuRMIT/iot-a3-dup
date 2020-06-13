@@ -4,6 +4,7 @@ from dataHelper import dataHelper
 from client import client
 import json
 from configparser import ConfigParser
+from tabulate import tabulate
 helper = dataHelper()
 
 
@@ -43,24 +44,36 @@ class QR_reader:
             # our output image we need to convert it to a string first
             barcodeData = barcode.data.decode("utf-8")
             username = json.loads(barcodeData)['name']
-            send_and_recieve(username)   
+            self.send_and_recieve(username)   
 
     def send_and_recieve(self,data):
         """
-        sending and valid MAC address
-        :param string data: the sent data
-        :return: the profile of a user
-        :rtype: boolean
+        sending and valid username decoded from the QR code
+        :param string data: user name
+
         """
-        c=new client(self.ip, self.port)
-        valid_data =helper.valid_QR(self, data)
+        c=client(self.ip, self.port)
+        valid_data =helper.valid_QR(data)
         c.send_data(valid_data)   
         engineereer_data = c.listen_from_server() 
         c.close_client()
-        print(engineereer_data)
-        profile_data = json.loads(engineereer_data)
-        return profile_data      
-      
+        if(engineereer_data=='fail'):
+            print('unstable QR code')
+        else:    
+            profile_data = json.loads(engineereer_data)
+            print('engineer info:')
+            tp = self.get_tabulate(profile_data['data'])
+            print(tp)   
+
+    def get_tabulate(self, user):
+        """
+        return a tabulate table
+        :param string user: a json or dict of the user
+        :return: a tabulate tableof user
+        :rtype: tabulate
+        """
+        tb = tabulate([['username', user['fName']],['experience',user['experience']],['email',user['email']]],headers=['key','value'],tablefmt='orgtbl')
+        return tb
 if __name__ == "__main__":
     
     reader = QR_reader()
