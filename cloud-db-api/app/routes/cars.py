@@ -62,14 +62,39 @@ def delete_car(car_id):
     return {"success": success}
 
 @bp.route("/assistant/", methods=["POST", "GET"])
-def assistant_test():
-    test = request.json
-
-    if test is None:
+def assistant_repsonse():
+    assistant_query = request.json
+    if assistant_query is None:
       return {"fulfillmentText" : "Hmm.. something went wrong."}
 
-    logger.debug(test["queryResult"])
+    logger.debug(assistant_query["queryResult"]["intent"]["displayName"])
+    
+    carMgr = CarManager()
 
-    response = {"fulfillmentText" : "come on plz work"}
-    return response
+    found_match = False
+
+    raw_parameters = assistant_query["queryResult"]["parameters"]
+
+    fields = ["car_id", "year_from", "year_to", "car_model", "body_type", "num_seats_from", 
+                "num_seats_to", "car_colour", "cost_hour_from", "cost_hour_to"]
+    types = [int, int, int, str, str, int, int, str, float, float]
+    # transform/clean search dict
+    searchD = {k: (raw_parameters[k] if k in raw_parameters else "") for k in fields}
+    searchD = {k: (t(searchD[k]) if searchD[k] else "") for k,t in zip(fields, types)}
+    for rangeK in ("year", "num_seats", "cost_hour"):
+        fromK = rangeK + "_from"
+        toK = rangeK + "_to"
+        searchD[rangeK] = [searchD.pop(fromK), searchD.pop(toK)]
+        if searchD[rangeK][0] == searchD[rangeK][1]:
+            searchD[rangeK] = searchD[rangeK][0]
+    searchD = {k: v for k,v in searchD.items() if v}
+
+    logger.debug(searchD)
+    matches = carMgr.getMany(searchD)
+    if len(matches) <= 0:
+      return {"fulfillmentText" : "There's no cars that match that description."}
+    else: 
+      return {"fulfillmentText" : "Okay. Getting cars matching your description.", "carInfo": matches}
+
+    return {"fulfillmentText" : "Something's gone a bit awry. Please hold."}
 
