@@ -3,7 +3,7 @@ import time
 
 def create_qr_code(string):
     """
-    QR code creation function
+    QR code creation function 
     
     :param string: the encode data
     :return:

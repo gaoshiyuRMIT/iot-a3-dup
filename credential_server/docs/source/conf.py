@@ -12,17 +12,17 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../..'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'agent pi for engineer'
-copyright = '2020, xinhuan duan'
-author = 'xinhuan duan'
+project = 'server'
+copyright = '2020, xinhuan'
+author = 'xinhuan'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '1.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -30,8 +30,8 @@ release = '1.0.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
 extensions = [
- 'recommonmark',
  'sphinx.ext.autodoc'
 ]
 

@@ -4,23 +4,27 @@ from httpHelper import httpHelper as Helper
 import json
 import pickle
 # import jsonpickle
-import pathlib
+# import pathlib
 # import face_recognition
-from pathlib import Path
+# from pathlib import Path
 import numpy as np
 
 class dataHandler:
-    CWD = os.getcwd()
+    """
+    this class can read in the data sent by the client and send data to the api and get response
+    """
+    # CWD = os.getcwd()
     # ENCODEFOLDER = "../admin-app/app/dataset/{}/encoding"
     # ENCODEFILEPATH = CWD + "/iot/admin-app/app/dataset/{}/encoding/face_encoding.pickle"
-    ENCODEFOLDER = os.path.realpath("../admin-app/app/dataset/{}/encoding")
+    # ENCODEFOLDER = os.path.realpath("../admin-app/app/dataset/{}/encoding")
 
     def __init__(self):
         self.helper = Helper()
     
     def hanle_data(self,data):
         """choose diffrent function according to the data type
-        :param dict: a dictionary recieved from the client 
+
+        :param dict data: a dictionary recieved from the client 
         """
         if data['type'] == 'login':
             return self.login(data)
@@ -41,7 +45,9 @@ class dataHandler:
         
     def return_car(self, data):
         """change database via api, return situation
-        :param string: a dictionary recieved from the client 
+
+        :param string data: a dictionary recieved from the client 
+
         :return: the data that will be sent via socket
         :rtype: string
          """
@@ -64,7 +70,9 @@ class dataHandler:
         
     def unlock(self,data):
         """change  database via api, unlock situation
-        :param string: a dictionary recieved from the client 
+
+        :param string data: a dictionary recieved from the client 
+
         :return: the data that will be sent via socket
         :rtype: string
          """
@@ -81,7 +89,9 @@ class dataHandler:
     
     def search_booking(self,user_input,status):
         """get data from database, search situation 
-        :param string: a dictionary recieved from the client 
+
+        :param string data: a dictionary recieved from the client 
+
         :return: the data that will be sent via socket
         :rtype: string
         """
@@ -114,8 +124,8 @@ class dataHandler:
         
     #     return 'fail'
 
-    def get_encode_file_path(self, username):
-        return os.path.realpath(f"../admin-app/datasets/{username}/encoding/face_encoding.pickle")
+    # def get_encode_file_path(self, username):
+    #     return os.path.realpath(f"../admin-app/datasets/{username}/encoding/face_encoding.pickle")
 
     
     # def login_face(self, data):
@@ -160,7 +170,9 @@ class dataHandler:
     
     def update_car(self, car, car_id):
         """update car data
+
         :param string car: car is a json string
+
         :return: the data that will be sent via socket
         :rtype: string
         """
@@ -168,14 +180,18 @@ class dataHandler:
     
     def update_booking(self,booking_id,booking):
         """update booking data
+
         :param string booking_id: the booking id of the booking
+
         :param string booking: the booking data to be put in the database
         """
         response = self.helper.put(('/bookings/%s/update' %booking_id),booking)
         
     def valid_bluetooth(self, MAC):
         """update booking data
+
         :param string MAC: the MAC address recieved from the user
+
         :return: the data that will be sent via socket(either fail or the user)
         :rtype: string
         """
@@ -187,7 +203,9 @@ class dataHandler:
         
     def valid_QR(self, username):
         """update booking data
+
         :param string username: the user name of the engineer
+
         :return: the data that will be sent via socket(either fail or the user)
         :rtype: string
         """  

@@ -20,6 +20,7 @@ class QR_reader:
         call a window to let user choose photoes
 
         :return: the file path chosen by the user
+    
         :rtype: string
         """
         print("input a file path of your qrcode")     
@@ -29,7 +30,9 @@ class QR_reader:
     def scan_QR(self):
         """
         scan the QR code
+
         :param string: the encode data
+
         :return: the Json String decoded from the QR code
         :rtype: string
         """   
@@ -70,13 +73,11 @@ class QR_reader:
     def get_tabulate(self, user):
         """
         return a tabulate table
+
         :param string user: a json or dict of the user
+        
         :return: a tabulate tableof user
         :rtype: tabulate
         """
         tb = tabulate([['name', user['fName']],['experience',user['experience']],['email',user['email']]],headers=['key','value'],tablefmt='orgtbl')
         return tb
-if __name__ == "__main__":
-    
-    reader = QR_reader()
-    reader.scan_QR()
