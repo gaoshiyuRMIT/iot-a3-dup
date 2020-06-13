@@ -1,4 +1,4 @@
-
+from urllib.parse import quote
 from .base_service import BaseService
 
 class UserService(BaseService):

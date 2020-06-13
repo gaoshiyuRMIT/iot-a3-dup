@@ -3,6 +3,7 @@ from passlib.hash import sha256_crypt
 
 
 class AuthUtil(object):
+    
     def login(self, password, stored_user) -> bool:
         if stored_user is None:
             return False
