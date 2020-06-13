@@ -28,6 +28,13 @@ CREATE TABLE IF NOT EXISTS Employee (
     CONSTRAINT PK_Admin PRIMARY KEY (username)
 );
 
+create table if not exists Engineer (
+    username VARCHAR(32) not null, 
+    mac_address VARCHAR(255),
+    experience int default 1,
+    CONSTRAINT `FK_Engineer_username` FOREIGN KEY (`username`) REFERENCES `Employee` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS Car ( 
     car_id INT not null auto_increment, 
     year INT not null, 
