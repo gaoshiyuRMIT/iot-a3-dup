@@ -8,7 +8,7 @@ Update Car Details
 {% block error_message %}
 {{ super() }}
 {% endblock %}
-<form class="form-horizontal needs-validation" action="{{ url_for('cars.update_car', car_id=car['car_id']) }}" method="POST">
+<form class="form-horizontal needs-validation" action="{{ url_for('cars.update_car', car_id=car['car_id']) }}" method="post">
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
