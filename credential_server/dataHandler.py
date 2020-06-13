@@ -32,6 +32,8 @@ class dataHandler:
             return self.search_booking(data,"inProgress")
         elif data['type'] == 'unlock':
             return self.unlock(data)
+        elif data['type'] == 'valid_QR':
+            return self.valid_QR(data['decode'])
         elif data['type'] == 'valid_blue':
             return self.valid_bluetooth(data['MAC'])
         else:
@@ -174,12 +176,25 @@ class dataHandler:
     def valid_bluetooth(self, MAC):
         """update booking data
         :param string MAC: the MAC address recieved from the user
+        :return: the data that will be sent via socket(either fail or the user)
+        :rtype: string
         """
         response = self.helper.get('/employees/engineers/mac/%s' %MAC)
         if(response.status_code == 200):
             return response.text
         else:
             return 'fail'
-    
+        
+    def valid_QR(self, username):
+        """update booking data
+        :param string username: the user name of the engineer
+        :return: the data that will be sent via socket(either fail or the user)
+        :rtype: string
+        """  
+        response = self.helper.get('/employees/engineers/%s' %username)
+        if(response.status_code == 200):
+            return response.text
+        else:
+            return 'fail'
     
     
