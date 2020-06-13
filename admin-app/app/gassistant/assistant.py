@@ -146,8 +146,6 @@ class AspenAssistant(object):
         )
         self.deadline = 60 * 3 + 5
 
-        self.device_handler = device_handler
-
     def __enter__(self):
         return self
 
@@ -190,6 +188,8 @@ class AspenAssistant(object):
         # received from the gRPC Google Assistant API.
         for resp in self.assistant.Assist(iter_log_assist_requests(),
                                           self.deadline):
+            #print (resp.device_action.device_request_json)
+            #print (type(resp.device_action.device_request_json))
             assistant_helpers.log_assist_response_without_audio(resp)
             if resp.event_type == END_OF_UTTERANCE:
                 logging.info('End of audio request detected.')
@@ -204,7 +204,7 @@ class AspenAssistant(object):
                 if not self.conversation_stream.playing:
                     self.conversation_stream.stop_recording()
                     
-                    #self.conversation_stream.start_playback()
+                    self.conversation_stream.start_playback()
                     print('Playing assistant response.')
                     #print (resp)
                 self.conversation_stream.write(resp.audio_out.audio_data)
@@ -225,7 +225,6 @@ class AspenAssistant(object):
 
             elif resp.dialog_state_out.microphone_mode == CLOSE_MICROPHONE:
                 continue_conversation = False
-            
 
             if resp.device_action.device_request_json:
                 device_request = json.loads(
@@ -234,6 +233,7 @@ class AspenAssistant(object):
                 fs = self.device_handler(device_request)
                 if fs:
                     device_actions_futures.extend(fs)
+                    print (device_actions_futures)
             # if self.display and resp.screen_out.data:
             #     system_browser = browser_helpers.system_browser
             #     system_browser.display(resp.screen_out.data)
@@ -243,7 +243,7 @@ class AspenAssistant(object):
             concurrent.futures.wait(device_actions_futures)
 
         logging.info('Finished playing assistant response.')
-        #self.conversation_stream.stop_playback()
+        self.conversation_stream.stop_playback()
         return continue_conversation, text_response, user_input, rthing
 
     def gen_assist_requests(self):
@@ -279,6 +279,9 @@ class AspenAssistant(object):
         for data in self.conversation_stream:
             # Subsequent requests need audio data, but not config.
             yield embedded_assistant_pb2.AssistRequest(audio_in=data)
+
+    def getAssist(self):
+        return self.assistant
 
 if __name__ == '__main__':
     main()
