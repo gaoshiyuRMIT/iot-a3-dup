@@ -1,7 +1,7 @@
 from pyzbar import pyzbar
 import cv2
-from dataHelper import dataHelper
-from client import client
+from socket_extension import dataHelper
+from socket_extension import client
 import json
 from configparser import ConfigParser
 from tabulate import tabulate

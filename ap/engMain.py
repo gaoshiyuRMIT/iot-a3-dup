@@ -1,6 +1,6 @@
 import bluetooth
-from dataHelper import dataHelper
-from client import client
+from socket_extension import dataHelper
+from socket_extension import client
 from configparser import ConfigParser
 import json
 
