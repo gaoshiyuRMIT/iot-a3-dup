@@ -116,7 +116,7 @@ class dataHelper:
         :rtype: string
         """
         data={
-            'decode' : MACAdd,
+            'decode' : decode,
             'type' : 'valid_QR'
         }    
         send_data = json.dumps(data)
