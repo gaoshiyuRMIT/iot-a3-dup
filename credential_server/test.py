@@ -9,7 +9,7 @@ handler = dataHandler ()
 class serverTest(unittest.TestCase):
     def test_helper(self):
         response = handler.valid_bluetooth('70:EA:5A:33:54:52')
-        self.assertEqual(response, 'success')
+        self.assertNotEqual(response, 'fail')
         
     def test_neg_helper(self):
         response = handler.valid_bluetooth('70:EA:5A:33:54:51')

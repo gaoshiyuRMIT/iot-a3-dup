@@ -177,7 +177,7 @@ class dataHandler:
         """
         response = self.helper.get('/employees/engineers/mac/%s' %MAC)
         if(response.status_code == 200):
-            return 'success'
+            return response.text
         else:
             return 'fail'
     
