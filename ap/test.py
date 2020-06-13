@@ -1,10 +1,15 @@
 import bluetooth
 from dataHelper import dataHelper
 from client import client
+from configparser import ConfigParser
 
 helper = dataHelper()
+config = ConfigParser()
+config.read('ap.config', encoding='UTF-8')
+port=config['address'].getint('port')
+ip = config['address'].get('ip')
 def send_and_valid(data):
-    c = client()
+    c = client(ip,port)
     """
     sending and valid MAC address
     :param string data: the sent data
@@ -14,7 +19,9 @@ def send_and_valid(data):
     c.send_data(data)   
     status = c.listen_from_server() 
     c.close_client()
-    if status == 'success':
+    if status == 'fail':
+        return False
+    else:
         return True
         
 def main():
@@ -26,9 +33,10 @@ def main():
             bd_address=nearby_devices[0][0]
             print(bd_address)
             data = helper.validate_blue(bd_address)
-            # if send_and_valid(data):
-            #     exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
-            #     print('See u next time!')
+            if send_and_valid(data):
+                print('welcome, engineer!')
+                #exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
+                print('See u next time!')
             quit()
         else:
             print('no device found!')    
