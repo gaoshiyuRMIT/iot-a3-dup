@@ -1,24 +1,26 @@
-import matplotlib
-matplotlib.use('Agg')
-from tkinter import Tk, filedialog
-import os
 from pyzbar import pyzbar
 import cv2
 from dataHelper import dataHelper
 from client import client
 import json
+from configparser import ConfigParser
 helper = dataHelper()
 
+
 class QR_reader:
+    def __init__(self):
+        config = ConfigParser()
+        config.read('ap.config', encoding='UTF-8')
+        self.port=config['address'].getint('port')
+        self.ip = config['address'].get('ip')
     def get_path(self):
         """
         call a window to let user choose photoes
-        :return string: the file path chosen by the user
+        :return: the file path chosen by the user
+        :rtype: string
         """
-        root = Tk()
-        root.update()
-        root.withdraw()        
-        image_filepath = filedialog.askopenfilename(filetypes=[("jpg files", "*.jpg")], initialdir='/home/pi/Desktop/IotA3/iot/ap/QRCode', title="Choose a QR code image")
+        print("input a file path of your qrcode")     
+        image_filepath = input()
         return image_filepath
 
     def scan_QR(self):
@@ -41,7 +43,7 @@ class QR_reader:
             # our output image we need to convert it to a string first
             barcodeData = barcode.data.decode("utf-8")
             username = json.loads(barcodeData)['name']
-            print(username)     
+            send_and_recieve(username)   
 
     def send_and_recieve(self,data):
         """
@@ -50,10 +52,13 @@ class QR_reader:
         :return: the profile of a user
         :rtype: boolean
         """
+        c=new client(self.ip, self.port)
         valid_data =helper.valid_QR(self, data)
         c.send_data(valid_data)   
         engineereer_data = c.listen_from_server() 
-        profile_data = json.loads(engineereer_data)['data']
+        c.close_client()
+        print(engineereer_data)
+        profile_data = json.loads(engineereer_data)
         return profile_data      
       
 if __name__ == "__main__":
