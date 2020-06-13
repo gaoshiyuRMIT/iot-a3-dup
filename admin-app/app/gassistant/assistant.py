@@ -56,6 +56,7 @@ DIALOG_FOLLOW_ON = embedded_assistant_pb2.DialogStateOut.DIALOG_FOLLOW_ON
 CLOSE_MICROPHONE = embedded_assistant_pb2.DialogStateOut.CLOSE_MICROPHONE
 PLAYING = embedded_assistant_pb2.ScreenOutConfig.PLAYING
 DEFAULT_GRPC_DEADLINE = 60 * 3 + 5
+DEVICE_ID = "747f0c62-a723-11ea-9ec7-b827eb4dc132"
 
 class AspenAssistant(object):
     """Sample Assistant that supports conversations and device actions.
@@ -74,7 +75,7 @@ class AspenAssistant(object):
     def __init__(self):
         self.language_code = "en-US" 
         self.device_model_id = "iot-a2-275604-iot-a3-yx3rus"
-        self.device_id = "747f0c62-a723-11ea-9ec7-b827eb4dc132"
+        self.device_id = DEVICE_ID
         self.display = None
 
         self.userSpeech = ""
@@ -174,6 +175,7 @@ class AspenAssistant(object):
 
         text_response = None
         user_input = None
+        rthing = None
 
         self.conversation_stream.start_recording()
         logging.info('Recording audio request.')
@@ -202,9 +204,9 @@ class AspenAssistant(object):
                 if not self.conversation_stream.playing:
                     self.conversation_stream.stop_recording()
                     
-                    self.conversation_stream.start_playback()
+                    #self.conversation_stream.start_playback()
                     print('Playing assistant response.')
-                    print (resp)
+                    #print (resp)
                 self.conversation_stream.write(resp.audio_out.audio_data)
             if resp.dialog_state_out.conversation_state:
                 conversation_state = resp.dialog_state_out.conversation_state
@@ -217,10 +219,14 @@ class AspenAssistant(object):
             if resp.dialog_state_out.microphone_mode == DIALOG_FOLLOW_ON:
                 continue_conversation = True
                 logging.info('Expecting follow-on query from user.')
+
             if resp.dialog_state_out.supplemental_display_text:
                 text_response = resp.dialog_state_out.supplemental_display_text
+
             elif resp.dialog_state_out.microphone_mode == CLOSE_MICROPHONE:
                 continue_conversation = False
+            
+
             if resp.device_action.device_request_json:
                 device_request = json.loads(
                     resp.device_action.device_request_json
@@ -237,8 +243,8 @@ class AspenAssistant(object):
             concurrent.futures.wait(device_actions_futures)
 
         logging.info('Finished playing assistant response.')
-        self.conversation_stream.stop_playback()
-        return continue_conversation, text_response, user_input
+        #self.conversation_stream.stop_playback()
+        return continue_conversation, text_response, user_input, rthing
 
     def gen_assist_requests(self):
         """Yields: AssistRequest messages to send to the API."""

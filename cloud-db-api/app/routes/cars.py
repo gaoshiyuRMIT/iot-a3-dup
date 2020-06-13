@@ -1,4 +1,5 @@
 import logging
+import json
 from . import request, url_for, Blueprint, g
 from app.CarManager import CarManager
 from . import jsonifyResponseData
@@ -93,10 +94,19 @@ def assistant_repsonse():
 
     logger.debug(searchD)
     matches = carMgr.getMany(searchD)
+
+    car_id_list = []
+
+    for match in matches:
+        car_id_list.append(match["car_id"])
+
+    logger.debug(car_id_list)
+
     if len(matches) <= 0:
-      return {"fulfillmentText" : "There's no cars that match that description."}
+        return {"fulfillmentText" : "There's no cars that match that description."}
     else: 
-      return {"fulfillmentText" : "Okay. Getting cars matching your description.", "carInfo": matches}
+
+        return {"fulfillmentText" : json.dumps(car_id_list)}
 
     return {"fulfillmentText" : "Something's gone a bit awry. Please hold."}
 
