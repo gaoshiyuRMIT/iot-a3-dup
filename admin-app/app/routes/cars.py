@@ -48,29 +48,75 @@ def map(car_id):
 
 @bp.route("/add")
 def add_car_page():
-    pass
+    return render_template("addCar.html")
 
 @bp.route("/add", methods=["POST"])
 def add_car():
     # get new car info from request.form
-    pass
+    service = CarService()
+    data = {
+        'year': request.form['year'],
+        'car_model': request.form['car_model'],
+        'body_type' : request.form['body_type'],
+        'num_seats' : request.form['num_seats'],
+        'car_colour' : request.form['car_colour'],
+        'cost_hour' : request.form['cost_hour'],
+        'latitude' : request.form['latitude'],
+        'longitude' : request.form['longitude'],
+        'car_status' : "available"
+        }
+    result = service.add_car(data)
+    if result is not None:
+        flash("Success! Car created")
+        return render_template('menu.html')
+
 
 @bp.route("/<int:car_id>/bookings")
 def rental_history(car_id):
-    pass
+    '''display all bookings made for specific car'''
+    service = BookingService()
+    bookings = service.get_bookings_for_car(car_id)
+    return render_template('carHistory.html', car_id=car_id, bookings=bookings)
+
 
 @bp.route("/<int:car_id>/update")
 def update_car_page(car_id):
-    pass
+    #get current car details
+    car = CarService().get_car(car_id)
+    #return template with car details attached
+    return render_template('updateCar.html', car=car)
 
 @bp.route("/<int:car_id>/update", methods=["PUT"])
 def update_car(car_id):
-    # get new car info from request.form
-    pass
+    service = CarService()
+    #store data in dict for transmission
+    data = {
+        'year': request.form['year'],
+        'car_model': request.form['car_model'],
+        'body_type': request.form['body_type'],
+        'num_seats': request.form['num_seats'],
+        'car_colour': request.form['car_colour'],
+        'cost_hour': request.form['cost_hour'],
+        'latitude': request.form['latitude'],
+        'longitude': request.form['longitude'],
+        'car_status': request.form['car_status']
+        }
+    result = service.update_car(car_id, data)
+    if result is not None:
+        flash(f"Success! Car #{car_id} details updated")
+        return redirect(url_for('cars.list_cars'))
+
 
 @bp.route("/<int:car_id>/remove", methods=["GET"])
 def remove_car(car_id):
-    pass
+    '''remove car from database and update displays accordingly'''
+    #pop up window asking for confirmation
+    service = CarService()
+    if service.delete_car(car_id):
+        return redirect(url_for('cars.list_cars'))
+    else:
+        flash(f"Car #{car_id} could not be deleted")
+        return redirect(url_for('cars.list_cars'))
 
 @bp.route("/<int:car_id>/report")
 def report_car_with_issue(car_id):
@@ -80,8 +126,6 @@ def report_car_with_issue(car_id):
     response = car_channel.push_note(f"Car #{car_id} Issues", f"Car #{car_id} is reported with issues at {datetime.now().isoformat()}")
     car_svc.report_car_with_issue(car_id)
     return redirect(url_for("cars.list_cars"))
-
-
 
 @bp.route("/admintalk")
 def admin_talk():
