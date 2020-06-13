@@ -29,19 +29,19 @@ Update User Details
                     <div class="form-group">
                         <label for="password" class="col-md-2 control-label">Update Password:</label>
                         <input type="password" name="password" class="col-md-2 control-form" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain 8 or more letters - at least one uppercase, lowercase, plus one non-letter character">
-                        <div><small class="text-info">leave emtpy if you don't wish to change</small></div>
+                        <div><small class="text-info"> leave emtpy if you don't wish to change</small></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group">
                         <label for="fname" class="col-md-2 control-label">Update First name: </label>
-                        <input type="text" name="fname" class="col-md-2 control-form" value="{{ user['fName'] }}" pattern="^[A-Za-z0-9\-]+$">
+                        <input type="text" name="fname" class="col-md-2 control-form" value={{ user['fName'] }} pattern="^[A-Za-z0-9\-]+$" title="First name can not contain any white spaces">
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group">
                         <label for="lname" class="col-md-2 control-label">Update Last name: </label>
-                        <input type="text" name="lname" class="col-md-2 control-form" value="{{ user['lName'] }}" pattern="^[A-Za-z0-9\-]+$">
+                        <input type="text" name="lname" class="col-md-2 control-form" value="{{ user['lName'] }}" pattern="^[A-Za-z0-9\-]+$" title="Last name can not contain any white spaces">
                     </div>
                 </div>
                 <div class="row">
@@ -55,7 +55,7 @@ Update User Details
                 
             </div>
             <div class="panel-footer">
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <button name="update" type="submit" class="btn btn-info" onclick="return confirm('Confirm: Update User Details?')">Update User</button>
             </div>
         </form>
 
