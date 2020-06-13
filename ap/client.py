@@ -8,7 +8,9 @@ class client:
 
     
     def send_data(self, data):
-        """send data to server"""
+        """send data to server
+         :param string data: data to be sent to the server
+        """
         self.s.send(data)
         #response = self.listen_from_server();
         #return response

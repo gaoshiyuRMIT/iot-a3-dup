@@ -72,7 +72,7 @@ class QR_reader:
         :return: a tabulate tableof user
         :rtype: tabulate
         """
-        tb = tabulate([['username', user['fName']],['experience',user['experience']],['email',user['email']]],headers=['key','value'],tablefmt='orgtbl')
+        tb = tabulate([['name', user['fName']],['experience',user['experience']],['email',user['email']]],headers=['key','value'],tablefmt='orgtbl')
         return tb
 if __name__ == "__main__":
     

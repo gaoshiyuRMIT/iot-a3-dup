@@ -2,6 +2,7 @@ import bluetooth
 from dataHelper import dataHelper
 from client import client
 from configparser import ConfigParser
+import json
 
 class console:
     helper = dataHelper()
@@ -24,7 +25,7 @@ class console:
         if status == 'fail':
             return False
         else:
-            username = status['data']['fName']
+            self.username = json.loads(status)['data']['fName']
             return True
         
     def main(self):
@@ -33,16 +34,15 @@ class console:
             
             if len(nearby_devices)>0:
                 for address, name in nearby_devices:
-                    print(address)
-                    data = self.helper.validate_blue(bd_address)
-                    if send_and_valid(data):
-                        print('welcome, {}!'.format(username))
-                        exec(open("/home/pi/Desktop/IotA3/iot/ap/engineer.py").read())
+                    data = self.helper.validate_blue(address)
+                    if self.send_and_valid(data):
+                        print('welcome, {}!'.format(self.username))
+                        exec(open("engineer.py").read())
                         print('See u next time!')
                     quit()
             else:
                 print('no device found!')    
 
 if __name__ == "__main__":
-    
-    main()
+    c = console()
+    c.main()
