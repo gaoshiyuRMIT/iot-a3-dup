@@ -5,6 +5,7 @@ JsonString='{ "name":"shiyu_engineer", "id":2}'
 def create_qr_code(string):
     """
     QR code creation function
+    
     :param string: the encode data
     :return:
     """

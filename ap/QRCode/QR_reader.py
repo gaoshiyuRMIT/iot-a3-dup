@@ -5,10 +5,11 @@ from socket_extension import client
 import json
 from configparser import ConfigParser
 from tabulate import tabulate
-helper = dataHelper()
+
 
 
 class QR_reader:
+    helper = dataHelper()
     def __init__(self):
         config = ConfigParser()
         config.read('ap.config', encoding='UTF-8')
@@ -17,6 +18,7 @@ class QR_reader:
     def get_path(self):
         """
         call a window to let user choose photoes
+
         :return: the file path chosen by the user
         :rtype: string
         """
@@ -49,11 +51,11 @@ class QR_reader:
     def send_and_recieve(self,data):
         """
         sending and valid username decoded from the QR code
-        :param string data: user name
 
+        :param string data: user name
         """
         c=client(self.ip, self.port)
-        valid_data =helper.valid_QR(data)
+        valid_data =self.helper.valid_QR(data)
         c.send_data(valid_data)   
         engineereer_data = c.listen_from_server() 
         c.close_client()
