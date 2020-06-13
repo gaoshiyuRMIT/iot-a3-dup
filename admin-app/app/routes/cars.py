@@ -103,7 +103,7 @@ def update_car(car_id):
         }
     result = service.update_car(car_id, data)
     if result is not None:
-        flash("Success! Car details updated")
+        flash(f"Success! Car #{car_id} details updated")
         return redirect(url_for('cars.list_cars'))
 
 
@@ -115,7 +115,7 @@ def remove_car(car_id):
     if service.delete_car(car_id):
         return redirect(url_for('cars.list_cars'))
     else:
-        flash("Car: " + car_id + "could not be deleted")
+        flash(f"Car #{car_id} could not be deleted")
         return redirect(url_for('cars.list_cars'))
 
 @bp.route("/<int:car_id>/report")
@@ -126,7 +126,6 @@ def report_car_with_issue(car_id):
     response = car_channel.push_note(f"Car #{car_id} Issues", f"Car #{car_id} is reported with issues at {datetime.now().isoformat()}")
     car_svc.report_car_with_issue(car_id)
     return redirect(url_for("cars.list_cars"))
-
 
 @bp.route("/admintalk")
 def admin_talk():

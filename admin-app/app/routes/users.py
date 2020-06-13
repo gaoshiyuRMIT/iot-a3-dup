@@ -40,7 +40,7 @@ def update_user(username):
         data["password"] = sha256_crypt.using(rounds=1000).hash(request.form["password"])
     # call user service to send new user value
     service.update_user(username, data)
-    flash(f"successfully updated user {username}")
+    flash(f"successfully updated user: {username}")
     return redirect(url_for("users.list_users"))
 
 
@@ -52,7 +52,7 @@ def remove_user(username):
     if service.delete_user(username):
         return redirect(url_for('users.list_users'))
     else:
-        flash("User: " + username + "could not be deleted")
+        flash(f"{username} could not be deleted")
         return redirect(url_for('users.list_users'))
 
 @bp.route("/add")
@@ -65,7 +65,7 @@ def add_user():
     username = request.form['username']
     usernameTaken = service.findExistingUser(username)
     if usernameTaken is not None:
-        flash("Username: " + username + " is already taken. Please try again")
+        flash(f"Username {username} is already taken. Please try again")
         return render_template('addUser.html')
     else:
         password = request.form['password']
@@ -79,6 +79,6 @@ def add_user():
         }
         result = service.add_user(data)
         if result is not None:
-            flash("Success! User created ")
+            flash(f"Success! User {username} created ")
             return render_template('menu.html')
     
