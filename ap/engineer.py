@@ -12,6 +12,8 @@ def main():
                 Q.scan_QR()
             except:
                 print("wrong input path ot invalid QR code")    
+        if(option!='1' and option!='2'):
+            print('invalid input ')        
 
 if __name__ == "__main__":
     # execute only if run as a script
