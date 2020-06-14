@@ -10,11 +10,12 @@ CREATE TABLE IF NOT EXISTS User (
 );
 
 CREATE TABLE `UserActivity` (
-  `username` varchar(32) NOT NULL,
-  `activity` varchar(32) NOT NULL DEFAULT 'login',
-  `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY `FK_UserLogin_username` (`username`),
-  CONSTRAINT `FK_UserLogin_username` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+    `activity_id` int not null auto_increment,
+    `username` varchar(32) NOT NULL,
+    `activity` varchar(32) NOT NULL DEFAULT 'login',
+    `update_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT PK_UserActivity PRIMARY KEY (activity_id),
+    CONSTRAINT `FK_UserLogin_username` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

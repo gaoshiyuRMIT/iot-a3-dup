@@ -27,3 +27,11 @@ class UserService(BaseService):
         output = self.post(url, data)
 
         return True if output['success'] == True else False
+
+    def add_activity(self, username, activity) -> bool:
+        '''log user activity
+        '''
+        url = "/users/activity/add"
+        data = {"username": username, "activity": activity}
+        resp = self.post(url, data)
+        return resp["success"]
