@@ -1,5 +1,7 @@
-from QRCode import QR_reader
+
+
 def main():
+    from QRCode import QR_reader
     Q= QR_reader()
     option="0"
     while(option!='2'):

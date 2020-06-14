@@ -1,10 +1,10 @@
 import qrcode
 import time
 
-JsonString='{ "name":"james", "id":2}'
 def create_qr_code(string):
     """
-    QR code creation function
+    QR code creation function 
+    
     :param string: the encode data
     :return:
     """

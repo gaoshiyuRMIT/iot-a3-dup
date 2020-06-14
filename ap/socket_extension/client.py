@@ -1,17 +1,28 @@
 import socket    
 
 class client:
+    """
+    This is a class used to connect to the server
+
+    :param address: the ip address of the server
+    :type address: string
+    :param port: the port that the server is listening on
+    :type port: int
+    """
     def __init__(self, address, port):
+        
         self.s = socket.socket()
         self.s.connect((address,port))
         
 
     
     def send_data(self, data):
-        """send data to server"""
+        """send data to server
+        
+         :param string data: data to be sent to the server
+        """
         self.s.send(data)
-        #response = self.listen_from_server();
-        #return response
+       
         
     def close_client(self):
         """close connection"""
