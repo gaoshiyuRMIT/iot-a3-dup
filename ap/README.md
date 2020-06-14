@@ -2,6 +2,7 @@
 - cd into the ap folder
 - change the port and ip to the osame port and ip of your server in ap.config
 - `python engmain.py`
+- `workon barcode`
 
 
 
