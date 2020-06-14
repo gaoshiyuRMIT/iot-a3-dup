@@ -1,0 +1,57 @@
+{
+  "id": "6342293a-bb66-49ea-857b-1c68b1024c58",
+  "name": "Ask about Cat",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "cat.names",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "7190a7ab-55cd-4959-9137-c621f99acfe7",
+          "required": false,
+          "dataType": "@Cat",
+          "name": "cat",
+          "value": "$cat",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en-au",
+          "condition": "",
+          "speech": [
+            "The cat you\u0027re talking about is {$cat}",
+            "Hm, not sure which cat you\u0027re talking about."
+          ]
+        },
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": [
+            "The cat you\u0027re talking about is {$cat}",
+            "Hm, not sure which cat you\u0027re talking about."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

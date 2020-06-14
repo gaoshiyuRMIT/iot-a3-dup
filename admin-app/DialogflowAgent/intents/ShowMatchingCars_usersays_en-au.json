@@ -1,0 +1,1546 @@
+[
+  {
+    "id": "b7d3a85a-7312-46d6-91ff-3a325e88d956",
+    "data": [
+      {
+        "text": "get a car with ",
+        "userDefined": false
+      },
+      {
+        "text": "3",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " to ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "num_seats_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " seats that is ",
+        "userDefined": false
+      },
+      {
+        "text": "4",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " to ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a6415cc0-184f-4562-be8e-fb5cb2396cb3",
+    "data": [
+      {
+        "text": "get cars with ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": "-20",
+        "alias": "num_seats_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " seats please",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "ba86f401-253f-4f3e-9fff-52bc3536c52d",
+    "data": [
+      {
+        "text": "i want cars with ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " or more ",
+        "userDefined": false
+      },
+      {
+        "text": "seats",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3392a39a-a7a7-4431-af6b-2ab41bd2d50e",
+    "data": [
+      {
+        "text": "get all the cars with ",
+        "userDefined": false
+      },
+      {
+        "text": "3",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " to ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "num_seats_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " seats and they\u0027re ",
+        "userDefined": false
+      },
+      {
+        "text": "orange",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "61d1bffc-ce4f-4e1d-8838-cd4cb6db56b9",
+    "data": [
+      {
+        "text": "get me cars with ",
+        "userDefined": false
+      },
+      {
+        "text": "3",
+        "alias": "num_seats_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " or less ",
+        "userDefined": false
+      },
+      {
+        "text": "seats",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "16d99f22-e214-4f54-8ad5-f37fe6cffee6",
+    "data": [
+      {
+        "text": "find all the cars that have less than ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "num_seats_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " seats and are more than ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2de290db-5d7e-447f-a506-b4a3ffabe811",
+    "data": [
+      {
+        "text": "get me a ",
+        "userDefined": false
+      },
+      {
+        "text": "2018",
+        "alias": "year_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " car for ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "cbf53df6-2862-4b33-afab-5c360a4f7b56",
+    "data": [
+      {
+        "text": "do we have any ",
+        "userDefined": false
+      },
+      {
+        "text": "1990",
+        "alias": "year_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "sedans",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "852945d0-72ab-4c0e-ab9d-4a93daf20ddf",
+    "data": [
+      {
+        "text": "get me the cars that are from before ",
+        "userDefined": false
+      },
+      {
+        "text": "2019",
+        "alias": "year_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " for less than ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "dac32566-e406-447b-b07c-86bf547b0da5",
+    "data": [
+      {
+        "text": "find cars older than ",
+        "userDefined": false
+      },
+      {
+        "text": "1970",
+        "alias": "year_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "120",
+        "alias": "cost_hour_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8188e481-c3cd-4176-9ad4-cb17eae00fce",
+    "data": [
+      {
+        "text": "get me ",
+        "userDefined": false
+      },
+      {
+        "text": "sedans",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": false
+      },
+      {
+        "text": " made between ",
+        "userDefined": false
+      },
+      {
+        "text": "2000",
+        "alias": "year_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "2002",
+        "alias": "year_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a0221b53-0abd-4c39-8142-c8f60288f4d4",
+    "data": [
+      {
+        "text": "get me cars newer than ",
+        "userDefined": false
+      },
+      {
+        "text": "2010",
+        "alias": "year_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " with ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " or more ",
+        "userDefined": false
+      },
+      {
+        "text": "seats",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "069692b2-c791-42cf-83aa-c6479a4e4143",
+    "data": [
+      {
+        "text": "find me ",
+        "userDefined": false
+      },
+      {
+        "text": "red",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars from ",
+        "userDefined": false
+      },
+      {
+        "text": "1990",
+        "alias": "year_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " onwards",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3f4797c1-b795-4534-a46b-7f7a0b00d65b",
+    "data": [
+      {
+        "text": "give me ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "num_seats_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "seater",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "sedans",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": false
+      },
+      {
+        "text": " for less than ",
+        "userDefined": false
+      },
+      {
+        "text": "20",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c1c736d8-076e-43bf-8dbc-f753438ae680",
+    "data": [
+      {
+        "text": "do you have any ",
+        "userDefined": false
+      },
+      {
+        "text": "sedans",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": true
+      },
+      {
+        "text": " with more than ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "num_seats_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "seats",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "31ff48af-bd18-4517-aab4-753a98c9f04c",
+    "data": [
+      {
+        "text": "get me cars with ",
+        "userDefined": false
+      },
+      {
+        "text": "4",
+        "alias": "seats_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "seats",
+        "alias": "CarSeats",
+        "meta": "@CarSeats",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "eda50687-6251-4fd1-bf18-bbf96bd667a6",
+    "data": [
+      {
+        "text": "do you have any ",
+        "userDefined": false
+      },
+      {
+        "text": "blue",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "sedans",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": false
+      },
+      {
+        "text": " for ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bucks",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      },
+      {
+        "text": " and up?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d2f95460-f209-4859-a066-5e2f3744e8a4",
+    "data": [
+      {
+        "text": "return ",
+        "userDefined": false
+      },
+      {
+        "text": "hatchbacks",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": true
+      },
+      {
+        "text": " that cost less than ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a7050b7c-5def-4665-bb75-8efb6d32a000",
+    "data": [
+      {
+        "text": "find me a ",
+        "userDefined": false
+      },
+      {
+        "text": "red",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "SUV",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bf38126e-7bef-4b77-b011-7253a081d02f",
+    "data": [
+      {
+        "text": "get me all the ",
+        "userDefined": false
+      },
+      {
+        "text": "coupes",
+        "alias": "body_type",
+        "meta": "@CarBody",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "aa7eb8ea-1df5-4937-94d2-240d1a2bad2b",
+    "data": [
+      {
+        "text": "show me cars from ",
+        "userDefined": false
+      },
+      {
+        "text": "6",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " to ",
+        "userDefined": false
+      },
+      {
+        "text": "eight",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "cf0a9724-de0f-4658-8c26-64e37c8368f9",
+    "data": [
+      {
+        "text": "any cars for ",
+        "userDefined": false
+      },
+      {
+        "text": "4",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " to ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      },
+      {
+        "text": "?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "0e3a022a-4b97-4cea-a567-6257a66bfcb4",
+    "data": [
+      {
+        "text": "do you have any ",
+        "userDefined": false
+      },
+      {
+        "text": "bronze",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": true
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "98da7816-62db-4e6d-9ea1-5058830d42ec",
+    "data": [
+      {
+        "text": "show cars smaller than ",
+        "userDefined": false
+      },
+      {
+        "text": "1",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollar an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d246762a-2040-44de-95a5-6115e11df678",
+    "data": [
+      {
+        "text": "show cars less than ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d2c90254-72e8-44c6-95cc-34292dd7951a",
+    "data": [
+      {
+        "text": "show cars that are less than ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bucks an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "005dd195-057f-4cc6-bc68-c75ed3af07e0",
+    "data": [
+      {
+        "text": "give me cars that are less than ",
+        "userDefined": false
+      },
+      {
+        "text": "1",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "buck",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d41fe7b1-cb1a-4646-8229-587838b51c5a",
+    "data": [
+      {
+        "text": "get cars more than ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bucks",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e396ca04-1468-4732-87a4-a3363a0bf8aa",
+    "data": [
+      {
+        "text": "gimme cars between ",
+        "userDefined": false
+      },
+      {
+        "text": "ten",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "fifteen",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bucks",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a1ff12ba-8205-45bd-a299-5b53e7fc925a",
+    "data": [
+      {
+        "text": "give me cars that are ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "bucks",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "1b8af04f-1a3f-4b98-a78f-42fe64140ef9",
+    "data": [
+      {
+        "text": "get ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollar",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": true
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e796974d-3c98-4e13-b7a1-bc94a85db09e",
+    "data": [
+      {
+        "text": "which cars cost ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3dd491ce-7f08-4202-934b-17994c4a5990",
+    "data": [
+      {
+        "text": "give me cars that cost ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_exact",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "a1da4c53-cb8b-4d17-983b-fb258514e9cc",
+    "data": [
+      {
+        "text": "give me cars that cost more than ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      },
+      {
+        "text": " and are ",
+        "userDefined": false
+      },
+      {
+        "text": "gold",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "382fe082-27d7-4a21-a7a3-cb8f2ae60298",
+    "data": [
+      {
+        "text": "show me all the ",
+        "userDefined": false
+      },
+      {
+        "text": "purple",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars that cost less than ",
+        "userDefined": false
+      },
+      {
+        "text": "6",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars an hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "1730857c-d156-43e0-a54e-dc67a1b96653",
+    "data": [
+      {
+        "text": "show me ",
+        "userDefined": false
+      },
+      {
+        "text": "red",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars between ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "5",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "fe9864f4-a12b-4a21-a9b1-c77f011854f5",
+    "data": [
+      {
+        "text": "show me cars more than ",
+        "userDefined": false
+      },
+      {
+        "text": "1",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollar per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      },
+      {
+        "text": " but less than ",
+        "userDefined": false
+      },
+      {
+        "text": "15",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c9670609-94ff-44ca-ba83-8a05cf34a9c8",
+    "data": [
+      {
+        "text": "show me cars less than ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " but above ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f0ccf8c5-1eb2-48d5-bbf9-6b44f5275ab9",
+    "data": [
+      {
+        "text": "show me cars below ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "10b85661-ad24-4ce8-8610-fa06bd2bdd7d",
+    "data": [
+      {
+        "text": "show me cars above ",
+        "userDefined": false
+      },
+      {
+        "text": "10",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "18a8e7fb-acc0-4673-8dc5-27eceaec0518",
+    "data": [
+      {
+        "text": "show me cars between ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " and ",
+        "userDefined": false
+      },
+      {
+        "text": "4",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": false
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "01f7068f-bd66-46fd-bb75-a45514148206",
+    "data": [
+      {
+        "text": "show me cars less than ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_to",
+        "meta": "@sys.number",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d171ef59-894d-4523-9b67-4fb096cdfe6a",
+    "data": [
+      {
+        "text": "show me cars for more than ",
+        "userDefined": false
+      },
+      {
+        "text": "2",
+        "alias": "cost_hour_from",
+        "meta": "@sys.number",
+        "userDefined": true
+      },
+      {
+        "text": " ",
+        "userDefined": false
+      },
+      {
+        "text": "dollars per hour",
+        "alias": "RentalCost",
+        "meta": "@RentalCost",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "9c1faf11-76f5-4ae9-bc00-6a7187c96470",
+    "data": [
+      {
+        "text": "give me only ",
+        "userDefined": false
+      },
+      {
+        "text": "yellow",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d320a6fd-b78d-41b6-8ba6-45fbc110f07b",
+    "data": [
+      {
+        "text": "show me ",
+        "userDefined": false
+      },
+      {
+        "text": "red",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "10155c74-3e5b-4bf6-9322-35a848f17443",
+    "data": [
+      {
+        "text": "show me all the ",
+        "userDefined": false
+      },
+      {
+        "text": "blue",
+        "alias": "car_colour",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

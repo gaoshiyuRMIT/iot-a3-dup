@@ -1,0 +1,9 @@
+{
+  "id": "8fa61fcb-e080-4645-a266-58c631dc32fd",
+  "name": "CarModel",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

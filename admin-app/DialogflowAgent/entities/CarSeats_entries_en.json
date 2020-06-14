@@ -1,0 +1,23 @@
+[
+  {
+    "value": "seats",
+    "synonyms": [
+      "seats",
+      "seater"
+    ]
+  },
+  {
+    "value": "fits",
+    "synonyms": [
+      "fits",
+      "fit"
+    ]
+  },
+  {
+    "value": "people",
+    "synonyms": [
+      "people",
+      "person"
+    ]
+  }
+]
