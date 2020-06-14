@@ -1,0 +1,64 @@
+[
+  {
+    "id": "ba41febd-d0cb-46cc-a2f1-c667a6ecb10f",
+    "data": [
+      {
+        "text": "Filter out ",
+        "userDefined": false
+      },
+      {
+        "text": "red",
+        "alias": "color",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "41c16cb8-2554-445b-9790-701d21e64997",
+    "data": [
+      {
+        "text": "Filter out cars that are ",
+        "userDefined": false
+      },
+      {
+        "text": "blue",
+        "alias": "color",
+        "meta": "@sys.color",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f9a323b6-1347-4c30-939e-c5f1ff703c0c",
+    "data": [
+      {
+        "text": "Filter out all the ",
+        "userDefined": false
+      },
+      {
+        "text": "yellow",
+        "alias": "color",
+        "meta": "@sys.color",
+        "userDefined": false
+      },
+      {
+        "text": " cars",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

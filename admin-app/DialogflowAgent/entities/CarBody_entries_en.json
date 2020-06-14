@@ -1,0 +1,54 @@
+[
+  {
+    "value": "Sedan",
+    "synonyms": [
+      "Sedan",
+      "sedans"
+    ]
+  },
+  {
+    "value": "Hatchback",
+    "synonyms": [
+      "Hatchback",
+      "hatchbacks"
+    ]
+  },
+  {
+    "value": "SUV",
+    "synonyms": [
+      "SUV",
+      "SUVs"
+    ]
+  },
+  {
+    "value": "Coupe",
+    "synonyms": [
+      "Coupe",
+      "Coop",
+      "Coupes",
+      "Coops"
+    ]
+  },
+  {
+    "value": "Wagon",
+    "synonyms": [
+      "Wagon",
+      "Pickup",
+      "Truck",
+      "Ute",
+      "Wagons",
+      "Pickups",
+      "Trucks",
+      "Utes"
+    ]
+  },
+  {
+    "value": "Van",
+    "synonyms": [
+      "Van",
+      "Minivan",
+      "Vans",
+      "Minivans"
+    ]
+  }
+]

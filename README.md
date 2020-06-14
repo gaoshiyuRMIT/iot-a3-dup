@@ -1,28 +1,26 @@
 
-# IoT - Assignment 2 
+# IoT - Assignment 3
 
 ## "Sharing is Car(ing)"
 
 ### Team members
 - Shiyu Gao s3734720
-    - RESTFUL API Shell
-    - Google Credentials API
-    - RESTFUL API functionality
-    - Car Search 
-    - Car Booking
+    - RESTFUL API new functionalities
+    - admin website shell 
+    - admin website dashboard
+    - admin website view, search and report cars & show location
+    - root level documentation
+    - admin website unit tests
 - Aspen Forster s3330837
-    - Admin-app Shell
-    - Google Maps API
-    - Login / Registration
-    - Input validation
-    - Silly art for website
+    - admin website search cars by voice
+    - Google Assistant SDK integration
 - Kaspian Fitzptrick (Kase) s3630115
-    - Facial Recognition
-    - Database design and set up
+    - Admin website add, update and remove users & cars
+    - admin website documentation
 - Xinhuan Duan (Stally) s3713321
-    - Agent Pi Console App
-    - Credentials Server
-    - Socket Programming
+    - Agent Pi Admin console app
+    - bluetooth auto unlock car
+    - QR code recognition
 
 ### admin-app
 admin-app README: [HERE](admin-app/README.md)

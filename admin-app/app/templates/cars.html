@@ -133,13 +133,13 @@ $("#talk_to_assistant").click(function(event) {
         document.getElementById("user_google_input").value = response["input"];
         $('#user-input').html("<b>You asked Google: </b> \"" + response["input"] + "\"");
         $("#talk_to_assistant").removeClass("disabled");
+       
+        try {
+            assistantResponses = response["response"].split("\n");
+            google_response = assistantResponses[0];
+            database_response = assistantResponses[1];
 
-
-        assistantResponses = response["response"].split("\n");
-
-        if (assistantResponses[1].substring(0, 1) == '{'){
             filterData = JSON.parse(assistantResponses[1].trim());
-            if (filterData != null){
                 for(var key in filterData){
                     if (!filterData.hasOwnProperty(key)){
                         continue;
@@ -151,10 +151,8 @@ $("#talk_to_assistant").click(function(event) {
                     }
                 }
                 document.getElementById("filterForm").submit();
-            } else {
-                $('#user-input').html("<b>Something went wrong - try again.</b>");
-            }
-        } else {
+        } catch (e){
+            console.log(e);
             $('#user-input').html("<b>Something went wrong - try again.</b>");
         }
     });
@@ -168,20 +166,30 @@ $("#talk_to_assistant").click(function(event) {
         {% block error_message %}
             {{ super() }}
         {% endblock %}
-    
-        <div class="panel col-md-6">
+
+        <div class="panel col-md-4">
             <a class="btn btn-primary" href="{{ url_for('cars.add_car_page') }}">Add a Car</a>
-            <a class="btn btn-info" id="talk_to_assistant" href=#>Talk to Google Assistant</a>
+            <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide Filters</button>
+            <button onclick="toggleMaps()" id= "map-button" class="col-2 btn btn-light">Hide Maps</button>
         </div>
-        <div class="panel col-md-6">
-            <p id="user-input"><b>You asked Google:</b> {{ input }} </p>
+    
+        <div class="panel col-md-8">
+            <div class="row">
+                <div class="col-md-10">
+                    <p><b>Say "Ask Sharing is Caring.." or "Talk to Sharing is Caring.." before your query to Google!</b></p>
+                    <p><i>Example: "<b>Ask Sharing is Caring</b> to show <b>black</b> cars worth more than <b>$5 per hour</b></i></p>
+                    <p><i>Example: "<b>Talk to Sharing is Caring</b> about <b>sedans</b> with between <b>2 and 5 seats</b></i></p>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-info" id="talk_to_assistant" href=#>Talk to Google Assistant</a>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <p id="user-input"><b>You asked Google:</b> {{ input }} </p>
+            </div>
         </div>
 
-    </div>
-    <div class="container">
-
-        <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide Filters</button>
-        <button onclick="toggleMaps()" id= "map-button" class="col-2 btn btn-light">Hide Maps</button>
         <div class="panel">
             <div class="panel-body" id="search-form">
                 <div class="row">

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "e93fe48a-2e68-49db-b71e-ff90aba9a7e0",
+    "data": [
+      {
+        "text": "internet weather",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "8d283ec6-f9f4-4a3f-a11f-2dc8da256740",
+    "data": [
+      {
+        "text": "tell me about internet weather",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "value": "Ford Fiesta",
+    "synonyms": [
+      "Ford Fiesta",
+      "Ford",
+      "Fords"
+    ]
+  },
+  {
+    "value": "Audi A6",
+    "synonyms": [
+      "Audi A6",
+      "Audi",
+      "Audis"
+    ]
+  },
+  {
+    "value": "Ski-Doo MX Z 600 TRAIL",
+    "synonyms": [
+      "Ski-Doo MX Z 600 TRAIL",
+      "Ski-Doo",
+      "MX Z TRAIL"
+    ]
+  },
+  {
+    "value": "Honda SA50 ELITE SR",
+    "synonyms": [
+      "Honda SA50 ELITE SR",
+      "SA50",
+      "Honda",
+      "Hondas"
+    ]
+  },
+  {
+    "value": "Kenworth T270",
+    "synonyms": [
+      "Kenworth T270",
+      "Kenworth",
+      "Kenworths"
+    ]
+  },
+  {
+    "value": "Victory KINGPIN",
+    "synonyms": [
+      "Victory KINGPIN",
+      "Victory",
+      "Kingpin",
+      "Kingpins"
+    ]
+  },
+  {
+    "value": "Mazda",
+    "synonyms": [
+      "Mazda",
+      "Mazdas"
+    ]
+  }
+]
