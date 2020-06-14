@@ -13,11 +13,9 @@ Back to `Home Page`_
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
 
-   base_service
-   car_service
-   booking_service
-   user_service
+   services/*
 
 Indices and tables
 ==================

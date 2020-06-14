@@ -13,14 +13,10 @@ Back to `Home Page`_
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
 
-   users_api_doc
-   cars_api_doc
-   bookings_api_doc
-   booking_manager
-   car_manager
-   user_manager
-   base_manager
+   apis/*
+   managers/*
 
 
 Indices and tables
