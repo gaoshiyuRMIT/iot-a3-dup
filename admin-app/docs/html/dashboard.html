@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dashboard Routes &#8212; Car Share System Admin App 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Employee Routes" href="employees.html" />
+    <link rel="prev" title="Car Routes" href="cars.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.routes.dashboard">
+<span id="dashboard-routes"></span><h1>Dashboard Routes<a class="headerlink" href="#module-app.routes.dashboard" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="app.routes.dashboard.car_usage">
+<code class="sig-prename descclassname">app.routes.dashboard.</code><code class="sig-name descname">car_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.dashboard.car_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route ‘/dashboard/data/car_usage’ which displays number 
+of cars being used each day. Retrieves bookings data from cloud 
+database and transforms for display in graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>car usage data in json form</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask Response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.dashboard.dashboard">
+<code class="sig-prename descclassname">app.routes.dashboard.</code><code class="sig-name descname">dashboard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.dashboard.dashboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route for dashboard: ‘/dashboard’ which managers view on
+logging into employee website.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html page for dashboard</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.dashboard.rental_revenue">
+<code class="sig-prename descclassname">app.routes.dashboard.</code><code class="sig-name descname">rental_revenue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.dashboard.rental_revenue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route ‘/dashboard/data/revenue’ which displays the daily
+revenue from renting cars. Retrieves booking history from cloud database
+and calculates amount of time cars have been rented for and resultant
+revenue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>revenue data in json form</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.dashboard.user_activities">
+<code class="sig-prename descclassname">app.routes.dashboard.</code><code class="sig-name descname">user_activities</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.dashboard.user_activities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route ‘/dashboard/data/user_activities which displays
+number of active users each day. Information retrieved from cloud
+database table user_activity</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>number of active user/day is json form</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Car Share System Admin App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_service.html">Base Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="car_service.html">Car Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking_service.html">Booking Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_service.html">User Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="employee_service.html">Employee Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cars.html">Car Routes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dashboard Routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="employees.html">Employee Routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users.html">User Routes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="cars.html" title="previous chapter">Car Routes</a></li>
+      <li>Next: <a href="employees.html" title="next chapter">Employee Routes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/dashboard.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

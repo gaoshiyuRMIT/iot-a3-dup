@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Employee Routes &#8212; Car Share System Admin App 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User Routes" href="users.html" />
+    <link rel="prev" title="Dashboard Routes" href="dashboard.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.routes.employees">
+<span id="employee-routes"></span><h1>Employee Routes<a class="headerlink" href="#module-app.routes.employees" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="app.routes.employees.index">
+<code class="sig-prename descclassname">app.routes.employees.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.employees.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>defines index URL/route: ‘/’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html index</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.employees.login">
+<code class="sig-prename descclassname">app.routes.employees.</code><code class="sig-name descname">login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.employees.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route for login page: ‘/login’. Retrieves username and 
+password from form, hashes password to compare with stored hash
+for entered username. If credentials are authorised, directs user to
+landing page depending on thier role (admin/manager/engineer).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html page (login/homepage) appropriate to user</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.employees.logout">
+<code class="sig-prename descclassname">app.routes.employees.</code><code class="sig-name descname">logout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.employees.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines route for loggin out: ‘/logout’. Logs user out by clearing 
+session details, and redirects to login page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html for login page</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.employees.menu">
+<code class="sig-prename descclassname">app.routes.employees.</code><code class="sig-name descname">menu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.employees.menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route for main menu: ‘/menu’. All employees of type admin
+are directed to this page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html for main menu page</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.employees.register">
+<code class="sig-prename descclassname">app.routes.employees.</code><code class="sig-name descname">register</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.employees.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines URL/route for employee registration. Not currently active.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>html page for registration</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>flask template</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Car Share System Admin App</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="base_service.html">Base Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="car_service.html">Car Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="booking_service.html">Booking Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_service.html">User Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="employee_service.html">Employee Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cars.html">Car Routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dashboard.html">Dashboard Routes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Employee Routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users.html">User Routes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="dashboard.html" title="previous chapter">Dashboard Routes</a></li>
+      <li>Next: <a href="users.html" title="next chapter">User Routes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/employees.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
