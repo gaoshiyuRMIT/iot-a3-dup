@@ -117,45 +117,46 @@
 <!-------------------GOOGlE ASSISTANT INTEGRATION------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
-// $(document).ready(function(event){
-// $.ajax({ url: "{{ url_for('cars.makeassistant') }}", 
-//             success: function(){
-//                 alert("google assistant connected");
-//             }});
-// });
+$(document).ready(function(event){
+
+    $('#user-input').html("<b>You asked Google: </b> \"" + document.getElementById("user_google_input").value + "\"");
+});
 
 $("#talk_to_assistant").click(function(event) {
     $("#talk_to_assistant").addClass("disabled");
     $.ajax({
         url: "{{ url_for('cars.voicesearch') }}",
     }).done(function(response) {
-        console.log("car usage raw data: ");
-        console.log(response["continue"]);
+        console.log("assistant data: ");
         console.log(response["input"]);
         console.log(response["response"]);
+        document.getElementById("user_google_input").value = response["input"];
         $('#user-input').html("<b>You asked Google: </b> \"" + response["input"] + "\"");
         $("#talk_to_assistant").removeClass("disabled");
 
-        
 
-        filterData = JSON.parse(response["response"].split("\n")[1].trim());
+        assistantResponses = response["response"].split("\n");
 
-        if (filterData != null){
-            for(var key in filterData){
-                if (!filterData.hasOwnProperty(key)){
-                    continue;
+        if (assistantResponses[1].substring(0, 1) == '{'){
+            filterData = JSON.parse(assistantResponses[1].trim());
+            if (filterData != null){
+                for(var key in filterData){
+                    if (!filterData.hasOwnProperty(key)){
+                        continue;
+                    }
+                    console.log(key);
+                    matchingInputField = document.getElementById(key);
+                    if (matchingInputField.nodeName === "INPUT"){
+                        matchingInputField.value = filterData[key];
+                    }
                 }
-                console.log(key);
-                matchingInputField = document.getElementById(key);
-                if (matchingInputField.nodeName === "INPUT"){
-                    matchingInputField.value = filterData[key];
-                }
+                document.getElementById("filterForm").submit();
+            } else {
+                $('#user-input').html("<b>Something went wrong - try again.</b>");
             }
-
-            document.getElementById("filterForm").submit();
+        } else {
+            $('#user-input').html("<b>Something went wrong - try again.</b>");
         }
-
-
     });
 });
 </script>
@@ -173,7 +174,7 @@ $("#talk_to_assistant").click(function(event) {
             <a class="btn btn-info" id="talk_to_assistant" href=#>Talk to Google Assistant</a>
         </div>
         <div class="panel col-md-6">
-            <p id="user-input"></p>
+            <p id="user-input"><b>You asked Google:</b> {{ input }} </p>
         </div>
 
     </div>
@@ -186,6 +187,7 @@ $("#talk_to_assistant").click(function(event) {
                 <div class="row">
                     <div class="col-md-12">
                     <form method="post" id="filterForm" action="{{ url_for('cars.search_cars') }}">
+                        <input type="hidden" id="user_google_input" name="user_google_input" value="{{ u_input }}">
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="car_id">Car ID</label>

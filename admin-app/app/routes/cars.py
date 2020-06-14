@@ -1,7 +1,6 @@
 from datetime import datetime
 from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash, session
 from pushbullet import Pushbullet
-import jsonpickle
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.gassistant.assistant import AspenAssistant
@@ -37,9 +36,12 @@ def search_cars():
         if searchD[rangeK][0] == searchD[rangeK][1]:
             searchD[rangeK] = searchD[rangeK][0]
     searchD = {k: v for k,v in searchD.items() if v}
+
+    user_speech = request.form.get("user_google_input")
+
     # call CarService to search for cars, providing search dict
     cars = CarService().search_cars(searchD)
-    return render_template("cars.html", cars=cars, key=key)
+    return render_template("cars.html", cars=cars, key=key, u_input=user_speech)
 
 @bp.route("/<int:car_id>/map")
 def map(car_id):
