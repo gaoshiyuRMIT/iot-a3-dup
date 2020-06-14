@@ -7,8 +7,6 @@
             <li><a href="{{ url_for('index') }}">Home</a></li>
             {% if session['loggedIn'] %}
             <li><a href="{{ url_for('cars') }}">Browse Cars</a></li>
-            <li><a href="{{ url_for('map') }}">Map_TEMP</a></li> 
-                    
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
