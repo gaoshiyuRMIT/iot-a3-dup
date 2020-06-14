@@ -15,15 +15,8 @@ Back to `Home Page`_
    :caption: Contents:
    :glob:
 
-   base_service
-   car_service
-   booking_service
-   user_service
-   employee_service
-   cars
-   dashboard
-   employees
-   users 
+   services/*
+   routes/*
 
 
 Indices and tables

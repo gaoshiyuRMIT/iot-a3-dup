@@ -1,5 +1,5 @@
 User Routes
-===================
+===========
 
 .. automodule:: app.routes.users
    :members:

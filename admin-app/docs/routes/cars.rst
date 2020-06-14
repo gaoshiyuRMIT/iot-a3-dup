@@ -1,5 +1,5 @@
 Car Routes
-==================
+==========
 
 .. automodule:: app.routes.cars
    :members:

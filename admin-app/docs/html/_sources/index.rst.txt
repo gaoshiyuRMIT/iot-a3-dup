@@ -16,6 +16,8 @@ Back to `Home Page`_
    :glob:
 
    services/*
+   routes/*
+
 
 Indices and tables
 ==================

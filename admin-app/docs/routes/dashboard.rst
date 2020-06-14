@@ -1,5 +1,5 @@
 Dashboard Routes
-=======================
+================
 
 .. automodule:: app.routes.dashboard
    :members:
