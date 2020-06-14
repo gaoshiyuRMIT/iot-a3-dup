@@ -62,3 +62,19 @@ to generate the API documentation:
 - make sure your virtualenv is activated and has all libraries in requirements.txt installed
 - `sphinx-build docs docs/html`
 - open docs/html/index.html
+
+
+### Trello
+
+![Screenshot](trello1.jpg)
+![Screenshot](trello2.jpg)
+![Screenshot](trello3.jpg)
+![Screenshot](trello4.jpg)
+
+
+### Github
+
+![Screenshot](github1.jpg)
+![Screenshot](github2.jpg)
+![Screenshot](github4.jpg)
+![Screenshot](github3.jpg)
