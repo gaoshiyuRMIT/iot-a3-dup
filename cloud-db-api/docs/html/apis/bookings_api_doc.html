@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bookings API Endpoints &#8212; Car Share System API 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cars API Endpoints" href="cars_api_doc.html" />
+    <link rel="prev" title="Welcome to Car Share System API’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="bookings-api-endpoints">
+<h1>Bookings API Endpoints<a class="headerlink" href="#bookings-api-endpoints" title="Permalink to this headline">¶</a></h1>
+<dl class="http get">
+<dt id="get--bookings-(int-booking_id)">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/bookings/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">booking_id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--bookings-(int-booking_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the data of one booking.</p>
+<p><strong>Example request</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/bookings/7</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;booking_id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="nt">&quot;car_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;date_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-01-01&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;date_return&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-01-05&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;finished&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;time_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;19:00:00&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;time_return&quot;</span><span class="p">:</span> <span class="s2">&quot;11:00:00&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;janedoe1&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example erroneous response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;error_code&quot;</span><span class="p">:</span> <span class="s2">&quot;MissingKey&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;error_message&quot;</span><span class="p">:</span> <span class="s2">&quot;The specified booking_id does not exist.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Response JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – a json object representing a booking, with the keys “booking_id”, “username”, “car_id”, “date_booking”, “time_booking”, “date_return”, “time_return”, “status”. The entries are ordered first by <code class="docutils literal notranslate"><span class="pre">status</span></code> ( <code class="docutils literal notranslate"><span class="pre">booked</span></code> and <code class="docutils literal notranslate"><span class="pre">inProgress</span></code> first) and then by <code class="docutils literal notranslate"><span class="pre">booking_id</span></code>.</p></li>
+<li><p><strong>error_code</strong> (<em>string</em>) – a short code name for the error</p></li>
+<li><p><strong>error_message</strong> (<em>string</em>) – readable error message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – no error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – request data is wrong, either with wrong keys or the values do not conform to type/format constraints</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="http post">
+<dt id="post--bookings-search">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/bookings/search</code><a class="headerlink" href="#post--bookings-search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for bookings.</p>
+<p><strong>Example request</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/bookings/search</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;janedoe1&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;inProgress&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;booking_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="nt">&quot;car_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">&quot;date_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-05-04&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;date_return&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-10&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;inProgress&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;time_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;19:58:02&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;time_return&quot;</span><span class="p">:</span> <span class="s2">&quot;11:00:00&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;janedoe1&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example erroneous response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;error_code&quot;</span><span class="p">:</span> <span class="s2">&quot;InvalidArgument&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;error_message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid key(s): bodyy_type&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>booking_id</strong> (<em>int</em>) – </p></li>
+<li><p><strong>username</strong> (<em>string</em>) – </p></li>
+<li><p><strong>car_id</strong> (<em>int</em>) – </p></li>
+<li><p><strong>date_booking</strong> (<em>string</em>) – in iso format, e.g. “2020-06-01”</p></li>
+<li><p><strong>time_booking</strong> (<em>string</em>) – in iso format, e.g. “19:58:02”</p></li>
+<li><p><strong>date_return</strong> (<em>string</em>) – in iso format, e.g. “2020-06-01”</p></li>
+<li><p><strong>time_return</strong> (<em>string</em>) – in iso format, e.g. “19:58:02”</p></li>
+<li><p><strong>status</strong> (<em>string</em>) – one of <code class="docutils literal notranslate"><span class="pre">booked</span></code>, <code class="docutils literal notranslate"><span class="pre">inProgress</span></code>, <code class="docutils literal notranslate"><span class="pre">cancelled</span></code>, <code class="docutils literal notranslate"><span class="pre">finished</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>data</strong> – a list of booking datas, each booking with the keys “booking_id”, “username”, “car_id”, “date_booking”, “time_booking”, “date_return”, “time_return”, “status”. The entries are ordered first by <code class="docutils literal notranslate"><span class="pre">status</span></code> ( <code class="docutils literal notranslate"><span class="pre">booked</span></code> and <code class="docutils literal notranslate"><span class="pre">inProgress</span></code> first) and then by <code class="docutils literal notranslate"><span class="pre">booking_id</span></code>.</p></li>
+<li><p><strong>error_code</strong> (<em>string</em>) – a short code name for the error</p></li>
+<li><p><strong>error_message</strong> (<em>string</em>) – readable error message</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – no error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – request data is wrong, either with wrong keys or the values do not conform to type/format constraints</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="http put">
+<dt id="put--bookings-(int-booking_id)-update">
+<code class="sig-name descname">PUT </code><code class="sig-name descname">/bookings/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">booking_id</em><span class="sig-paren">)</span><code class="sig-name descname">/update</code><a class="headerlink" href="#put--bookings-(int-booking_id)-update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a booking’s data.</p>
+<p><strong>Example request</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/bookings/3/update</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;cancelled&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;success&quot;</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example erroneous response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;error_code&quot;</span><span class="p">:</span> <span class="s2">&quot;InvalidArgument&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;error_message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid key(s): statuss&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_booking</strong> (<em>string,optional</em>) – in iso format, e.g. “2020-06-01”</p></li>
+<li><p><strong>time_booking</strong> (<em>string,optional</em>) – in iso format, e.g. “19:58:02”</p></li>
+<li><p><strong>date_return</strong> (<em>string,optional</em>) – in iso format, e.g. “2020-06-01”</p></li>
+<li><p><strong>time_return</strong> (<em>string,optional</em>) – in iso format, e.g. “19:58:02”</p></li>
+<li><p><strong>status</strong> (<em>string,optional</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>data</strong> – has the key “success”, which is whether true or false</p></li>
+<li><p><strong>error_code</strong> – a short name for the error</p></li>
+<li><p><strong>error_message</strong> – a readable error message</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – no error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – request data is wrong, either with wrong keys or the values do not conform to type/format constraints</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="http post">
+<dt id="post--bookings-add">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/bookings/add</code><a class="headerlink" href="#post--bookings-add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new booking, and get the inserted booking’s booking_id.</p>
+<p><strong>Example request</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/cars/add</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;car_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nt">&quot;date_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-06-01&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;date_return&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-06-05&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;time_booking&quot;</span><span class="p">:</span> <span class="s2">&quot;19:58:02&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;time_return&quot;</span><span class="p">:</span> <span class="s2">&quot;11:00:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;janedoe1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;booking_id&quot;</span><span class="p">:</span> <span class="mi">4</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example erroneous response</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;error_code&quot;</span><span class="p">:</span> <span class="s2">&quot;MissingKey&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;error_message&quot;</span><span class="p">:</span> <span class="s2">&quot;The specified user does not exist&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Request JSON Object</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – must be of an existing user</p></li>
+<li><p><strong>car_id</strong> (<em>int</em>) – must be of an existing car</p></li>
+<li><p><strong>date_booking</strong> (<em>string</em>) – in iso format, e.g. “2020-06-01”; must be in the future</p></li>
+<li><p><strong>time_booking</strong> (<em>string</em>) – in iso format, e.g. “19:58:02”; must be in the future</p></li>
+<li><p><strong>date_return</strong> (<em>string</em>) – in iso format, e.g. “2020-06-01”; must be in the future</p></li>
+<li><p><strong>time_return</strong> (<em>string</em>) – in iso format, e.g. “19:58:02”; must be in the future</p></li>
+</ul>
+</dd>
+<dt class="field-even">Response JSON Object</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>data</strong> – has the key “booking_id”, which is the booking_id of the newly added booking</p></li>
+<li><p><strong>error_code</strong> – a short name for the error</p></li>
+<li><p><strong>error_message</strong> – a readable error message</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Status Codes</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – no error</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – request data is wrong, either with wrong keys or the values do not conform to type/format constraints</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Car Share System API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bookings API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cars_api_doc.html">Cars API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="users_api_doc.html">Users API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managers/base_manager.html">DB Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managers/booking_manager.html">Booking Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managers/car_manager.html">Car Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../managers/user_manager.html">User Manager</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to Car Share System API’s documentation!</a></li>
+      <li>Next: <a href="cars_api_doc.html" title="next chapter">Cars API Endpoints</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/apis/bookings_api_doc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
