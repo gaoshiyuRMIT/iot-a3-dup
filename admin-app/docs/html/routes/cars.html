@@ -5,19 +5,19 @@
   <head>
     <meta charset="utf-8" />
     <title>Car Routes &#8212; Car Share System Admin App 0.1 documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dashboard Routes" href="dashboard.html" />
-    <link rel="prev" title="Employee Service" href="employee_service.html" />
+    <link rel="prev" title="User Service" href="../services/user_service.html" />
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
@@ -64,11 +64,6 @@ the add car page and sends this data to database.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="app.routes.cars.admin_talk">
-<code class="sig-prename descclassname">app.routes.cars.</code><code class="sig-name descname">admin_talk</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.cars.admin_talk" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
 <dt id="app.routes.cars.list_cars">
 <code class="sig-prename descclassname">app.routes.cars.</code><code class="sig-name descname">list_cars</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.cars.list_cars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines URL/route for displaying cars. Retrieves cars (stored in 
@@ -99,6 +94,11 @@ assigned this status when they need an engineer to fix them.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py function">
+<dt id="app.routes.cars.makeassistant">
+<code class="sig-prename descclassname">app.routes.cars.</code><code class="sig-name descname">makeassistant</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.cars.makeassistant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt id="app.routes.cars.map">
@@ -227,6 +227,11 @@ car, stored in database (except car ID).</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt id="app.routes.cars.voicesearch">
+<code class="sig-prename descclassname">app.routes.cars.</code><code class="sig-name descname">voicesearch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.cars.voicesearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -236,7 +241,7 @@ car, stored in database (except car ID).</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Car Share System Admin App</a></h1>
+<h1 class="logo"><a href="../index.html">Car Share System Admin App</a></h1>
 
 
 
@@ -248,11 +253,11 @@ car, stored in database (except car ID).</p>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="base_service.html">Base Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="car_service.html">Car Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="booking_service.html">Booking Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_service.html">User Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="employee_service.html">Employee Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/base_service.html">Base Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/booking_service.html">Booking Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/car_service.html">Car Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/employee_service.html">Employee Service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/user_service.html">User Service</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Car Routes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dashboard.html">Dashboard Routes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="employees.html">Employee Routes</a></li>
@@ -262,8 +267,8 @@ car, stored in database (except car ID).</p>
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="employee_service.html" title="previous chapter">Employee Service</a></li>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../services/user_service.html" title="previous chapter">User Service</a></li>
       <li>Next: <a href="dashboard.html" title="next chapter">Dashboard Routes</a></li>
   </ul></li>
 </ul>
@@ -271,7 +276,7 @@ car, stored in database (except car ID).</p>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
@@ -298,7 +303,7 @@ car, stored in database (except car ID).</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="_sources/cars.rst.txt"
+      <a href="../_sources/routes/cars.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
