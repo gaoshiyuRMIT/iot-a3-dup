@@ -134,12 +134,11 @@ $("#talk_to_assistant").click(function(event) {
         $('#user-input').html("<b>You asked Google: </b> \"" + response["input"] + "\"");
         $("#talk_to_assistant").removeClass("disabled");
        
-        assistantResponses = response["response"].split("\n");
-
-        google_response = assistantResponses[0];
-        database_response = assistantResponses[1];
-
         try {
+            assistantResponses = response["response"].split("\n");
+            google_response = assistantResponses[0];
+            database_response = assistantResponses[1];
+
             filterData = JSON.parse(assistantResponses[1].trim());
                 for(var key in filterData){
                     if (!filterData.hasOwnProperty(key)){
