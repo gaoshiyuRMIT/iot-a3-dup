@@ -15,6 +15,11 @@ Welcome to Car Share System Admin website's documentation!
    booking_service
    user_service
    employee_service
+   cars
+   dashboard
+   employees
+   users 
+
 
 Indices and tables
 ==================

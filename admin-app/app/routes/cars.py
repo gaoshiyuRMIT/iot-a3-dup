@@ -98,8 +98,7 @@ def add_car():
     """Provides logic (via POST) to retrieve data entered by user on 
     the add car page and sends this data to database.
 
-    :return: confirmation message of car being added and redirects user 
-    to main menu
+    :return: confirmation message, redirects user to main menu
     :rtype: flask template
     """
     service = CarService()
@@ -157,8 +156,7 @@ def update_car(car_id):
 
     :param car_id: ID/primary key of cars in car table
     :type car_id: int
-    :return: confirmation message that car has been updated and routes 
-    to main list of cars
+    :return: confirmation message, returns to main car list
     :rtype: flask template
     """
     service = CarService()
