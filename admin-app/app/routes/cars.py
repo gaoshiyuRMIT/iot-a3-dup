@@ -147,6 +147,9 @@ def update_car_page(car_id):
     """
     #get current car details
     car = CarService().get_car(car_id)
+    for k in list(car.keys()):
+        if car[k] is None:
+            car[k] = ""
     #return template with car details attached
     return render_template('updateCar.html', car=car)
 
@@ -171,10 +174,11 @@ def update_car(car_id):
         'num_seats': request.form['num_seats'],
         'car_colour': request.form['car_colour'],
         'cost_hour': request.form['cost_hour'],
-        'latitude': request.form['latitude'],
-        'longitude': request.form['longitude'],
         'car_status': request.form['car_status']
     }
+    for k in ('latitude', 'longitude'):
+        if request.form[k]:
+            data[k] = request.form[k]
     service.update_car(car_id, data)
     flash(f"Success! Car #{car_id} details updated")
     return redirect(url_for('cars.list_cars'))
