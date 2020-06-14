@@ -1,11 +1,14 @@
 from datetime import datetime
-from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash
+from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash, session
 from pushbullet import Pushbullet
+import jsonpickle
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
 from app.gassistant.assistant import AspenAssistant
 
 bp = Blueprint("cars", __name__, url_prefix="/cars")
+
+assistant = None
 
 @bp.route("/")
 def list_cars():
@@ -120,8 +123,16 @@ def report_car_with_issue(car_id):
     car_svc.report_car_with_issue(car_id)
     return redirect(url_for("cars.list_cars"))
 
+
+@bp.route("/makeassistant")
+def makeassistant():
+    #assistant = AspenAssistant()
+    #session['assistant'] = jsonpickle.encode(assistant)
+    return {"success" : "true"}
+
 @bp.route("/voicesearch")
 def voicesearch():
     assistant = AspenAssistant()
     a,b,c = assistant.assist()
     return c
+

@@ -244,6 +244,7 @@ class AspenAssistant(object):
 
         logging.info('Finished playing assistant response.')
         self.conversation_stream.stop_playback()
+        self.conversation_stream.close()
         return continue_conversation, text_response, user_input
 
     def gen_assist_requests(self):
@@ -280,8 +281,6 @@ class AspenAssistant(object):
             # Subsequent requests need audio data, but not config.
             yield embedded_assistant_pb2.AssistRequest(audio_in=data)
 
-    def getAssist(self):
-        return self.assistant
 
 if __name__ == '__main__':
     main()
