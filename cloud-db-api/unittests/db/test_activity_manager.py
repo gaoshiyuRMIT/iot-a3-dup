@@ -37,4 +37,9 @@ class TestActivityManager:
                 cur.execute(f"delete from {self.actMgr.TABLE_NAME} where activity_id = %s", dataID)
         self.conn.commit()
     
+    def testCountActivityType(self):
+        '''test whether activity manager counts number of activity events correctly'''
+        self.assertEqual(3, len(self.actMgr.get_type_counts()))
+
+
     
