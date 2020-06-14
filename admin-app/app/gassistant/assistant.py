@@ -204,18 +204,18 @@ class AspenAssistant(object):
                 if not self.conversation_stream.playing:
                     self.conversation_stream.stop_recording()
                     
-                    self.conversation_stream.start_playback()
-                    print('Playing assistant response.')
+                    #self.conversation_stream.start_playback()
+                    #print('Playing assistant response.')
                     #print (resp)
-                self.conversation_stream.write(resp.audio_out.audio_data)
+                #self.conversation_stream.write(resp.audio_out.audio_data)
             if resp.dialog_state_out.conversation_state:
                 conversation_state = resp.dialog_state_out.conversation_state
                 print('Updating conversation state.')
-                self.conversation_state = conversation_state
+                #self.conversation_state = conversation_state
             if resp.dialog_state_out.volume_percentage != 0:
                 volume_percentage = resp.dialog_state_out.volume_percentage
                 print('Setting volume to %s%%', volume_percentage)
-                self.conversation_stream.volume_percentage = volume_percentage
+                #self.conversation_stream.volume_percentage = volume_percentage
             if resp.dialog_state_out.microphone_mode == DIALOG_FOLLOW_ON:
                 continue_conversation = True
                 logging.info('Expecting follow-on query from user.')
@@ -243,9 +243,9 @@ class AspenAssistant(object):
             concurrent.futures.wait(device_actions_futures)
 
         logging.info('Finished playing assistant response.')
-        self.conversation_stream.stop_playback()
+        #self.conversation_stream.stop_playback()
         self.conversation_stream.close()
-        return continue_conversation, text_response, user_input
+        return {"continue" : continue_conversation, "response" : text_response, "input" : user_input}
 
     def gen_assist_requests(self):
         """Yields: AssistRequest messages to send to the API."""

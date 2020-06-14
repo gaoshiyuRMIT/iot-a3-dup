@@ -18,6 +18,12 @@
             zoom: maxZoomLevel
         };
 
+        function updateCarList(){
+            carInfoDiv = document.getElementById("car-location-info");
+            carDivs = carInfoDiv.getElementsByTagName("div");
+            initMap();
+        }
+
         function markCar(car, mapObj){
             var lat = parseFloat(car.getAttribute("data-lat"));
             var lon = parseFloat(car.getAttribute("data-lon"));
@@ -84,11 +90,21 @@
             }
         }
 
+        function toggleMaps(){
+            toggleVisibility("google_map");
+            const mapbutton = document.getElementById("map-button");
+            if (mapbutton.innerHTML.trim() === "Show Maps"){
+                mapbutton.innerHTML = "Hide Maps";
+            } else {
+                mapbutton.innerHTML = "Show Maps";
+            }
+        }
+
         function toggleSearchForm() {
             toggleVisibility("search-form");
             const b = document.getElementById("toggle-form-button");
             if (b.innerHTML.trim() === "Search / Filter")
-                b.innerHTML = "Hide";
+                b.innerHTML = "Hide Filters";
             else
                 b.innerHTML = "Search / Filter";
         }
@@ -101,19 +117,45 @@
 <!-------------------GOOGlE ASSISTANT INTEGRATION------------------------->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
-$(document).ready(function(event){
-$.ajax({ url: "{{ url_for('cars.makeassistant') }}", 
-            success: function(){
-                alert("google assistant connected");
-            }});
-});
+// $(document).ready(function(event){
+// $.ajax({ url: "{{ url_for('cars.makeassistant') }}", 
+//             success: function(){
+//                 alert("google assistant connected");
+//             }});
+// });
 
 $("#talk_to_assistant").click(function(event) {
+    $("#talk_to_assistant").addClass("disabled");
     $.ajax({
         url: "{{ url_for('cars.voicesearch') }}",
-    }).done(function(car_usage_raw) {
+    }).done(function(response) {
         console.log("car usage raw data: ");
-        console.log(car_usage_raw);
+        console.log(response["continue"]);
+        console.log(response["input"]);
+        console.log(response["response"]);
+        $('#user-input').html("<b>You asked Google: </b> \"" + response["input"] + "\"");
+        $("#talk_to_assistant").removeClass("disabled");
+
+        
+
+        filterData = JSON.parse(response["response"].split("\n")[1].trim());
+
+        if (filterData != null){
+            for(var key in filterData){
+                if (!filterData.hasOwnProperty(key)){
+                    continue;
+                }
+                console.log(key);
+                matchingInputField = document.getElementById(key);
+                if (matchingInputField.nodeName === "INPUT"){
+                    matchingInputField.value = filterData[key];
+                }
+            }
+
+            document.getElementById("filterForm").submit();
+        }
+
+
     });
 });
 </script>
@@ -126,17 +168,24 @@ $("#talk_to_assistant").click(function(event) {
             {{ super() }}
         {% endblock %}
     
-        <div class="panel">
+        <div class="panel col-md-6">
             <a class="btn btn-primary" href="{{ url_for('cars.add_car_page') }}">Add a Car</a>
             <a class="btn btn-info" id="talk_to_assistant" href=#>Talk to Google Assistant</a>
         </div>
+        <div class="panel col-md-6">
+            <p id="user-input"></p>
+        </div>
 
-        <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide</button>
+    </div>
+    <div class="container">
+
+        <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide Filters</button>
+        <button onclick="toggleMaps()" id= "map-button" class="col-2 btn btn-light">Hide Maps</button>
         <div class="panel">
             <div class="panel-body" id="search-form">
                 <div class="row">
                     <div class="col-md-12">
-                    <form method="post" action="{{ url_for('cars.search_cars') }}">
+                    <form method="post" id="filterForm" action="{{ url_for('cars.search_cars') }}">
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="car_id">Car ID</label>

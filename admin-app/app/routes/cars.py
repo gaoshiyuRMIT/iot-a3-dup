@@ -8,8 +8,6 @@ from app.gassistant.assistant import AspenAssistant
 
 bp = Blueprint("cars", __name__, url_prefix="/cars")
 
-assistant = None
-
 @bp.route("/")
 def list_cars():
     key = current_app.config['GOOGLE_API_KEY']
@@ -133,6 +131,6 @@ def makeassistant():
 @bp.route("/voicesearch")
 def voicesearch():
     assistant = AspenAssistant()
-    a,b,c = assistant.assist()
-    return c
+    data = assistant.assist()
+    return data
 
