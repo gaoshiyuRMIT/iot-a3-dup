@@ -1,0 +1,9 @@
+{
+  "id": "35974af4-87ff-4045-b685-655d5492bd55",
+  "name": "CarSeats",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

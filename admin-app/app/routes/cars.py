@@ -1,9 +1,9 @@
 from datetime import datetime
-from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash
+from flask import Blueprint, request, redirect, url_for, render_template, current_app, flash, session
 from pushbullet import Pushbullet
 from app.services.car_service import CarService
 from app.services.booking_service import BookingService
-from app.services.admintalk import AdminTalk
+from app.gassistant.assistant import AspenAssistant
 
 bp = Blueprint("cars", __name__, url_prefix="/cars")
 
@@ -62,9 +62,12 @@ def search_cars():
         if searchD[rangeK][0] == searchD[rangeK][1]:
             searchD[rangeK] = searchD[rangeK][0]
     searchD = {k: v for k,v in searchD.items() if v}
+
+    user_speech = request.form.get("user_google_input")
+
     # call CarService to search for cars, providing search dict
     cars = CarService().search_cars(searchD)
-    return render_template("cars.html", cars=cars, key=key)
+    return render_template("cars.html", cars=cars, key=key, u_input=user_speech)
 
 @bp.route("/<int:car_id>/map")
 def map(car_id):
@@ -98,8 +101,7 @@ def add_car():
     """Provides logic (via POST) to retrieve data entered by user on 
     the add car page and sends this data to database.
 
-    :return: confirmation message of car being added and redirects user 
-    to main menu
+    :return: confirmation message, redirects user to main menu
     :rtype: flask template
     """
     service = CarService()
@@ -145,6 +147,9 @@ def update_car_page(car_id):
     """
     #get current car details
     car = CarService().get_car(car_id)
+    for k in list(car.keys()):
+        if car[k] is None:
+            car[k] = ""
     #return template with car details attached
     return render_template('updateCar.html', car=car)
 
@@ -157,8 +162,7 @@ def update_car(car_id):
 
     :param car_id: ID/primary key of cars in car table
     :type car_id: int
-    :return: confirmation message that car has been updated and routes 
-    to main list of cars
+    :return: confirmation message, returns to main car list
     :rtype: flask template
     """
     service = CarService()
@@ -170,10 +174,11 @@ def update_car(car_id):
         'num_seats': request.form['num_seats'],
         'car_colour': request.form['car_colour'],
         'cost_hour': request.form['cost_hour'],
-        'latitude': request.form['latitude'],
-        'longitude': request.form['longitude'],
         'car_status': request.form['car_status']
     }
+    for k in ('latitude', 'longitude'):
+        if request.form[k]:
+            data[k] = request.form[k]
     service.update_car(car_id, data)
     flash(f"Success! Car #{car_id} details updated")
     return redirect(url_for('cars.list_cars'))
@@ -217,7 +222,16 @@ def report_car_with_issue(car_id):
     car_svc.report_car_with_issue(car_id)
     return redirect(url_for("cars.list_cars"))
 
-@bp.route("/admintalk")
-def admin_talk():
-    a = AdminTalk()
-    return a.test()
+
+@bp.route("/makeassistant")
+def makeassistant():
+    #assistant = AspenAssistant()
+    #session['assistant'] = jsonpickle.encode(assistant)
+    return {"success" : "true"}
+
+@bp.route("/voicesearch")
+def voicesearch():
+    assistant = AspenAssistant()
+    data = assistant.assist()
+    return data
+

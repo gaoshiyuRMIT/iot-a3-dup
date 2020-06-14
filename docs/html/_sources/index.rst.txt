@@ -17,8 +17,8 @@ Contents:
 .. _Admin Website: ../../admin-app/docs/html/index.html
 .. _Cloud DB API: ../../cloud-db-api/docs/html/index.html
 .. _Customer Website: ../../customer-app/docs/html/index.html
-.. _Socket Server: ../../credential_server/docs/html/index.html
-.. _Agent Pi Console App: ../../ap/docs/html/index.html
+.. _Socket Server: ../../credential_server/docs/build/html/index.html
+.. _Agent Pi Console App: ../../ap/docs/build/html/index.html
 
 
 Indices and tables

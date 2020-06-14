@@ -1,0 +1,9 @@
+{
+  "id": "af7a56d6-ead6-43d6-9b36-979047f311d2",
+  "name": "CarBody",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

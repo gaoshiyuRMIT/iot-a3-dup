@@ -61,8 +61,7 @@ def update_user(username):
 
     :param username: username=primary key for user in user table
     :type username: string
-    :return: Confirmation message that user has been updated, redirects 
-    to user view/search page.
+    :return: Confirmation message, redirects to user view/search page.
     :rtype: flask template
     """
     #get current user details in order to retain password if needed

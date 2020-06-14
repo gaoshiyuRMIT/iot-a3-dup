@@ -1,0 +1,29 @@
+[
+  {
+    "value": "dollars per hour",
+    "synonyms": [
+      "dollars per hour",
+      "price per hour",
+      "per hour cost",
+      "hourly price",
+      "price for hour",
+      "hour price",
+      "dollars an hour",
+      "price an hour",
+      "cost an hour",
+      "per hour",
+      "cost per hour",
+      "hour cost",
+      "hourly cost"
+    ]
+  },
+  {
+    "value": "dollars",
+    "synonyms": [
+      "dollars",
+      "bucks",
+      "price",
+      "cash"
+    ]
+  }
+]

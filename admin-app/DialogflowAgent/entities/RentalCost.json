@@ -1,0 +1,9 @@
+{
+  "id": "d2f612c9-3015-4d05-b334-343ee46bd82c",
+  "name": "RentalCost",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

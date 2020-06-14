@@ -1,4 +1,5 @@
 import logging
+import json
 from . import request, url_for, Blueprint, g
 from app.CarManager import CarManager
 from . import jsonifyResponseData
@@ -83,20 +84,29 @@ def assistant_repsonse():
     # transform/clean search dict
     searchD = {k: (raw_parameters[k] if k in raw_parameters else "") for k in fields}
     searchD = {k: (t(searchD[k]) if searchD[k] else "") for k,t in zip(fields, types)}
-    for rangeK in ("year", "num_seats", "cost_hour"):
-        fromK = rangeK + "_from"
-        toK = rangeK + "_to"
-        searchD[rangeK] = [searchD.pop(fromK), searchD.pop(toK)]
-        if searchD[rangeK][0] == searchD[rangeK][1]:
-            searchD[rangeK] = searchD[rangeK][0]
+    # for rangeK in ("year", "num_seats", "cost_hour"):
+    #     fromK = rangeK + "_from"
+    #     toK = rangeK + "_to"
+    #     searchD[rangeK] = [searchD.pop(fromK), searchD.pop(toK)]
+    #     if searchD[rangeK][0] == searchD[rangeK][1]:
+    #         searchD[rangeK] = searchD[rangeK][0]
     searchD = {k: v for k,v in searchD.items() if v}
 
-    logger.debug(searchD)
-    matches = carMgr.getMany(searchD)
-    if len(matches) <= 0:
-      return {"fulfillmentText" : "There's no cars that match that description."}
-    else: 
-      return {"fulfillmentText" : "Okay. Getting cars matching your description.", "carInfo": matches}
+    # logger.debug(searchD)
+    # matches = carMgr.getMany(searchD)
+
+    # car_id_list = []
+
+    # for match in matches:
+    #     car_id_list.append(match["car_id"])
+
+    # logger.debug(car_id_list)
+
+    # if len(matches) <= 0:
+    #     return {"fulfillmentText" : "There's no cars that match that description."}
+    # else: 
+    return {"fulfillmentText" : json.dumps(searchD)}
+        #return {"fulfillmentText" : json.dumps(car_id_list)}
 
     return {"fulfillmentText" : "Something's gone a bit awry. Please hold."}
 

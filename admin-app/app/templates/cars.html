@@ -18,9 +18,20 @@
             zoom: maxZoomLevel
         };
 
+        function updateCarList(){
+            carInfoDiv = document.getElementById("car-location-info");
+            carDivs = carInfoDiv.getElementsByTagName("div");
+            initMap();
+        }
+
         function markCar(car, mapObj){
             var lat = parseFloat(car.getAttribute("data-lat"));
             var lon = parseFloat(car.getAttribute("data-lon"));
+
+            if (isNaN(lat) || isNaN(lon)){
+                return;
+            }
+
             var model = car.getAttribute("data-model");
             var id = car.id;
 
@@ -51,8 +62,6 @@
             markers.push(location);
         }
 
-        
-
         function initMap() {
             map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
             for(i=0; i < carDivs.length; i++){
@@ -69,7 +78,6 @@
 
         }
 
-        
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"></script>
     <script>  
@@ -82,11 +90,21 @@
             }
         }
 
+        function toggleMaps(){
+            toggleVisibility("google_map");
+            const mapbutton = document.getElementById("map-button");
+            if (mapbutton.innerHTML.trim() === "Show Maps"){
+                mapbutton.innerHTML = "Hide Maps";
+            } else {
+                mapbutton.innerHTML = "Show Maps";
+            }
+        }
+
         function toggleSearchForm() {
             toggleVisibility("search-form");
             const b = document.getElementById("toggle-form-button");
             if (b.innerHTML.trim() === "Search / Filter")
-                b.innerHTML = "Hide";
+                b.innerHTML = "Hide Filters";
             else
                 b.innerHTML = "Search / Filter";
         }
@@ -95,6 +113,52 @@
             toggleSearchForm();
         })
     </script>
+
+<!-------------------GOOGlE ASSISTANT INTEGRATION------------------------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+<script>
+$(document).ready(function(event){
+
+    $('#user-input').html("<b>You asked Google: </b> \"" + document.getElementById("user_google_input").value + "\"");
+});
+
+$("#talk_to_assistant").click(function(event) {
+    $("#talk_to_assistant").addClass("disabled");
+    $.ajax({
+        url: "{{ url_for('cars.voicesearch') }}",
+    }).done(function(response) {
+        console.log("assistant data: ");
+        console.log(response["input"]);
+        console.log(response["response"]);
+        document.getElementById("user_google_input").value = response["input"];
+        $('#user-input').html("<b>You asked Google: </b> \"" + response["input"] + "\"");
+        $("#talk_to_assistant").removeClass("disabled");
+       
+        try {
+            assistantResponses = response["response"].split("\n");
+            google_response = assistantResponses[0];
+            database_response = assistantResponses[1];
+
+            filterData = JSON.parse(assistantResponses[1].trim());
+                for(var key in filterData){
+                    if (!filterData.hasOwnProperty(key)){
+                        continue;
+                    }
+                    console.log(key);
+                    matchingInputField = document.getElementById(key);
+                    if (matchingInputField.nodeName === "INPUT"){
+                        matchingInputField.value = filterData[key];
+                    }
+                }
+                document.getElementById("filterForm").submit();
+        } catch (e){
+            console.log(e);
+            $('#user-input').html("<b>Something went wrong - try again.</b>");
+        }
+    });
+});
+</script>
+
 {% endblock %}
 
 {% block content %}
@@ -102,17 +166,36 @@
         {% block error_message %}
             {{ super() }}
         {% endblock %}
-    
-        <div class="panel">
+
+        <div class="panel col-md-4">
             <a class="btn btn-primary" href="{{ url_for('cars.add_car_page') }}">Add a Car</a>
+            <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide Filters</button>
+            <button onclick="toggleMaps()" id= "map-button" class="col-2 btn btn-light">Hide Maps</button>
+        </div>
+    
+        <div class="panel col-md-8">
+            <div class="row">
+                <div class="col-md-10">
+                    <p><b>Say "Ask Sharing is Caring.." or "Talk to Sharing is Caring.." before your query to Google!</b></p>
+                    <p><i>Example: "<b>Ask Sharing is Caring</b> to show <b>black</b> cars worth more than <b>$5 per hour</b></i></p>
+                    <p><i>Example: "<b>Talk to Sharing is Caring</b> about <b>sedans</b> with between <b>2 and 5 seats</b></i></p>
+                </div>
+                <div class="col-md-2">
+                    <a class="btn btn-info" id="talk_to_assistant" href=#>Talk to Google Assistant</a>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <p id="user-input"><b>You asked Google:</b> {{ input }} </p>
+            </div>
         </div>
 
-        <button onclick="toggleSearchForm()" id="toggle-form-button" class="col-2 btn btn-info">Hide</button>
         <div class="panel">
             <div class="panel-body" id="search-form">
                 <div class="row">
                     <div class="col-md-12">
-                    <form method="post" action="{{ url_for('cars.search_cars') }}">
+                    <form method="post" id="filterForm" action="{{ url_for('cars.search_cars') }}">
+                        <input type="hidden" id="user_google_input" name="user_google_input" value="{{ u_input }}">
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label class="control-label" for="car_id">Car ID</label>
@@ -180,10 +263,10 @@
     </div>
     <div class="container">
         <div class='row'>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div id="google_map" style="width:100%;height:400px;"></div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="table-responsive">
                     <table class='table'>
                         <thead>
