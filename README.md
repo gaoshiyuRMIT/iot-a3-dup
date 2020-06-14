@@ -14,9 +14,11 @@
 - Aspen Forster s3330837
     - admin website search cars by voice
     - Google Assistant SDK integration
+    - project README
 - Kaspian Fitzptrick (Kase) s3630115
     - Admin website add, update and remove users & cars
     - admin website documentation
+    - unit tests for added endpoints in cloud-db-api
 - Xinhuan Duan (Stally) s3713321
     - Agent Pi Admin console app
     - bluetooth auto unlock car
