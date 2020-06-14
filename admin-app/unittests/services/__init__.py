@@ -15,10 +15,13 @@ from .test_base_services import TestBaseServices
 from .test_booking_services import TestBookingServices
 from .test_car_services import TestCarServices
 from .test_employee_services import TestEmployeeServices
+from .test_user_services import TestUserServices
+
 
 __all__ = [
     "TestBaseServices",
     "TestBookingServices",
     "TestCarServices",
-    "TestEmployeeServices"
+    "TestEmployeeServices",
+    "TestUserServices"
 ]
