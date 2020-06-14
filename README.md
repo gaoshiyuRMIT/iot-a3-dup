@@ -22,6 +22,11 @@
     - bluetooth auto unlock car
     - QR code recognition
 
+### Test Data
+- username: shiyu_admin, role: admin
+- username: shiyu_manager, role: manager
+- username: shiyu_engineer, role: engineer
+
 ### admin-app
 admin-app README: [HERE](admin-app/README.md)
 #### "admin-app": Booking website to run on the Master Pi
@@ -60,3 +65,5 @@ to generate the API documentation:
 - make sure your virtualenv is activated and has all libraries in requirements.txt installed
 - `sphinx-build docs docs/html`
 - open docs/html/index.html
+
+
