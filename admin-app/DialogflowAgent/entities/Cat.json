@@ -1,0 +1,9 @@
+{
+  "id": "6f767434-1db2-4c74-bd92-1b62ad8ed1a6",
+  "name": "Cat",
+  "isOverridable": true,
+  "isEnum": false,
+  "isRegexp": false,
+  "automatedExpansion": false,
+  "allowFuzzyExtraction": false
+}

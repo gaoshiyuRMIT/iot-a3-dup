@@ -1,0 +1,222 @@
+{
+  "id": "ffe49d81-07d1-4704-927a-79ed06bb6a62",
+  "name": "ShowMatchingCars",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "showingcars",
+      "affectedContexts": [
+        {
+          "name": "talkingtoSharingIsCaring",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "5ca95997-64a2-4d63-969f-30d5285e8815",
+          "required": false,
+          "dataType": "@sys.color",
+          "name": "car_colour",
+          "value": "$car_colour",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "8b2ececa-bca9-4ee8-8aea-8962ba15e27a",
+          "required": false,
+          "dataType": "@RentalCost",
+          "name": "RentalCost",
+          "value": "$RentalCost",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "e436587b-413f-4d23-9b59-e154fd0f337f",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "cost_hour",
+          "value": "$cost_hour",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "8eac4434-d05e-4cf6-8371-3259ae5b8ce6",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "cost_hour_to",
+          "value": "$cost_hour_to",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "a80c5821-7e35-4f16-be45-e5e37f64c05f",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "cost_hour_from",
+          "value": "$cost_hour_from",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "448fb1d4-2bad-440b-b328-516817c33277",
+          "required": false,
+          "dataType": "@CarBody",
+          "name": "body_type",
+          "value": "$body_type",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "43449838-4b8b-47fc-9d15-5e28c8f00790",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "num_seats",
+          "value": "$num_seats",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "5a669696-b4a9-4880-84c0-b8ba44f52f16",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "num_seats_to",
+          "value": "$num_seats_to",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "5574b83f-ef74-4daa-801b-b34fddb3291e",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "num_seats_from",
+          "value": "$num_seats_from",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "a115068b-c1ac-4907-94e5-637b3233e03b",
+          "required": false,
+          "dataType": "@CarSeats",
+          "name": "CarSeats",
+          "value": "$CarSeats",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "4d1b525e-a0ca-4077-b60b-7319d07481f1",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "year",
+          "value": "$year",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "3da1f5a6-5376-40c1-9fcf-a2e001db1b9a",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "year_from",
+          "value": "$year_from",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "749f8629-ddf3-48e9-b161-5653bd305fb5",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "year_to",
+          "value": "$year_to",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "f96e5a9f-92fd-4d7e-b4c1-10207fe0c592",
+          "required": false,
+          "dataType": "@CarModel",
+          "name": "CarModel",
+          "value": "$CarModel",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": "custom_payload",
+          "platform": "google",
+          "lang": "en-au",
+          "condition": "",
+          "payload": {
+            "google": {
+              "queryText": ""
+            }
+          }
+        },
+        {
+          "type": 0,
+          "lang": "en-au",
+          "condition": "",
+          "speech": [
+            "Ok. Searching the database..",
+            "Got it. Searching for cars.",
+            "Finding cars matching your description."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

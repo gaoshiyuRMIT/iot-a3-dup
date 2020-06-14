@@ -1,0 +1,38 @@
+{
+  "id": "fafbc30c-2b07-435b-9e8d-179c23a05b1d",
+  "name": "StrawberryCream",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": true,
+      "action": "testing.test",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "3134e2dd-aa4a-4e17-af01-8cd29c5619c3",
+          "required": false,
+          "dataType": "@sys.any",
+          "name": "Testing",
+          "value": "$test",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}
