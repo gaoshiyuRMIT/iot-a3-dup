@@ -69,15 +69,15 @@ to generate the API documentation:
 
 ### Trello
 
-![Screenshot](trello1.jpg)
-![Screenshot](trello2.jpg)
-![Screenshot](trello3.jpg)
-![Screenshot](trello4.jpg)
+![Screenshot](trello1.JPG)
+![Screenshot](trello2.JPG)
+![Screenshot](trello3.JPG)
+![Screenshot](trello4.JPG)
 
 
 ### Github
 
-![Screenshot](github1.jpg)
-![Screenshot](github2.jpg)
-![Screenshot](github4.jpg)
-![Screenshot](github3.jpg)
+![Screenshot](github1.JPG)
+![Screenshot](github2.JPG)
+![Screenshot](github4.JPG)
+![Screenshot](github3.JPG)
