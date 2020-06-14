@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Booking Manager &#8212; Car Share System API 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Car Manager" href="car_manager.html" />
+    <link rel="prev" title="DB Manager" href="base_manager.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-app.BookingManager">
+<span id="booking-manager"></span><h1>Booking Manager<a class="headerlink" href="#module-app.BookingManager" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="app.BookingManager.BookingManager">
+<em class="property">class </em><code class="sig-prename descclassname">app.BookingManager.</code><code class="sig-name descname">BookingManager</code><a class="headerlink" href="#app.BookingManager.BookingManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="app.BookingManager.BookingManager.addOne">
+<code class="sig-name descname">addOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">newBookingVal</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.BookingManager.BookingManager.addOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>add a new booking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>newBookingVal</strong> (<em>dict</em>) – with all the fields and values of a booking, except booking_id</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the auto-generated booking_id</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.BookingManager.BookingManager.deleteOne">
+<code class="sig-name descname">deleteOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking_id</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#app.BookingManager.BookingManager.deleteOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>deleted one booking given booking ID</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.BookingManager.BookingManager.getMany">
+<code class="sig-name descname">getMany</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filt</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#app.BookingManager.BookingManager.getMany" title="Permalink to this definition">¶</a></dt>
+<dd><p>get all bookings that satisfy the query condition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filt</strong> (<em>dict</em>) – the query condition</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a list of dictionaries, each representing a booking</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.BookingManager.BookingManager.getOne">
+<code class="sig-name descname">getOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking_id</span></em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#app.BookingManager.BookingManager.getOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a booking by supplying booking_id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>booking_id</strong> (<em>int</em>) – booking ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the booking data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.BookingManager.BookingManager.tranformDateTime">
+<em class="property">static </em><code class="sig-name descname">tranformDateTime</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">row</span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.BookingManager.BookingManager.tranformDateTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>transform date/time returned from database into ISO strings</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>dict</em>) – a row (dict) of booking fetched from database</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a dictionary in which all date/time values are transformed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="app.BookingManager.BookingManager.updateOne">
+<code class="sig-name descname">updateOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">booking_id</span></em>, <em class="sig-param"><span class="n">newBookingVal</span><span class="p">:</span> <span class="n">dict</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#app.BookingManager.BookingManager.updateOne" title="Permalink to this definition">¶</a></dt>
+<dd><p>provided booking_id and new values, update a booking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>booking_id</strong> (<em>int</em>) – booking ID</p></li>
+<li><p><strong>newBookingVal</strong> (<em>dict</em>) – a dictionary specifying the fields to update and the values to update them with</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether a row is updated successfully</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Car Share System API</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../apis/bookings_api_doc.html">Bookings API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apis/cars_api_doc.html">Cars API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apis/users_api_doc.html">Users API Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_manager.html">DB Manager</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Booking Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="car_manager.html">Car Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_manager.html">User Manager</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="base_manager.html" title="previous chapter">DB Manager</a></li>
+      <li>Next: <a href="car_manager.html" title="next chapter">Car Manager</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Shiyu Gao.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/managers/booking_manager.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -9,12 +9,25 @@ bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
 @bp.route("/")
 def dashboard():
+    """
+    Defines URL/route for dashboard: '/dashboard' which managers view on
+    logging into employee website. 
+
+    :return: html page for dashboard 
+    :rtype: flask template
+    """
     return render_template("dashboard.html")
 
 @bp.route("/data/car_usage")
 def car_usage():
-    '''number of cars being used each day
-    '''
+    """
+    Defines URL/route '/dashboard/data/car_usage' which displays number 
+    of cars being used each day. Retrieves bookings data from cloud 
+    database and transforms for display in graph.
+
+    :return: car usage data in json form
+    :rtype: flask Response object 
+    """
     bk_svc = BookingService()
     bookings = bk_svc.search_bookings({})
     counter = Counter()
@@ -32,8 +45,15 @@ def car_usage():
 
 @bp.route("/data/revenue")
 def rental_revenue():
-    '''revenue generated from rental each day
-    '''
+    """
+    Defines URL/route '/dashboard/data/revenue' which displays the daily
+    revenue from renting cars. Retrieves booking history from cloud database
+    and calculates amount of time cars have been rented for and resultant
+    revenue. 
+
+    :return: revenue data in json form
+    :rtype: flask response object
+    """
     bk_svc = BookingService()
     bookings = bk_svc.get_all_with_cars()
     counter = Counter()
@@ -55,7 +75,13 @@ def rental_revenue():
 
 @bp.route("/data/user_activities")
 def user_activities():
-    '''# of active users each day
-    '''
+    """
+    Defines URL/route '/dashboard/data/user_activities which displays
+    number of active users each day. Information retrieved from cloud
+    database table user_activity 
+
+    :return: number of active user/day is json form
+    :rtype: flask response object
+    """
     type_counts = UserService().get_activity_types()
     return jsonify(type_counts)

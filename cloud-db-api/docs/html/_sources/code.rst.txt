@@ -1,6 +1,0 @@
-Code docs
-=========
-.. module:: app.BookingManager
-
-.. autoclass:: BookingManager
-    :members:

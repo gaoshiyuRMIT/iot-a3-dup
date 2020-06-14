@@ -8,7 +8,7 @@ Update Car Details
 {% block error_message %}
 {{ super() }}
 {% endblock %}
-<form class="form-horizontal needs-validation" action="{{ url_for('cars.update_car', car_id=car['car_id']) }}" method="POST">
+<form class="form-horizontal needs-validation" action="{{ url_for('cars.update_car', car_id=car['car_id']) }}" method="post">
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -74,7 +74,7 @@ Update Car Details
             <div class="row">
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="car_status">Update Status:</label>
-                    <input class="col-md-2 control-form" type="text" id="car_status" name="car_status" value="{{ car['car_status'] }}">
+                    <input class="col-md-2 control-form" type="text" id="car_status" name="car_status" value="{{ car['car_status'] }}" pattern="(available|booked|hasIssue)" title="status can be: 'available', 'booked', or 'hasIssue'">
                 </div>
             </div> 
         </div>

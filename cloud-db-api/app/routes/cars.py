@@ -48,6 +48,8 @@ def addCar():
     # untested
     newCarVal = request.json
     newCarVal = carMgr.keepValidFieldsOnly(newCarVal)
+     # pop 'None' values
+    newCarVal = {k: v for k,v in newCarVal.items() if v is not None and v != ""}
     carId = carMgr.addOne(newCarVal)
     return {"car_id": carId}
 
