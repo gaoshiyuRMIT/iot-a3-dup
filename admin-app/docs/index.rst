@@ -6,9 +6,14 @@
 Welcome to Car Share System Admin website's documentation!
 ==========================================================
 
+Back to `Home Page`_
+
+.. _Home Page: ../../../docs/html/index.html
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
 
    base_service
    car_service

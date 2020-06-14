@@ -58,8 +58,7 @@ function generate_date_revenue_line_chart(canvas_id, data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                        stepSize: 0.1
+                        beginAtZero: true
                     }
                 }],
                 xAxes: [{
@@ -97,6 +96,11 @@ function generate_activity_polar_area(canvas_id, data, labels) {
             }]
         },
         options: {
+            scale: {
+                ticks: {
+                    stepSize: 1
+                }
+            }
         }
     });
     return myChart;

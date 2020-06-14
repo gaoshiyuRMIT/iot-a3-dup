@@ -6,17 +6,17 @@
 Welcome to Car Share System API's documentation!
 ================================================
 
+Back to `Home Page`_
+
+.. _Home Page: ../../../docs/html/index.html
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
 
-   users_api_doc
-   cars_api_doc
-   bookings_api_doc
-   booking_manager
-   car_manager
-   user_manager
-   base_manager
+   apis/*
+   managers/*
 
 
 Indices and tables

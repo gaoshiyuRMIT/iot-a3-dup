@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>socket_extension package &#8212; agent pi for engineer 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to agent pi for engineer’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="socket-extension-package">
+<h1>socket_extension package<a class="headerlink" href="#socket-extension-package" title="Permalink to this headline">¶</a></h1>
+<p>this module is used to communicate with the server.</p>
+<div class="section" id="module-socket_extension.client">
+<span id="socket-extension-client-module"></span><h2>socket_extension.client module<a class="headerlink" href="#module-socket_extension.client" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="socket_extension.client.client">
+<em class="property">class </em><code class="sig-prename descclassname">socket_extension.client.</code><code class="sig-name descname">client</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">address</span></em>, <em class="sig-param"><span class="n">port</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.client.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is a class used to connect to the server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>address</strong> (<em>string</em>) – the ip address of the server</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – the port that the server is listening on</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="socket_extension.client.client.close_client">
+<code class="sig-name descname">close_client</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.client.client.close_client" title="Permalink to this definition">¶</a></dt>
+<dd><p>close connection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="socket_extension.client.client.listen_from_server">
+<code class="sig-name descname">listen_from_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.client.client.listen_from_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>read data from server</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="socket_extension.client.client.send_data">
+<code class="sig-name descname">send_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.client.client.send_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>send data to server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>string</em>) – data to be sent to the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-socket_extension.dataHelper">
+<span id="socket-extension-datahelper-module"></span><h2>socket_extension.dataHelper module<a class="headerlink" href="#module-socket_extension.dataHelper" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="socket_extension.dataHelper.dataHelper">
+<em class="property">class </em><code class="sig-prename descclassname">socket_extension.dataHelper.</code><code class="sig-name descname">dataHelper</code><a class="headerlink" href="#socket_extension.dataHelper.dataHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>this is a class desined to generate data sent to the server side</p>
+<dl class="py method">
+<dt id="socket_extension.dataHelper.dataHelper.valid_QR">
+<code class="sig-name descname">valid_QR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decode</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.dataHelper.dataHelper.valid_QR" title="Permalink to this definition">¶</a></dt>
+<dd><p>create validation data for blur tooth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>decode</strong> (<em>string</em>) – the string decoded from the QRcode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the data that will be sent via socket</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="socket_extension.dataHelper.dataHelper.validate_blue">
+<code class="sig-name descname">validate_blue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">MACAdd</span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_extension.dataHelper.dataHelper.validate_blue" title="Permalink to this definition">¶</a></dt>
+<dd><p>create validation data for blur tooth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>string</strong> – the mac address read by the bluetooth</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the data that will be sent via socket</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">agent pi for engineer</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">socket_extension package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-socket_extension.client">socket_extension.client module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-socket_extension.dataHelper">socket_extension.dataHelper module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to agent pi for engineer’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, xinhuan duan.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/socket_extension.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

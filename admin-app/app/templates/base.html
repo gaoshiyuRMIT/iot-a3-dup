@@ -1,7 +1,15 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block navbar %}
+{% if session["role"] == "manager" %}
+    <nav class="navbar navbar-inverse" style="background-color:darkgreen;">
+{% elif session["role"] == "admin" %}
+<nav class="navbar navbar-dark bg-primary" style="background-color:rgb(35, 9, 61);">
+{% elif session["role"] == "engineer" %}
+    <nav class="navbar navbar-dark bg-primary" style="background-color:rgb(81, 36, 81);">
+{% else %}
 <nav class="navbar navbar-inverse">
+{% endif %}
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
             {% if session["loggedIn"] %}

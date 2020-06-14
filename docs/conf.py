@@ -38,7 +38,7 @@ release = '1'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinxcontrib.httpdomain',
+    # 'sphinxcontrib.httpdomain',
     'sphinx.ext.napoleon',
 ]
  

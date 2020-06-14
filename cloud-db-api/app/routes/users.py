@@ -65,3 +65,13 @@ def deleteUser(username):
 def get_activity_types():
     aMgr = ActivityManager()
     return aMgr.get_type_counts()
+
+@bp.route("/activity/add", methods=["POST"])
+@jsonifyResponseData
+def add_activity_log():
+    mgr = ActivityManager()
+    data = mgr.keepValidFieldsOnly(request.json)
+    # ignore empty values
+    data = {k: v for k,v in data.items() if v != "" and v is not None}
+    success = mgr.addOne(data)
+    return {"success": success}

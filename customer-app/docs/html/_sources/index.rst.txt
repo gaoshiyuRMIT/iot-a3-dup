@@ -6,14 +6,16 @@
 Welcome to Car Share System website's documentation!
 ====================================================
 
+Back to `Home Page`_
+
+.. _Home Page: ../../../docs/html/index.html
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :glob:
 
-   base_service
-   car_service
-   booking_service
-   user_service
+   services/*
 
 Indices and tables
 ==================

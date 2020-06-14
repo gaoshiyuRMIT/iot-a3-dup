@@ -28,6 +28,7 @@ def login_check():
         dbUser = service.findExistingUser(request.form.get('username'))
         if (dbUser is not None):
             if (sha256_crypt.verify(request.form.get('password'), dbUser['password'])):
+                service.add_activity(request.form.get('username'), "login")
                 session['username'] = request.form.get('username')
                 session['fName'] = dbUser['username']
                 session['loggedIn'] = True
@@ -77,6 +78,7 @@ def registerUser():
             }
             result = service.registerUser(userInfo)
             if result:
+                service.add_activity(username, "register")
                 flash("Success: Account created - please log in")
             return render_template('login.html')
     else:
@@ -130,6 +132,7 @@ def searchCars():
     searchD = {k: v for k,v in searchD.items() if v}
     # call CarService to search for cars, providing search dict
     cars = CarService().searchCars(searchD)
+    UserService().add_activity(session["username"], "search_cars")
     return render_template("cars.html", cars=cars, key=key)
 
 
@@ -196,6 +199,8 @@ def addBookingPost():
         return redirect(url_for("addBooking", car_id=data["car_id"]))
     # add a booking
     bk_id = service.addBooking(data)
+    # log user activity
+    UserService().add_activity(session["username"], "add_booking")
     flash("Booking successful! Booking ID - {}".format(bk_id))
     # add an event to google calendar
     g_cred = GAuthUtil().getCredential()
@@ -217,6 +222,8 @@ def cancelBooking(booking_id):
             return redirect(url_for("bookings"))
 
     bkService.updateBooking(booking_id, {"status": "cancelled"})
+    # log activity
+    UserService().add_activity(session["username"], "cancel_booking")
     flash("Booking {} successfully cancelled!".format(booking_id))
     # remove calendar event
     cred = GAuthUtil().getCredential()
