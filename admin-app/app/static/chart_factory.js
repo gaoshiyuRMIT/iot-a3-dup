@@ -97,6 +97,11 @@ function generate_activity_polar_area(canvas_id, data, labels) {
             }]
         },
         options: {
+            scale: {
+                ticks: {
+                    stepSize: 1
+                }
+            }
         }
     });
     return myChart;
