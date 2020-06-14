@@ -39,7 +39,8 @@ class QR_reader:
         path = self.get_path()
         image = cv2.imread(path)
         barcodes = pyzbar.decode(image)
-        print(len(barcodes))
+        if len(barcodes)==0:
+            print("can't read qrcode!")
         for barcode in barcodes:
             # extract the bounding box location of the barcode and draw the
             # bounding box surrounding the barcode on the image
