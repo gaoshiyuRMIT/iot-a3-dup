@@ -7,5 +7,5 @@ wheel==0.34.2
 dlib==19.19.0
 face_recognition==1.2.3
 imutils==0.5.3
-urllib3==1.25.8
+urllib3==1.26.5
 Sphinx==3.0.1
